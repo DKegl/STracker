@@ -81,13 +81,7 @@ fastlane/test_output
 iOSInjectionProject/
 
 
-### Xcode Patch ###
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcworkspace/contents.xcworkspacedata
-/*.gcno
-**/xcshareddata/WorkspaceSettings.xcsettings
+
 
 
 # End of https://www.gitignore.io/api/xcode
