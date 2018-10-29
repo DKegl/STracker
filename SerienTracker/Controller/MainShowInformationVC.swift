@@ -12,6 +12,7 @@ class MainShowInformationVC: UIViewController {
     @IBOutlet var showLabel: UILabel!
     @IBOutlet var showImageView: CachedImageView!
     @IBOutlet var statusLabel: UILabel!
+    @IBOutlet weak var epButton: UIButton!
     
     @IBOutlet var showSummaryTextView: UITextView!
     
@@ -30,6 +31,7 @@ class MainShowInformationVC: UIViewController {
         showSummaryTextView.text = showInfo.show?.summary.deleteHTMLTag(tag: "")
         showImageView.loadImageFromUrl((showInfo.show?.image.original)!)
         statusLabel.text? = showInfo.show?.status ?? ""
+        epButton.layer.cornerRadius = 20
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

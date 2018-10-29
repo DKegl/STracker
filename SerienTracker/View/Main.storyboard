@@ -133,9 +133,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lAg-4w-R8M" customClass="CachedImageView" customModule="SerienTracker" customModuleProvider="target">
-                                <rect key="frame" x="85" y="156" width="200" height="217"/>
+                                <rect key="frame" x="85" y="156" width="199" height="160"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="lAg-4w-R8M" secondAttribute="height" multiplier="200:217" id="UIq-Ir-wo5"/>
+                                    <constraint firstAttribute="height" constant="160" id="B22-QV-mTx"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under the Dome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X80-gR-EFH">
@@ -145,17 +145,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHb-lc-4po">
-                                <rect key="frame" x="10" y="381" width="355" height="200"/>
+                                <rect key="frame" x="10" y="324" width="355" height="257"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="MWc-VP-ptH"/>
+                                    <constraint firstAttribute="height" constant="257" id="BTr-6h-keu"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLg-kw-Jqy">
-                                <rect key="frame" x="167" y="127" width="41.5" height="21"/>
+                                <rect key="frame" x="166.5" y="127" width="42" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="CHl-Ze-wAS"/>
                                 </constraints>
@@ -164,7 +164,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofL-lY-JB6">
-                                <rect key="frame" x="55" y="601" width="265" height="41"/>
+                                <rect key="frame" x="104" y="606" width="161" height="41"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="22"/>
                                 <state key="normal" title="Episoden">
@@ -177,24 +177,26 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="oOu-G0-vAw" firstAttribute="trailing" secondItem="lHb-lc-4po" secondAttribute="trailing" constant="10" id="1hO-ti-Vxu"/>
-                            <constraint firstItem="lHb-lc-4po" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" constant="10" id="3Bv-yp-7jb"/>
-                            <constraint firstItem="lAg-4w-R8M" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" constant="85" id="Ata-96-JTc"/>
+                            <constraint firstItem="ofL-lY-JB6" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" constant="104" id="0xh-Jl-8M7"/>
+                            <constraint firstItem="lHb-lc-4po" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" constant="10" id="7zu-BY-foT"/>
+                            <constraint firstItem="lAg-4w-R8M" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" constant="85" id="B5y-9U-K3P"/>
                             <constraint firstItem="X80-gR-EFH" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" id="EbR-3u-aEj"/>
-                            <constraint firstItem="oOu-G0-vAw" firstAttribute="trailing" secondItem="lAg-4w-R8M" secondAttribute="trailing" constant="90" id="IWG-lN-ZFO"/>
+                            <constraint firstItem="lHb-lc-4po" firstAttribute="centerX" secondItem="oLg-kw-Jqy" secondAttribute="centerX" id="Fab-xp-d9I"/>
                             <constraint firstItem="X80-gR-EFH" firstAttribute="trailing" secondItem="oOu-G0-vAw" secondAttribute="trailing" id="Nvo-W8-FSI"/>
+                            <constraint firstItem="ofL-lY-JB6" firstAttribute="centerX" secondItem="lAg-4w-R8M" secondAttribute="centerX" id="TP5-zQ-FnK"/>
                             <constraint firstItem="X80-gR-EFH" firstAttribute="top" secondItem="oOu-G0-vAw" secondAttribute="top" constant="20" id="Yc2-LA-unc"/>
-                            <constraint firstItem="ofL-lY-JB6" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" constant="55" id="ahX-D4-gaT"/>
-                            <constraint firstItem="lHb-lc-4po" firstAttribute="top" secondItem="lAg-4w-R8M" secondAttribute="bottom" constant="8" id="krc-lV-sHj"/>
+                            <constraint firstItem="lAg-4w-R8M" firstAttribute="top" secondItem="Pns-Vp-QJs" secondAttribute="top" constant="156" id="cJY-qC-jik"/>
+                            <constraint firstItem="ofL-lY-JB6" firstAttribute="top" secondItem="lHb-lc-4po" secondAttribute="bottom" constant="25" id="eVr-Ei-cNr"/>
+                            <constraint firstItem="lHb-lc-4po" firstAttribute="top" secondItem="lAg-4w-R8M" secondAttribute="bottom" constant="8" symbolic="YES" id="fE7-bz-Uso"/>
+                            <constraint firstItem="oOu-G0-vAw" firstAttribute="trailing" secondItem="lAg-4w-R8M" secondAttribute="trailing" constant="91" id="fFX-tp-wLw"/>
                             <constraint firstItem="oLg-kw-Jqy" firstAttribute="top" secondItem="X80-gR-EFH" secondAttribute="bottom" constant="7.5" id="r6U-gR-aOO"/>
-                            <constraint firstItem="ofL-lY-JB6" firstAttribute="top" secondItem="lHb-lc-4po" secondAttribute="bottom" constant="20" id="sQ1-vs-dh4"/>
-                            <constraint firstItem="oOu-G0-vAw" firstAttribute="trailing" secondItem="ofL-lY-JB6" secondAttribute="trailing" constant="55" id="sdn-ov-rVv"/>
-                            <constraint firstItem="lAg-4w-R8M" firstAttribute="top" secondItem="oLg-kw-Jqy" secondAttribute="bottom" constant="8" id="t7s-Cq-Xck"/>
+                            <constraint firstItem="lAg-4w-R8M" firstAttribute="top" secondItem="oLg-kw-Jqy" secondAttribute="bottom" constant="8" symbolic="YES" id="rOa-zd-r9G"/>
                             <constraint firstItem="oLg-kw-Jqy" firstAttribute="centerX" secondItem="Pns-Vp-QJs" secondAttribute="centerX" id="u7Q-8c-a1g"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oOu-G0-vAw"/>
                     </view>
                     <connections>
+                        <outlet property="epButton" destination="ofL-lY-JB6" id="g4j-EO-9fe"/>
                         <outlet property="showImageView" destination="lAg-4w-R8M" id="85b-56-Qp5"/>
                         <outlet property="showLabel" destination="X80-gR-EFH" id="K9c-MI-Y8F"/>
                         <outlet property="showSummaryTextView" destination="lHb-lc-4po" id="rCG-qs-xwv"/>
@@ -203,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3F-HN-UdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2766" y="125"/>
+            <point key="canvasLocation" x="2765.5999999999999" y="124.58770614692655"/>
         </scene>
         <!--Episodes ListVC-->
         <scene sceneID="iqm-pq-y4T">
