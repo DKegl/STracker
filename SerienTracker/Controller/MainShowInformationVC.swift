@@ -21,6 +21,7 @@ class MainShowInformationVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupUI()
+        navigationItem.title = showInfo?.show?.name
     }
     
     func setupUI() {

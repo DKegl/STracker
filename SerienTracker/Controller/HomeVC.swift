@@ -23,7 +23,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.topItem?.title = "Search a Show"
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -43,7 +43,6 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
             }
             
         }
-        
     }
     
     // MARK: - TableView Protocols
@@ -64,6 +63,9 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         cell.textLabel?.text = showSearchArray[indexPath.row].show?.name ?? "No Shows"
         }
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
