@@ -86,15 +86,16 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "episodenCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "episodenCell") as! epCell
         
         // Get episode from season(section) and row
         let episode = expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row]
         // >>let episode = groupedEpisodes[indexPath.section][indexPath.row]
         
+        cell.setEp(episode: episode)
         // not yet perfect but good enough for now
-        cell.textLabel?.text = "\(episode.number ?? 00). \(episode.name)"
-        cell.detailTextLabel?.text = episode.airdate
+//        cell.textLabel?.text = "\(episode.number ?? 00). \(episode.name)"
+//        cell.detailTextLabel?.text = episode.airdate
         
         // Checkmark seen episodes
         if episode.seen == true {

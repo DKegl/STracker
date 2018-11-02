@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wJh-A5-edd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wJh-A5-edd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -216,31 +216,75 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="episodenCell" textLabel="chG-me-bx0" detailTextLabel="B9u-Jm-Z1N" style="IBUITableViewCellStyleSubtitle" id="kbc-5z-Yr0">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="episodenCell" rowHeight="60" id="kbc-5z-Yr0" customClass="epCell" customModule="SerienTracker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kbc-5z-Yr0" id="sSV-oq-Cd1">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kbc-5z-Yr0" id="sSV-oq-Cd1">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="chG-me-bx0">
-                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p6a-V7-Z1o">
+                                            <rect key="frame" x="8" y="0.0" width="83.5" height="60.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="p6a-V7-Z1o" secondAttribute="height" multiplier="82:59" id="WXA-o3-VXq"/>
+                                                <constraint firstAttribute="height" constant="60" id="hnP-st-wVi"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AAX-k5-Ehf">
+                                            <rect key="frame" x="99" y="19.5" width="22" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="22" id="4xs-ea-mWK"/>
+                                                <constraint firstAttribute="height" constant="21" id="dJ7-pk-udT"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B9u-Jm-Z1N">
-                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zsy-OO-SmF">
+                                            <rect key="frame" x="123" y="19.5" width="230" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="230" id="SNH-VK-mH5"/>
+                                                <constraint firstAttribute="height" constant="21" id="Vs4-aX-rgo"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Yuk-bg-ClH">
+                                            <rect key="frame" x="274" y="38.5" width="85" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="ffL-te-Cap"/>
+                                                <constraint firstAttribute="width" constant="85" id="oI4-lo-AJb"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" red="0.22352941176470587" green="0.24313725490196078" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="AAX-k5-Ehf" firstAttribute="centerY" secondItem="sSV-oq-Cd1" secondAttribute="centerY" id="4Yo-fR-sNg"/>
+                                        <constraint firstAttribute="bottom" secondItem="Yuk-bg-ClH" secondAttribute="bottom" constant="0.5" id="5ed-Z6-Gf1"/>
+                                        <constraint firstItem="p6a-V7-Z1o" firstAttribute="leading" secondItem="sSV-oq-Cd1" secondAttribute="leading" constant="8" id="8Z5-w1-dlB"/>
+                                        <constraint firstAttribute="bottom" secondItem="p6a-V7-Z1o" secondAttribute="bottom" id="Msv-JB-9mr"/>
+                                        <constraint firstItem="Yuk-bg-ClH" firstAttribute="top" secondItem="sSV-oq-Cd1" secondAttribute="top" constant="38" id="S4a-8l-VqL"/>
+                                        <constraint firstItem="p6a-V7-Z1o" firstAttribute="top" secondItem="sSV-oq-Cd1" secondAttribute="top" id="Xau-oO-m1z"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="AAX-k5-Ehf" secondAttribute="bottom" constant="9" id="Yr9-2n-ipe"/>
+                                        <constraint firstItem="AAX-k5-Ehf" firstAttribute="top" secondItem="sSV-oq-Cd1" secondAttribute="topMargin" constant="8" id="apu-l5-znJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zsy-OO-SmF" secondAttribute="bottom" constant="9" id="cTx-nL-m7z"/>
+                                        <constraint firstItem="zsy-OO-SmF" firstAttribute="leading" secondItem="AAX-k5-Ehf" secondAttribute="trailing" constant="2" id="gIS-kE-0Ax"/>
+                                        <constraint firstItem="AAX-k5-Ehf" firstAttribute="leading" secondItem="p6a-V7-Z1o" secondAttribute="trailing" constant="7.5" id="lk8-ke-gn3"/>
+                                        <constraint firstItem="zsy-OO-SmF" firstAttribute="top" secondItem="sSV-oq-Cd1" secondAttribute="topMargin" constant="8" id="vw7-yV-8if"/>
+                                        <constraint firstAttribute="trailing" secondItem="Yuk-bg-ClH" secondAttribute="trailing" constant="16" id="zcc-v7-9t5"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateLbl" destination="Yuk-bg-ClH" id="P7e-ax-h4s"/>
+                                    <outlet property="epImage" destination="p6a-V7-Z1o" id="8oj-XY-5NN"/>
+                                    <outlet property="noLbl" destination="AAX-k5-Ehf" id="zfv-r2-2Gc"/>
+                                    <outlet property="titleLbl" destination="zsy-OO-SmF" id="ICp-f5-YmR"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -251,7 +295,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ukI-B4-uLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3537" y="125"/>
+            <point key="canvasLocation" x="3536.8000000000002" y="124.58770614692655"/>
         </scene>
         <!--Preview View Controller-->
         <scene sceneID="pSI-Rt-mL4">
@@ -276,7 +320,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="Qgy-3l-7l4"/>
                                 </constraints>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

@@ -15,10 +15,11 @@ class CachedImageView:UIImageView{
     var imageUrlString:String?
     
     func loadImageFromUrl(_ stringUrl:String){
-        
+
         //Save url string
         imageUrlString=stringUrl
-        
+
+
         //Get image from cache storage if available
         if let imageFromCache = imageCache.object(forKey: stringUrl as AnyObject){
             self.image=imageFromCache
@@ -51,8 +52,8 @@ class CachedImageView:UIImageView{
         
         return
     }
+    }
 
-}
 
 
 

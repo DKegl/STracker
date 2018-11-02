@@ -6,8 +6,7 @@
 //  Copyright © 2018 Daniel Keglmeier. All rights reserved.
 //
 
-import Foundation
-//Optional Daniel
+
 struct ShowEpisodenInformation: Codable {
     let id: Int
     let url, name: String
@@ -16,7 +15,9 @@ struct ShowEpisodenInformation: Codable {
     let runtime: Int?
     let summary: String?
     var seen: Bool? = false
+    let image: epImage?
 
 }
-
-
+struct epImage: Codable {
+    let medium, original: String
+}

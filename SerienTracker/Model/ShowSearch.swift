@@ -17,9 +17,9 @@ struct ShowSearch: Codable {
 struct Show: Codable {
     let id: Int
     let name: String
-    let image: Image
-    let summary: String
-    let status: String
+    let image: Image?
+    let summary: String?
+    let status: String?
     
 }
 
