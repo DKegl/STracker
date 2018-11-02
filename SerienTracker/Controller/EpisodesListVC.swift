@@ -161,16 +161,17 @@ extension EpisodesListVC {
         // The view is a button
         let titleButton = UIButton()
         // Should be the globally used GUI- backgroundColor it's still not even to that..
-        titleButton.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
-        titleButton.layer.borderColor = UIColor.black.cgColor
+        titleButton.backgroundColor = blackColor
+        titleButton.layer.borderColor = darkTurquoisColor.cgColor
         titleButton.layer.borderWidth = 2
+        titleButton.tintColor = UIColor.white
         
         // Use the globally used text style to show the Season sections
         // >> let title = "Season \(groupedEpisodes[section][0].season!)"
         let title = "Season \(expandableGroupedEpisodes[section][0].episodes[0].season!)"
         
         let strokeTextAttributes = [
-            NSAttributedString.Key.strokeColor: UIColor.gray,
+            NSAttributedString.Key.strokeColor: UIColor.white,
             NSAttributedString.Key.font: UIFont(name: "Futura", size: 24)!
         ] as [NSAttributedString.Key: Any]
         let attributedTitle = NSAttributedString(string: title, attributes: strokeTextAttributes)

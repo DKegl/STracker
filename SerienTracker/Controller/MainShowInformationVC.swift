@@ -23,8 +23,9 @@ class MainShowInformationVC: UIViewController {
         // Do any additional setup after loading the view.
         setupUI()
         navigationItem.title = showInfo?.show?.name
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(bookmarkTapped))
+
     }
-    
     func setupUI() {
         guard let showInfo = showInfo else { fatalError("No show info available") }
         showLabel.text = showInfo.show?.name
@@ -34,6 +35,9 @@ class MainShowInformationVC: UIViewController {
         epButton.layer.cornerRadius = 20
     }
     
+       @objc func bookmarkTapped(){
+            print("tap tap")
+        }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let epListVC = segue.destination as! EpisodesListVC
         epListVC.showInfo = showInfo?.show?.id

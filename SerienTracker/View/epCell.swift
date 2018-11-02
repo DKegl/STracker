@@ -21,7 +21,7 @@ class epCell: UITableViewCell {
     func setEp(episode: ShowEpisodenInformation) {
        cellImage.layer.cornerRadius = 20
         cellImage.layer.borderWidth = 2
-        cellImage.layer.borderColor = UIColor.white.cgColor
+        cellImage.layer.borderColor = turquoiseColor.cgColor
         
         
         noLbl.text = "\(episode.number ?? 00)."
