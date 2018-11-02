@@ -91,6 +91,8 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
         // Get episode from season(section) and row
         let episode = expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row]
         // >>let episode = groupedEpisodes[indexPath.section][indexPath.row]
+        tableView.separatorStyle = .none
+        
         
         cell.setEp(episode: episode)
         // not yet perfect but good enough for now

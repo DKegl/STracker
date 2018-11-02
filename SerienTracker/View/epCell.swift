@@ -15,8 +15,15 @@ class epCell: UITableViewCell {
     @IBOutlet var dateLbl: UILabel!
     
 
+    @IBOutlet weak var cellImage: UIImageView!
+    
     
     func setEp(episode: ShowEpisodenInformation) {
+       cellImage.layer.cornerRadius = 20
+        cellImage.layer.borderWidth = 2
+        cellImage.layer.borderColor = UIColor.white.cgColor
+        
+        
         noLbl.text = "\(episode.number ?? 00)."
         titleLbl.text = episode.name
         dateLbl.text = episode.airdate
@@ -25,6 +32,7 @@ class epCell: UITableViewCell {
         return
         }else{
             epImage!.loadImageFromUrl((episode.image?.original)!)
+        
         }
         }
     
