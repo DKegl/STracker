@@ -22,7 +22,7 @@ class epCell: UITableViewCell {
         dateLbl.text = episode.airdate
         // showImageView.loadImageFromUrl((showInfo.show?.image.original)! ?? "http://static.tvmaze.com/uploads/images/original_untouched/156/392357.jpg"
         if ((episode.image?.original) == nil) {
-        dateLbl.text = "nil"
+        return
         }else{
             epImage!.loadImageFromUrl((episode.image?.original)!)
         }
