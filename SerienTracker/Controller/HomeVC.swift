@@ -26,7 +26,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         self.navigationController?.navigationBar.topItem?.title = "Search a Show"
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.isHidden = true
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -82,6 +82,7 @@ extension HomeVC: UISearchBarDelegate {
             if showSearch != nil {
                 self?.showSearchArray = showSearch!
                 self!.tableView.reloadData()
+                self?.tableView.isHidden = false
             }
             else {
                 return

@@ -15,11 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        //MARK: - Navbar Setup
         UINavigationBar.appearance().barTintColor = blackColor
         UINavigationBar.appearance().tintColor = turquoiseColor
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.08, green:1.00, blue:0.93, alpha:1.0)]
         UINavigationBar.appearance().isTranslucent = false
         
+        //MARK: - Tabbar Setup
+        UITabBar.appearance().tintColor = turquoiseColor
+      // UITabBar.appearance().bartint
         return true
     }
 

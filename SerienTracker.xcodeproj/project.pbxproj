@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3C95D76DA5C21313A246C92F /* Pods_SerienTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB5049DDDD16A9401215F1D4 /* Pods_SerienTracker.framework */; };
 		6509780E218B1050004153A5 /* epCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509780D218B1050004153A5 /* epCell.swift */; };
+		650978102192254D004153A5 /* TopRatedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509780F2192254D004153A5 /* TopRatedVC.swift */; };
+		6509781221922574004153A5 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509781121922574004153A5 /* FavoritesVC.swift */; };
 		65228A1821860AE8002AFD7A /* previewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65228A1721860AE8002AFD7A /* previewViewController.swift */; };
 		654CA107218653FF004DD0D3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 654CA106218653FF004DD0D3 /* .gitignore */; };
 		655F01412178F8710079D430 /* ShowEpisodenInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F01402178F8710079D430 /* ShowEpisodenInformation.swift */; };
@@ -33,6 +35,8 @@
 		135E1B3DFCF64FA9F06E38C7 /* Pods-SerienTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SerienTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SerienTracker/Pods-SerienTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		3B87D319B785A717BD43994D /* Pods-SerienTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SerienTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-SerienTracker/Pods-SerienTracker.release.xcconfig"; sourceTree = "<group>"; };
 		6509780D218B1050004153A5 /* epCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = epCell.swift; sourceTree = "<group>"; };
+		6509780F2192254D004153A5 /* TopRatedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedVC.swift; sourceTree = "<group>"; };
+		6509781121922574004153A5 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		65228A1721860AE8002AFD7A /* previewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = previewViewController.swift; sourceTree = "<group>"; };
 		654CA106218653FF004DD0D3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		655F01402178F8710079D430 /* ShowEpisodenInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEpisodenInformation.swift; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 				65C14EFB217B729D001BB656 /* MainShowInformationVC.swift */,
 				65C14EFD217B72E9001BB656 /* EpisodesListVC.swift */,
 				65228A1721860AE8002AFD7A /* previewViewController.swift */,
+				6509780F2192254D004153A5 /* TopRatedVC.swift */,
+				6509781121922574004153A5 /* FavoritesVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -293,7 +299,9 @@
 				65C14F00217B83A2001BB656 /* ShowSerachApi.swift in Sources */,
 				65C14EFC217B729D001BB656 /* MainShowInformationVC.swift in Sources */,
 				6509780E218B1050004153A5 /* epCell.swift in Sources */,
+				6509781221922574004153A5 /* FavoritesVC.swift in Sources */,
 				655F01412178F8710079D430 /* ShowEpisodenInformation.swift in Sources */,
+				650978102192254D004153A5 /* TopRatedVC.swift in Sources */,
 				65EAE2DA217C8EF40024ACBB /* String+Extension.swift in Sources */,
 				65228A1821860AE8002AFD7A /* previewViewController.swift in Sources */,
 				65C14F02217B85C7001BB656 /* ShowSearch.swift in Sources */,
