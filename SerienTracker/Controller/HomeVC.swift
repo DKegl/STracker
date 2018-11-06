@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Lottie
 
 class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
+    @IBOutlet weak var lottieView: LOTAnimationView!
+    
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -27,6 +30,10 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isHidden = true
+        lottieView.setAnimation(named: "searchw")
+        lottieView.play()
+        lottieView.loopAnimation = true
+        
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -82,6 +89,7 @@ extension HomeVC: UISearchBarDelegate {
             if showSearch != nil {
                 self?.showSearchArray = showSearch!
                 self!.tableView.reloadData()
+                self?.lottieView.isHidden = true
                 self?.tableView.isHidden = false
             }
             else {

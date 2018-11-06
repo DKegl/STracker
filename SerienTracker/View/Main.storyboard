@@ -33,21 +33,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xu-M1-HST" customClass="LOTAnimationView">
+                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                                <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2xu-M1-HST" secondAttribute="height" multiplier="1:1" id="qWI-8M-kZa"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="g3z-EL-3nR">
                                 <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.13333333333333333" green="0.15686274509803921" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowMainCell" textLabel="IGy-oe-Pjs" style="IBUITableViewCellStyleDefault" id="3vz-Vb-M2p">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowMainCell" textLabel="IGy-oe-Pjs" rowHeight="50" style="IBUITableViewCellStyleDefault" id="3vz-Vb-M2p">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3vz-Vb-M2p" id="dFK-x0-vkV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IGy-oe-Pjs">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="49.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -82,17 +89,22 @@
                         <constraints>
                             <constraint firstItem="g3z-EL-3nR" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="500-Ue-yD1"/>
                             <constraint firstItem="g3z-EL-3nR" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="AxA-pO-txd"/>
+                            <constraint firstItem="2xu-M1-HST" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Cpm-lO-1QZ"/>
                             <constraint firstItem="g3z-EL-3nR" firstAttribute="top" secondItem="89Q-sy-8v5" secondAttribute="bottom" id="F7M-ke-1KN"/>
+                            <constraint firstItem="2xu-M1-HST" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QBG-zk-2Uq"/>
                             <constraint firstItem="89Q-sy-8v5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="YmS-mN-y4E"/>
                             <constraint firstItem="g3z-EL-3nR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cRF-Cf-wO9"/>
                             <constraint firstItem="89Q-sy-8v5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="emB-MY-pWK"/>
                             <constraint firstItem="g3z-EL-3nR" firstAttribute="top" secondItem="89Q-sy-8v5" secondAttribute="bottom" id="lzi-ea-fEb"/>
+                            <constraint firstItem="2xu-M1-HST" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mb3-QR-RgV"/>
                             <constraint firstItem="89Q-sy-8v5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="per-Aq-qqX"/>
+                            <constraint firstItem="2xu-M1-HST" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qbS-4L-6z2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="oF1-g8-CPy"/>
                     <connections>
+                        <outlet property="lottieView" destination="2xu-M1-HST" id="dfE-2w-jKE"/>
                         <outlet property="searchBar" destination="89Q-sy-8v5" id="GTi-6O-ezu"/>
                         <outlet property="tableView" destination="g3z-EL-3nR" id="FxY-fa-U9r"/>
                     </connections>
@@ -101,7 +113,7 @@
                 <searchDisplayController id="Cau-jj-b8T"/>
                 <searchDisplayController id="cFv-eJ-Ua8"/>
             </objects>
-            <point key="canvasLocation" x="1969" y="125"/>
+            <point key="canvasLocation" x="1968.8" y="124.58770614692655"/>
         </scene>
         <!--FavoritesVC-->
         <scene sceneID="yfJ-Aw-3VC">

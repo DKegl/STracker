@@ -10,4 +10,5 @@ target 'SerienTracker' do
   # Pods for SerienTracker
 pod 'RealmSwift'
 pod 'Alamofire'
+pod 'lottie-ios'
 end
