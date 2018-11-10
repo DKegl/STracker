@@ -23,7 +23,7 @@ class MainShowInformationVC: UIViewController {
         // Do any additional setup after loading the view.
         setupUI()
         navigationItem.title = showInfo?.show?.name
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(bookmarkTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(bookmarkTapped))
 
     }
     func setupUI() {
