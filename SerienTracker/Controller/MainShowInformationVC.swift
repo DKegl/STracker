@@ -6,8 +6,8 @@
 //  Copyright © 2018 Daniel Keglmeier. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
 class MainShowInformationVC: UIViewController {
     @IBOutlet var showLabel: UILabel!
@@ -17,13 +17,12 @@ class MainShowInformationVC: UIViewController {
     @IBOutlet var showSummaryTextView: UITextView!
     
     var showInfo: ShowSearch?
-    var showMainAPI=ShowMainApi()
-    var showEpListAPI=ShowEpListApi()
+    var showMainAPI = ShowMainApi()
+    var showEpListAPI = ShowEpListApi()
     
-    var realm:Realm{
-        let appDelegate=UIApplication.shared.delegate as! AppDelegate
+    var realm: Realm {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.realm!
-        
     }
     
     override func viewDidLoad() {
@@ -45,34 +44,46 @@ class MainShowInformationVC: UIViewController {
     
     @objc func bookmarkTapped() {
         print("tap tap")
-       
-        showMainAPI.getShowOverview(id: (showInfo?.show?.id)!) {[unowned self] (show) in
-            self.showEpListAPI.getEpList(id: (self.showInfo?.show?.id)!, complition: { (episoden) in
-                do{
-                    try self.realm.write {
-                        let realmShow=RealmBookmakShow()
-                        realmShow.isBookmark=true
-                        realmShow.showId=show?.showId ?? 0
-                        realmShow.showName=show?.showName
-                        
-                        var realmEpisoden=[RealmEpisodenInformation]()
-                        for episode in episoden!{
-                            let realmEp=RealmEpisodenInformation()
-                            realmEp.name=episode.name
-                            realmEp.show=realmShow
-                            realmEp.id=episode.id
-                            realmEpisoden.append(realmEp)
-                        }
-                        realmShow.realmEpisoden.append(objectsIn: realmEpisoden)
-                        self.realm.add(realmShow, update:true)
+        
+        showMainAPI.getShowOverview(id: (showInfo?.show?.id)!) { [unowned self] show in
+            self.showEpListAPI.getEpList(id: (self.showInfo?.show?.id)!, complition: { episoden in
+                // Realm().object(ofType: Book.self, forPrimaryKey: prevBook.nextId)
+                let showObject = self.realm.object(ofType: RealmBookmakShow.self, forPrimaryKey: show?.showId)
+                if showObject?.isBookmark == true {
+                    do {
+                        try self.realm.write {
+                            self.realm.delete((showObject?.realmEpisoden)!)
+                            self.realm.delete(showObject!)
+                            
+                    } } catch let error {
+                        print(error.localizedDescription)
                     }
-                }catch let error{
-                    print(error.localizedDescription)
+                } else {
+                    do {
+                        try self.realm.write {
+                            let realmShow = RealmBookmakShow()
+                            realmShow.isBookmark = true
+                            realmShow.showId = show?.showId ?? 0
+                            realmShow.showName = show?.showName
+                            
+                            var realmEpisoden = [RealmEpisodenInformation]()
+                            for episode in episoden! {
+                                let realmEp = RealmEpisodenInformation()
+                                realmEp.name = episode.name
+                                realmEp.show = realmShow
+                                realmEp.id = episode.id
+                                realmEpisoden.append(realmEp)
+                            }
+                            realmShow.realmEpisoden.append(objectsIn: realmEpisoden)
+                            self.realm.add(realmShow, update: true)
+                        }
+                    } catch let error {
+                        print(error.localizedDescription)
+                    }
                 }
-               
+                
             })
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

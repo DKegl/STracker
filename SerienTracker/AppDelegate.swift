@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //init Realm database
         do{
             realm=try Realm()
-            print(Realm.Configuration.defaultConfiguration.fileURL)
+            print(Realm.Configuration.defaultConfiguration.fileURL!)
             
         }catch let error{
             fatalError(error.localizedDescription)
