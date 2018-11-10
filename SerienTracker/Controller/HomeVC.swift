@@ -64,6 +64,11 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMainCell", for: indexPath)
+        cell.layer.borderColor = turquoiseColor.cgColor
+        
+        cell.layer.cornerRadius = 20
+        cell.layer.borderWidth = 2
+        cell.clipsToBounds = true
         if showSearchArray.count == 0 {
             cell.textLabel?.text = "No matching shows please try again"
         } else {
@@ -74,7 +79,10 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
+    }
+    
 }
 
 

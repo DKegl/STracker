@@ -108,7 +108,11 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
         
         return cell
     }
-    
+//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        let header = view as! UITableViewHeaderFooterView
+//        header.textLabel?.font = UIFont(name: "Futura", size: 30)
+//        header.textLabel?.textColor = UIColor.white
+//    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Checkmark seen episode
         // >> groupedEpisodes[indexPath.section][indexPath.row].seen = !(groupedEpisodes[indexPath.section][indexPath.row].seen ?? false)
@@ -162,9 +166,9 @@ extension EpisodesListVC {
         let titleButton = UIButton()
         // Should be the globally used GUI- backgroundColor it's still not even to that..
         titleButton.backgroundColor = blackColor
-        titleButton.layer.borderColor = darkTurquoisColor.cgColor
-        titleButton.layer.borderWidth = 2
-        titleButton.tintColor = UIColor.white
+        //titleButton.layer.borderColor = darkTurquoisColor.cgColor
+        //titleButton.layer.borderWidth = 2
+        titleButton.titleLabel?.textColor = UIColor.white
         
         // Use the globally used text style to show the Season sections
         // >> let title = "Season \(groupedEpisodes[section][0].season!)"
