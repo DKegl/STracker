@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct ShowSearch: Codable {
     let score: Double
     let show: Show?
@@ -20,7 +19,6 @@ struct Show: Codable {
     let image: Image?
     let summary: String?
     let status: String?
-    
 }
 
 enum CodingKeys: String, CodingKey {
@@ -32,8 +30,6 @@ struct Externals: Codable {
     let tvrage: JSONNull?
     let thetvdb: Int
     let imdb: JSONNull?
-    
-    
 }
 
 struct Image: Codable {

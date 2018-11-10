@@ -14,31 +14,21 @@ class epCell: UITableViewCell {
     @IBOutlet var titleLbl: UILabel!
     @IBOutlet var dateLbl: UILabel!
     
-
-    @IBOutlet weak var cellImage: UIImageView!
-    
+    @IBOutlet var cellImage: UIImageView!
     
     func setEp(episode: ShowEpisodenInformation) {
-       cellImage.layer.cornerRadius = 20
+        cellImage.layer.cornerRadius = 20
         cellImage.layer.borderWidth = 2
         cellImage.layer.borderColor = turquoiseColor.cgColor
-        
         
         noLbl.text = "\(episode.number ?? 00)."
         titleLbl.text = episode.name
         dateLbl.text = episode.airdate
-        // showImageView.loadImageFromUrl((showInfo.show?.image.original)! ?? "http://static.tvmaze.com/uploads/images/original_untouched/156/392357.jpg"
-        if ((episode.image?.original) == nil) {
-        return
-        }else{
+        
+        if (episode.image?.original) == nil {
+            return
+        } else {
             epImage!.loadImageFromUrl((episode.image?.original)!)
-        
         }
-        }
-    
-        
-        
     }
-
-
-
+}

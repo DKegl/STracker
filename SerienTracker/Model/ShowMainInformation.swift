@@ -15,12 +15,11 @@ struct ShowMainInformation: Codable {
     var showSummary: String
     var showId: Int
 
-
-enum CodingKeys: String, CodingKey {
-    case showName = "name"
-    case showStatus = "status"
-    case showPremiered = "premiered"
-    case showSummary = "summary"
-    case showId = "id"
-}
+    enum CodingKeys: String, CodingKey {
+        case showName = "name"
+        case showStatus = "status"
+        case showPremiered = "premiered"
+        case showSummary = "summary"
+        case showId = "id"
+    }
 }

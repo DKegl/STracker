@@ -12,7 +12,7 @@ class MainShowInformationVC: UIViewController {
     @IBOutlet var showLabel: UILabel!
     @IBOutlet var showImageView: CachedImageView!
     @IBOutlet var statusLabel: UILabel!
-    @IBOutlet weak var epButton: UIButton!
+    @IBOutlet var epButton: UIButton!
     
     @IBOutlet var showSummaryTextView: UITextView!
     
@@ -24,8 +24,8 @@ class MainShowInformationVC: UIViewController {
         setupUI()
         navigationItem.title = showInfo?.show?.name
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(bookmarkTapped))
-
     }
+    
     func setupUI() {
         guard let showInfo = showInfo else { fatalError("No show info available") }
         showLabel.text = showInfo.show?.name
@@ -35,9 +35,10 @@ class MainShowInformationVC: UIViewController {
         epButton.layer.cornerRadius = 20
     }
     
-       @objc func bookmarkTapped(){
-            print("tap tap")
-        }
+    @objc func bookmarkTapped() {
+        print("tap tap")
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let epListVC = segue.destination as! EpisodesListVC
         epListVC.showInfo = showInfo?.show?.id

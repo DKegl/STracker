@@ -50,7 +50,6 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
                 // Fill array for each key
                 // groupedEpisodes[season n][episode n]
                 keys.forEach({ key in
-                    // >> self?.groupedEpisodes.append(groupedDictionary[key]!)
                     
                     self?.expandableGroupedEpisodes.append([ShowHideEpsiodes(isExpanded: true, episodes: groupedDictionary[key]!)])
                 })
@@ -63,22 +62,12 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
     
     // MARK: - Table view data source
     
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        //Use season number for header title
-//        return "Season \(groupedEpisodes[section][0].season!)"
-//    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // number of seasons from the show
-        // >> return  groupedEpisodes.count
-        
         return expandableGroupedEpisodes.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // number of episodes in seasons (section points to actual season)
-        
-        // >> let expandedRows = expandableGroupedEpisodes[section][0].isExpanded ? groupedEpisodes[section].count : 0
         
         let expandedRows = expandableGroupedEpisodes[section][0].isExpanded ? expandableGroupedEpisodes[section][0].episodes.count : 0
         
@@ -90,14 +79,10 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
         
         // Get episode from season(section) and row
         let episode = expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row]
-        // >>let episode = groupedEpisodes[indexPath.section][indexPath.row]
+        
         tableView.separatorStyle = .none
         
-        
         cell.setEp(episode: episode)
-        // not yet perfect but good enough for now
-//        cell.textLabel?.text = "\(episode.number ?? 00). \(episode.name)"
-//        cell.detailTextLabel?.text = episode.airdate
         
         // Checkmark seen episodes
         if episode.seen == true {
@@ -108,11 +93,7 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
         
         return cell
     }
-//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        let header = view as! UITableViewHeaderFooterView
-//        header.textLabel?.font = UIFont(name: "Futura", size: 30)
-//        header.textLabel?.textColor = UIColor.white
-//    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Checkmark seen episode
         // >> groupedEpisodes[indexPath.section][indexPath.row].seen = !(groupedEpisodes[indexPath.section][indexPath.row].seen ?? false)
@@ -136,12 +117,6 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
         let previewDetail = expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row]
         detailViewController.episodenDetail = previewDetail
         
-        /*
-         Set the height of the preview by setting the preferred content size of the detail view controller.
-         Width should be zero, because it's not used in portrait.
-         */
-        
-        // Set the source rect to the cell frame, so surrounding elements are blurred.
         previewingContext.sourceRect = cell.frame
         
         return detailViewController
@@ -164,10 +139,7 @@ extension EpisodesListVC {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         // The view is a button
         let titleButton = UIButton()
-        // Should be the globally used GUI- backgroundColor it's still not even to that..
-        //titleButton.backgroundColor = blackColor
-        //titleButton.layer.borderColor = darkTurquoisColor.cgColor
-        //titleButton.layer.borderWidth = 2
+        
         titleButton.titleLabel?.textColor = UIColor.white
         
         // Use the globally used text style to show the Season sections

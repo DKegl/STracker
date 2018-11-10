@@ -11,9 +11,7 @@
 		6509780E218B1050004153A5 /* epCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509780D218B1050004153A5 /* epCell.swift */; };
 		650978102192254D004153A5 /* TopRatedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509780F2192254D004153A5 /* TopRatedVC.swift */; };
 		6509781221922574004153A5 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509781121922574004153A5 /* FavoritesVC.swift */; };
-		65097814219229A1004153A5 /* halloween.json in Resources */ = {isa = PBXBuildFile; fileRef = 65097813219229A1004153A5 /* halloween.json */; };
-		6509781821922EE1004153A5 /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 6509781721922EE1004153A5 /* search.json */; };
-		6509781A21922F35004153A5 /* searchw.json in Resources */ = {isa = PBXBuildFile; fileRef = 6509781921922F35004153A5 /* searchw.json */; };
+		6509781A21922F35004153A5 /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 6509781921922F35004153A5 /* search.json */; };
 		65228A1821860AE8002AFD7A /* previewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65228A1721860AE8002AFD7A /* previewViewController.swift */; };
 		654CA107218653FF004DD0D3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 654CA106218653FF004DD0D3 /* .gitignore */; };
 		655F01412178F8710079D430 /* ShowEpisodenInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F01402178F8710079D430 /* ShowEpisodenInformation.swift */; };
@@ -40,9 +38,7 @@
 		6509780D218B1050004153A5 /* epCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = epCell.swift; sourceTree = "<group>"; };
 		6509780F2192254D004153A5 /* TopRatedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedVC.swift; sourceTree = "<group>"; };
 		6509781121922574004153A5 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
-		65097813219229A1004153A5 /* halloween.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = halloween.json; sourceTree = "<group>"; };
-		6509781721922EE1004153A5 /* search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
-		6509781921922F35004153A5 /* searchw.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = searchw.json; sourceTree = "<group>"; };
+		6509781921922F35004153A5 /* search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
 		65228A1721860AE8002AFD7A /* previewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = previewViewController.swift; sourceTree = "<group>"; };
 		654CA106218653FF004DD0D3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		655F01402178F8710079D430 /* ShowEpisodenInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEpisodenInformation.swift; sourceTree = "<group>"; };
@@ -169,9 +165,7 @@
 		65E7B9062172367D006FA47D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				6509781921922F35004153A5 /* searchw.json */,
-				6509781721922EE1004153A5 /* search.json */,
-				65097813219229A1004153A5 /* halloween.json */,
+				6509781921922F35004153A5 /* search.json */,
 				65E7B8F821723648006FA47D /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -248,10 +242,8 @@
 				654CA107218653FF004DD0D3 /* .gitignore in Resources */,
 				65E7B8FC21723648006FA47D /* LaunchScreen.storyboard in Resources */,
 				65E7B8F921723648006FA47D /* Assets.xcassets in Resources */,
-				6509781821922EE1004153A5 /* search.json in Resources */,
-				65097814219229A1004153A5 /* halloween.json in Resources */,
 				65C14F08217BD2E0001BB656 /* Main.storyboard in Resources */,
-				6509781A21922F35004153A5 /* searchw.json in Resources */,
+				6509781A21922F35004153A5 /* search.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
