@@ -16,10 +16,15 @@ class RealmEpisodenInformation: Object {
     @objc dynamic var airdate, airtime, airstamp: String?
     @objc dynamic var runtime: Int=0
     @objc dynamic var summary: String?
-    @objc dynamic var seen: Bool=false
+    @objc dynamic var isSeen: Bool=false
     @objc dynamic var image:RealmImage?
     
     @objc dynamic var show:RealmBookmakShow?
+    //let show=LinkingObjects(fromType: RealmBookmakShow.self, property:"ParentShow")
+    
+    override class func primaryKey()->String{
+        return "id"
+    }
 }
 
 class RealmImage: Object {
@@ -33,8 +38,11 @@ class RealmBookmakShow: Object {
     @objc dynamic var showPremiered: String?
     @objc dynamic var showSummary: String?
     @objc dynamic var showId: Int=0
+    @objc dynamic var isBookmark:Bool=false
     
-    let episoden=List<RealmEpisodenInformation>()
-    
-    
+    let realmEpisoden=List<RealmEpisodenInformation>()
+
+    override class func primaryKey()->String{
+        return "showId"
+    }
 }
