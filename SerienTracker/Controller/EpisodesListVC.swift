@@ -158,14 +158,14 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
 extension EpisodesListVC {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         // Set height of section header to get more touch area
-        return 45
+        return 30
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         // The view is a button
         let titleButton = UIButton()
         // Should be the globally used GUI- backgroundColor it's still not even to that..
-        titleButton.backgroundColor = blackColor
+        //titleButton.backgroundColor = blackColor
         //titleButton.layer.borderColor = darkTurquoisColor.cgColor
         //titleButton.layer.borderWidth = 2
         titleButton.titleLabel?.textColor = UIColor.white
@@ -176,7 +176,7 @@ extension EpisodesListVC {
         
         let strokeTextAttributes = [
             NSAttributedString.Key.strokeColor: UIColor.white,
-            NSAttributedString.Key.font: UIFont(name: "Futura", size: 24)!
+            NSAttributedString.Key.font: UIFont(name: "Futura", size: 12)!
         ] as [NSAttributedString.Key: Any]
         let attributedTitle = NSAttributedString(string: title, attributes: strokeTextAttributes)
         
