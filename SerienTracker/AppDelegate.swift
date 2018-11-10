@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var realm:Realm?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -25,6 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //MARK: - Tabbar Setup
         UITabBar.appearance().tintColor = turquoiseColor
       // UITabBar.appearance().bartint
+        
+        //init Realm database
+        do{
+            realm=try Realm()
+            print(Realm.Configuration.defaultConfiguration.fileURL)
+            
+        }catch let error{
+            fatalError(error.localizedDescription)
+        }
+        
         return true
     }
 
