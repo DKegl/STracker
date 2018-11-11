@@ -140,21 +140,20 @@ extension EpisodesListVC {
         // The view is a button
         let titleButton = UIButton()
         
-        titleButton.titleLabel?.textColor = UIColor.white
-        
+      
         // Use the globally used text style to show the Season sections
         // >> let title = "Season \(groupedEpisodes[section][0].season!)"
         let title = "Season \(expandableGroupedEpisodes[section][0].episodes[0].season!)"
         
         let strokeTextAttributes = [
-            NSAttributedString.Key.strokeColor: UIColor.white,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.font: UIFont(name: "Futura", size: 12)!
         ] as [NSAttributedString.Key: Any]
         let attributedTitle = NSAttributedString(string: title, attributes: strokeTextAttributes)
         
         titleButton.setAttributedTitle(attributedTitle, for: .normal)
         
-        // Put section(season number) into button tag to evaluate whicht section
+        // Put section(season number) into button tag to evaluate which section
         // should be expand/collapsed
         titleButton.tag = section
         

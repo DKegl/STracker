@@ -14,7 +14,7 @@ class mainCell: UITableViewCell {
     @IBOutlet weak var showTitleLabel: UILabel!
     
     func setMainCell(cellInfo:String){
-        //Set rounded corners to containerView
+        //Set rounded corners for containerView
         containerView.layer.borderColor = turquoiseColor.cgColor
         containerView.layer.cornerRadius = 20
         containerView.layer.borderWidth = 2
