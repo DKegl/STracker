@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(Realm.Configuration.defaultConfiguration.fileURL!)
             
         }catch let error{
+           print(Realm.Configuration.defaultConfiguration.fileURL!)
             fatalError(error.localizedDescription)
         }
         

@@ -36,7 +36,11 @@ class MainShowInformationVC: UIViewController {
     func setupUI() {
         guard let showInfo = showInfo else { fatalError("No show info available") }
         showLabel.text = showInfo.show?.name
-        showSummaryTextView.text = showInfo.show?.summary!.deleteHTMLTag(tag: "")
+        if let summary=showInfo.show?.summary{
+            showSummaryTextView.text = summary.deleteHTMLTag(tag: "")
+        }else{
+             showSummaryTextView.text = "No show information available"
+        }
         showImageView.loadImageFromUrl((showInfo.show?.image!.original)!)
         statusLabel.text? = showInfo.show?.status ?? ""
         epButton.layer.cornerRadius = 20

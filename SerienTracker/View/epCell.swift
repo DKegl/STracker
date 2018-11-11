@@ -14,20 +14,35 @@ class epCell: UITableViewCell {
     @IBOutlet var titleLbl: UILabel!
     @IBOutlet var dateLbl: UILabel!
     
-    @IBOutlet var cellImage: UIImageView!
+    @IBOutlet var containerView: UIView!
+    
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
+    private var _backingImageWidthConstraintConst:CGFloat!
+    
+    override func awakeFromNib() {
+        //Save the value of the imageView's width constraint constant
+        _backingImageWidthConstraintConst=imageWidthConstraint.constant
+    }
     
     func setEp(episode: ShowEpisodenInformation) {
-        cellImage.layer.cornerRadius = 20
-        cellImage.layer.borderWidth = 2
-        cellImage.layer.borderColor = turquoiseColor.cgColor
+        //Round corner for the container view
+        containerView.layer.cornerRadius = 20
+        containerView.layer.borderWidth = 2
+        containerView.layer.borderColor = turquoiseColor.cgColor
         
         noLbl.text = "\(episode.number ?? 00)."
         titleLbl.text = episode.name
         dateLbl.text = episode.airdate
         
+        //Keep font size
+        titleLbl.adjustsFontSizeToFitWidth=false
+        
+        //Change position of the subview elements due to the availability of the image
         if (episode.image?.original) == nil {
+            imageWidthConstraint.constant=0
             return
         } else {
+            imageWidthConstraint.constant = _backingImageWidthConstraintConst
             epImage!.loadImageFromUrl((episode.image?.original)!)
         }
     }

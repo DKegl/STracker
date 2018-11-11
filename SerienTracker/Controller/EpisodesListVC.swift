@@ -26,6 +26,8 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Disable lines between cells
+        tableView.separatorStyle = .none
         
         navigationItem.title = showName
         // check if force Touch availible
@@ -80,8 +82,7 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
         // Get episode from season(section) and row
         let episode = expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row]
         
-        tableView.separatorStyle = .none
-        
+       
         cell.setEp(episode: episode)
         
         // Checkmark seen episodes
