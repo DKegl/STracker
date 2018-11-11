@@ -65,6 +65,15 @@ class MainShowInformationVC: UIViewController {
                             realmShow.isBookmark = true
                             realmShow.showId = show?.showId ?? 0
                             realmShow.showName = show?.showName
+                            realmShow.showStatus = show?.showStatus
+                            realmShow.showPremiered = show?.showPremiered
+                            realmShow.showSummary = show?.showSummary
+                            
+                            let image=ShowImage()
+                            image.setValue(show?.image?.medium, forKey: "medium")
+                            image.setValue(show?.image?.original, forKey: "original")
+                            
+                            realmShow.image=image
                             
                             var realmEpisoden = [RealmEpisodenInformation]()
                             for episode in episoden! {
@@ -72,6 +81,18 @@ class MainShowInformationVC: UIViewController {
                                 realmEp.name = episode.name
                                 realmEp.show = realmShow
                                 realmEp.id = episode.id
+                                realmEp.url = episode.url
+                                realmEp.season = episode.season ?? 0
+                                realmEp.number = episode.number ?? 0
+                                realmEp.airdate = episode.airdate
+                                realmEp.summary = episode.summary
+                                realmEp.isSeen = false
+                                let image=EpImage()
+                                image.setValue(show?.image?.medium, forKey: "medium")
+                                image.setValue(show?.image?.original, forKey: "original")
+                                
+                                realmEp.image=image
+                                
                                 realmEpisoden.append(realmEp)
                             }
                             realmShow.realmEpisoden.append(objectsIn: realmEpisoden)

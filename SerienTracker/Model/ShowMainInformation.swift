@@ -14,12 +14,16 @@ struct ShowMainInformation: Codable {
     var showPremiered: String
     var showSummary: String
     var showId: Int
-
+    var image: Image?
+    
     enum CodingKeys: String, CodingKey {
         case showName = "name"
         case showStatus = "status"
         case showPremiered = "premiered"
         case showSummary = "summary"
         case showId = "id"
+    }
+struct Image: Codable {
+    let medium, original: String
     }
 }

@@ -10,8 +10,7 @@ struct ShowEpisodenInformation: Codable {
     let id: Int
     let url, name: String
     let season, number: Int?
-    let airdate, airtime, airstamp: String?
-    let runtime: Int?
+    let airdate: String?
     let summary: String?
     var seen: Bool? = false
     let image: epImage?
