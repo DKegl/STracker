@@ -46,7 +46,7 @@
                                 <color key="tintColor" red="0.13333333333333333" green="0.15686274509803921" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="2" indentationWidth="10" reuseIdentifier="ShowMainCell" textLabel="IGy-oe-Pjs" rowHeight="50" style="IBUITableViewCellStyleDefault" id="3vz-Vb-M2p" customClass="mainCell" customModule="SerienTracker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="2" indentationWidth="10" reuseIdentifier="ShowMainCell" textLabel="IGy-oe-Pjs" rowHeight="50" style="IBUITableViewCellStyleDefault" id="3vz-Vb-M2p">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="3vz-Vb-M2p" id="dFK-x0-vkV">
