@@ -46,26 +46,43 @@
                                 <color key="tintColor" red="0.13333333333333333" green="0.15686274509803921" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="2" indentationWidth="10" reuseIdentifier="ShowMainCell" textLabel="IGy-oe-Pjs" rowHeight="50" style="IBUITableViewCellStyleDefault" id="3vz-Vb-M2p">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="2" indentationWidth="10" reuseIdentifier="ShowMainCell" rowHeight="50" id="3vz-Vb-M2p" customClass="mainCell" customModule="SerienTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="3vz-Vb-M2p" id="dFK-x0-vkV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IGy-oe-Pjs">
-                                                    <rect key="frame" x="35" y="0.0" width="325" height="49.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UY8-5b-pMS">
+                                                    <rect key="frame" x="5" y="2" width="365" height="46"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEe-Dd-Q8y">
+                                                            <rect key="frame" x="15" y="12.5" width="42" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="nEe-Dd-Q8y" firstAttribute="leading" secondItem="UY8-5b-pMS" secondAttribute="leading" constant="15" id="C0x-ml-z1C"/>
+                                                        <constraint firstItem="nEe-Dd-Q8y" firstAttribute="centerY" secondItem="UY8-5b-pMS" secondAttribute="centerY" id="IjK-Sk-4n8"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="UY8-5b-pMS" firstAttribute="top" secondItem="was-DY-hTE" secondAttribute="top" constant="2" id="0fh-gh-o4y"/>
+                                            <constraint firstItem="was-DY-hTE" firstAttribute="bottom" secondItem="UY8-5b-pMS" secondAttribute="bottom" constant="2" id="HeA-UW-Ipj"/>
+                                            <constraint firstItem="UY8-5b-pMS" firstAttribute="leading" secondItem="was-DY-hTE" secondAttribute="leading" constant="5" id="hlV-6q-Ne2"/>
+                                            <constraint firstItem="was-DY-hTE" firstAttribute="trailing" secondItem="UY8-5b-pMS" secondAttribute="trailing" constant="5" id="n59-Xn-oGc"/>
+                                        </constraints>
                                         <viewLayoutGuide key="safeArea" id="was-DY-hTE"/>
                                         <connections>
+                                            <outlet property="containerView" destination="UY8-5b-pMS" id="hC8-7u-pkx"/>
+                                            <outlet property="showTitleLabel" destination="nEe-Dd-Q8y" id="HN7-KE-0dO"/>
                                             <segue destination="5kB-Sh-CXM" kind="show" identifier="segueMainShowInformationVC" id="kpa-ef-9cZ"/>
                                         </connections>
                                     </tableViewCell>
