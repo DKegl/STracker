@@ -57,12 +57,15 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMainCell", for: indexPath)
-        cell.layer.borderColor = turquoiseColor.cgColor
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMainCell", for: indexPath) as! mainCell
         
-        cell.layer.cornerRadius = 20
-        cell.layer.borderWidth = 2
+        tableView.separatorStyle = .none
+        
+        cell.textLabel?.layer.borderColor = turquoiseColor.cgColor
+        cell.textLabel?.layer.cornerRadius = 20
+        cell.textLabel?.layer.borderWidth = 2
         cell.clipsToBounds = true
+       
         if showSearchArray.count == 0 {
             cell.textLabel?.text = "No matching shows please try again"
         } else {
