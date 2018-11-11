@@ -85,7 +85,7 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
        
         cell.setEp(episode: episode)
         
-        // Checkmark seen episodes
+        // >> ToDo Checkmark seen episodes
         if episode.seen == true {
             cell.accessoryType = .checkmark
         } else {
@@ -99,8 +99,10 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
         // Checkmark seen episode
         // >> groupedEpisodes[indexPath.section][indexPath.row].seen = !(groupedEpisodes[indexPath.section][indexPath.row].seen ?? false)
         
-        expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row].seen = !(expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row].seen ?? false)
+        //>> Todo read value from realm database
         
+        expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row].seen = !(expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row].seen ?? false)
+//
         // Refresh modified rows(episodes) from tableview
         tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
     }

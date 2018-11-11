@@ -22,7 +22,9 @@ struct ShowMainInformation: Codable {
         case showPremiered = "premiered"
         case showSummary = "summary"
         case showId = "id"
+        case image = "image"
     }
+    
 struct Image: Codable {
     let medium, original: String
     }

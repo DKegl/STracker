@@ -41,7 +41,7 @@ class MainShowInformationVC: UIViewController {
         }else{
              showSummaryTextView.text = "No show information available"
         }
-        
+
         if let imageUrl=showInfo.show?.image?.original{
              showImageView.loadImageFromUrl(imageUrl)
         }else if let imageUrl=showInfo.show?.image?.medium{
@@ -50,8 +50,6 @@ class MainShowInformationVC: UIViewController {
             print("No image available")
         }
        
-        
-        
         statusLabel.text? = showInfo.show?.status ?? ""
         epButton.layer.cornerRadius = 20
     }
@@ -59,36 +57,41 @@ class MainShowInformationVC: UIViewController {
     @objc func bookmarkTapped() {
         print("tap tap")
         
-        showMainAPI.getShowOverview(id: (showInfo?.show?.id)!) { [unowned self] show in
-            self.showEpListAPI.getEpList(id: (self.showInfo?.show?.id)!, complition: { episoden in
+        showMainAPI.getShowOverview(id: (showInfo?.show?.id)!) { [weak self] show in
+            guard let show=show else {
+                fatalError("No show found")
+            }
+            
+            self?.showEpListAPI.getEpList(id: (self?.showInfo?.show?.id)!, complition: { [weak self] episoden in
                 // Realm().object(ofType: Book.self, forPrimaryKey: prevBook.nextId)
-                let showObject = self.realm.object(ofType: RealmBookmakShow.self, forPrimaryKey: show?.showId)
+                let showObject = self?.realm.object(ofType: RealmBookmakShow.self, forPrimaryKey: show.showId)
+               
                 if showObject?.isBookmark == true {
                     do {
-                        try self.realm.write {
-                            self.realm.delete((showObject?.realmEpisoden)!)
-                            self.realm.delete(showObject!)
+                        try self?.realm.write {
+                            self?.realm.delete((showObject?.realmEpisoden)!)
+                            self?.realm.delete(showObject!)
                             
                     } } catch let error {
                         print(error.localizedDescription)
                     }
                 } else {
                     do {
-                        try self.realm.write {
+                        try self?.realm.write {
                             let realmShow = RealmBookmakShow()
                             realmShow.isBookmark = true
-                            realmShow.showId = show?.showId ?? 0
-                            realmShow.showName = show?.showName
-                            realmShow.showStatus = show?.showStatus
-                            realmShow.showPremiered = show?.showPremiered
-                            realmShow.showSummary = show?.showSummary
+                            realmShow.showId = show.showId
+                            realmShow.showName = show.showName
+                            realmShow.showStatus = show.showStatus
+                            realmShow.showPremiered = show.showPremiered
+                            realmShow.showSummary = show.showSummary
+                            
                             
                             let image=ShowImage()
-                            image.setValue(show?.image?.medium, forKey: "medium")
-                            image.setValue(show?.image?.original, forKey: "original")
-                            
-                            realmShow.image=image
-                            
+                            image.medium=show.image?.medium
+                            image.original=show.image?.original
+                            realmShow.setValue(image, forKey: "image")
+                    
                             var realmEpisoden = [RealmEpisodenInformation]()
                             for episode in episoden! {
                                 let realmEp = RealmEpisodenInformation()
@@ -101,16 +104,16 @@ class MainShowInformationVC: UIViewController {
                                 realmEp.airdate = episode.airdate
                                 realmEp.summary = episode.summary
                                 realmEp.isSeen = false
+                               
                                 let image=EpImage()
-                                image.setValue(show?.image?.medium, forKey: "medium")
-                                image.setValue(show?.image?.original, forKey: "original")
-                                
+                                image.medium=episode.image?.medium
+                                image.original=episode.image?.original
                                 realmEp.image=image
                                 
                                 realmEpisoden.append(realmEp)
                             }
                             realmShow.realmEpisoden.append(objectsIn: realmEpisoden)
-                            self.realm.add(realmShow, update: true)
+                            self?.realm.add(realmShow, update: true)
                         }
                     } catch let error {
                         print(error.localizedDescription)

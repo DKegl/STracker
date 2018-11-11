@@ -28,8 +28,7 @@ class ShowEpListApi {
             do {
                 let epInfo = try jsonDecoder.decode([ShowEpisodenInformation?].self, from: data)
                 for episode in epInfo {
-                    if var episode = episode{
-                        episode.seen = false
+                    if let episode = episode{
                         episoden.append(episode)
                     }
                 }
