@@ -64,11 +64,20 @@ class MainShowInformationVC: UIViewController {
             
             self?.showEpListAPI.getEpList(id: (self?.showInfo?.show?.id)!, complition: { [weak self] episoden in
                 // Realm().object(ofType: Book.self, forPrimaryKey: prevBook.nextId)
-                let showObject = self?.realm.object(ofType: RealmBookmakShow.self, forPrimaryKey: show.showId)
-               
+                let showObject = self?.realm.object(ofType: RealmBookmarkShow.self, forPrimaryKey: show.showId)
+                let showImageObject = self?.realm.object(ofType: RealmShowImage.self, forPrimaryKey: show.showId)
+                
+                
                 if showObject?.isBookmark == true {
                     do {
                         try self?.realm.write {
+                            self?.realm.delete(showImageObject!)
+                           // self?.realm.delete(episodenImageObject!)
+                            if let episodeShowImages=self?.realm.objects(RealmEpImage.self).filter("showId==\(show.showId)"){
+                                self?.realm.delete(episodeShowImages)
+                            }
+                            
+                    
                             self?.realm.delete((showObject?.realmEpisoden)!)
                             self?.realm.delete(showObject!)
                             
@@ -78,7 +87,7 @@ class MainShowInformationVC: UIViewController {
                 } else {
                     do {
                         try self?.realm.write {
-                            let realmShow = RealmBookmakShow()
+                            let realmShow = RealmBookmarkShow()
                             realmShow.isBookmark = true
                             realmShow.showId = show.showId
                             realmShow.showName = show.showName
@@ -87,14 +96,17 @@ class MainShowInformationVC: UIViewController {
                             realmShow.showSummary = show.showSummary
                             
                             
-                            let image=ShowImage()
+                            let image=RealmShowImage()
                             image.medium=show.image?.medium
                             image.original=show.image?.original
+                            image.showId=show.showId
                             realmShow.setValue(image, forKey: "image")
+                            
                     
+                            var realmEp:RealmEpisodenInformation
                             var realmEpisoden = [RealmEpisodenInformation]()
                             for episode in episoden! {
-                                let realmEp = RealmEpisodenInformation()
+                                realmEp=RealmEpisodenInformation()
                                 realmEp.name = episode.name
                                 realmEp.show = realmShow
                                 realmEp.id = episode.id
@@ -105,10 +117,13 @@ class MainShowInformationVC: UIViewController {
                                 realmEp.summary = episode.summary
                                 realmEp.isSeen = false
                                
-                                let image=EpImage()
+                                let image=RealmEpImage()
                                 image.medium=episode.image?.medium
                                 image.original=episode.image?.original
-                                realmEp.image=image
+                                image.episodeId=realmEp.id
+                                image.showId=show.showId
+                                realmEp.setValue(image, forKey: "image")
+                               
                                 
                                 realmEpisoden.append(realmEp)
                             }
