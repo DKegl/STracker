@@ -41,7 +41,17 @@ class MainShowInformationVC: UIViewController {
         }else{
              showSummaryTextView.text = "No show information available"
         }
-        showImageView.loadImageFromUrl((showInfo.show?.image!.original)!)
+        
+        if let imageUrl=showInfo.show?.image?.original{
+             showImageView.loadImageFromUrl(imageUrl)
+        }else if let imageUrl=showInfo.show?.image?.medium{
+            showImageView.loadImageFromUrl(imageUrl)
+        }else{
+            print("No image available")
+        }
+       
+        
+        
         statusLabel.text? = showInfo.show?.status ?? ""
         epButton.layer.cornerRadius = 20
     }
