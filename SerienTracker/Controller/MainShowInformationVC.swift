@@ -102,10 +102,10 @@ extension MainShowInformationVC {
                 image.showId = show.showId
                 realmShow.setValue(image, forKey: "image")
                 
-                var realmEp: RealmEpisodenInformation
                 var realmEpisoden = [RealmEpisodenInformation]()
-                for episode in episodes {
-                    realmEp = RealmEpisodenInformation()
+                
+                realmEpisoden=episodes.map({ (episode) -> RealmEpisodenInformation in
+                    let realmEp = RealmEpisodenInformation()
                     realmEp.name = episode.name
                     realmEp.show = realmShow
                     realmEp.id = episode.id
@@ -122,9 +122,9 @@ extension MainShowInformationVC {
                     image.episodeId = realmEp.id
                     image.showId = show.showId
                     realmEp.setValue(image, forKey: "image")
-                    
-                    realmEpisoden.append(realmEp)
-                }
+                    return realmEp
+                })
+                
                 realmShow.realmEpisoden.append(objectsIn: realmEpisoden)
                 self.realm.add(realmShow, update: true)
             }
