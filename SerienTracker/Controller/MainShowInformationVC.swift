@@ -20,10 +20,10 @@ class MainShowInformationVC: UIViewController {
     var showMainAPI = ShowMainApi()
     var showEpListAPI = ShowEpListApi()
     
-    var realm: Realm {
+    lazy var realm:Realm={
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.realm!
-    }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +55,12 @@ class MainShowInformationVC: UIViewController {
     }
     
     @objc func bookmarkTapped() {
+        let testShow=getShow(id: (showInfo?.show?.id)!)
+            print("Show:\(testShow)")
+        
         print("tap tap")
+        
+       let userConfirmation=UserActionConfirmView(title: "Bookmark", message: "Stored", image:UIImage(named: "star"))
         
         showMainAPI.getShowOverview(id: (showInfo?.show?.id)!) { [weak self] show in
             guard let show=show else {
@@ -77,13 +82,13 @@ class MainShowInformationVC: UIViewController {
                                 self?.realm.delete(episodeShowImages)
                             }
                             
-                    
                             self?.realm.delete((showObject?.realmEpisoden)!)
                             self?.realm.delete(showObject!)
                             
                     } } catch let error {
                         print(error.localizedDescription)
                     }
+                //Delete bookmarked show
                 } else {
                     do {
                         try self?.realm.write {
@@ -95,14 +100,12 @@ class MainShowInformationVC: UIViewController {
                             realmShow.showPremiered = show.showPremiered
                             realmShow.showSummary = show.showSummary
                             
-                            
                             let image=RealmShowImage()
                             image.medium=show.image?.medium
                             image.original=show.image?.original
                             image.showId=show.showId
                             realmShow.setValue(image, forKey: "image")
                             
-                    
                             var realmEp:RealmEpisodenInformation
                             var realmEpisoden = [RealmEpisodenInformation]()
                             for episode in episoden! {
@@ -133,7 +136,9 @@ class MainShowInformationVC: UIViewController {
                     } catch let error {
                         print(error.localizedDescription)
                     }
-                }
+                    
+                    userConfirmation.show(animated: true)
+                }//else bookmark show
                 
             })
         }
@@ -144,4 +149,34 @@ class MainShowInformationVC: UIViewController {
         epListVC.showInfo = showInfo?.show?.id
         epListVC.showName = showInfo?.show?.name
     }
+}
+
+extension MainShowInformationVC{
+    
+    func getShow(id:Int)->ShowMainInformation?{
+        var readShow:ShowMainInformation?
+       
+        showMainAPI.getShowOverview(id: (showInfo?.show?.id)!) { [weak self ]show in
+            readShow=show
+          
+        }
+     
+        
+        return readShow
+    }
+    
+
+    func saveAsBookmarkShow(show:ShowMainInformation){
+        
+            
+    }
+    
+    func deleteBookmarkShow(show:ShowMainInformation){
+        
+    }
+    
+    func executeInOrder(){
+        
+    }
+    
 }
