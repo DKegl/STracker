@@ -31,8 +31,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         lottieView.setAnimation(named: "search")
         lottieView.play()
         lottieView.loopAnimation = true
-        tableView.separatorStyle = .none //<<
-        
+        tableView.separatorStyle = .none // <<
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -59,9 +58,9 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMainCell", for: indexPath) as! mainCell //<<
-       
-        let cellInfo:String
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMainCell", for: indexPath) as! mainCell // <<
+        
+        let cellInfo: String
         if showSearchArray.count == 0 {
             cellInfo = "No matching shows please try again"
         } else {
