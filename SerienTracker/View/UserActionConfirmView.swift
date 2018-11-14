@@ -8,15 +8,19 @@
 //  Copyright © 2018 Daniel Keglmeier. All rights reserved.
 //
 
-
 import UIKit
 
 class UserActionConfirmView: UIView {
     private let backgroundView = UIView()
     private let userConfirmationView = UIView()
-    private var title: String?
-    private var message: String?
-    private var image: UIImage?
+   
+    private var messageLabel:UILabel!
+    private var titleLabel:UILabel!
+    private var imageView:UIImageView!
+    
+    private var _title: String?
+    private var _message: String?
+    private var _image: UIImage?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,18 +28,24 @@ class UserActionConfirmView: UIView {
     }
     
     @IBInspectable var CustomImage: UIImage? {
-        get { return self.image }
-        set { self.image = newValue }
+        get { return self._image }
+        set { self._image = newValue
+              imageView.image = newValue
+        }
     }
     
     @IBInspectable var CustomTitle: String? {
-        get { return self.title }
-        set { self.title = newValue }
+        get { return self._title }
+        set { self._title = newValue
+             titleLabel.text = newValue
+        }
     }
     
     @IBInspectable var CustomMessage: String? {
-        get { return message }
-        set { message = newValue }
+        get { return _message }
+        set { _message = newValue
+            messageLabel.text=newValue
+        }
     }
     
     // Shouldn't be called from NIB-file
@@ -47,11 +57,11 @@ class UserActionConfirmView: UIView {
     }
     
     init(title: String?, message: String?, image: UIImage?) {
-        self.title = title
-        self.message = message
-        self.image = image
+        self._title = title
+        self._message = message
+        self._image = image
         super.init(frame: UIScreen.main.bounds)
-        setupViews()
+        self.setupViews()
     }
     
     private func setupViews() {
@@ -62,32 +72,34 @@ class UserActionConfirmView: UIView {
         addSubview(self.backgroundView)
         
         // Configure subviews
-        let dialogViewWidth = frame.width - 80
+        let dialogViewWidth = frame.width - 150
         // 1.Subview is an UILabel
-        let titleLabel = UILabel(frame: CGRect(x: 8, y: 8, width: dialogViewWidth - 16, height: 30))
-        titleLabel.text = title
+        titleLabel = UILabel(frame: CGRect(x:frame.width/2-dialogViewWidth/2-4, y: 8, width: dialogViewWidth - 16, height: 30))
+        titleLabel.text = _title
         titleLabel.textAlignment = .center
         userConfirmationView.addSubview(titleLabel)
         
-        // 2.Subview is a border view
-        let separatorLineView = UIView()
-        separatorLineView.frame.origin = CGPoint(x: 0, y: titleLabel.frame.height + 8)
-        separatorLineView.frame.size = CGSize(width: dialogViewWidth, height: 1)
-        separatorLineView.backgroundColor = UIColor.groupTableViewBackground
-        userConfirmationView.addSubview(separatorLineView)
+        // 2.Subview is an UILabel
+        messageLabel = UILabel(frame: CGRect(x: frame.width/2-dialogViewWidth/2-4, y: titleLabel.frame.height+8, width: dialogViewWidth - 16, height: 30))
+        messageLabel.text = _title
+        messageLabel.textAlignment = .center
+        userConfirmationView.addSubview(messageLabel)
         
         // 3.Subview is an UIImage view animated or not
-        let imageView = UIImageView()
-        imageView.frame.origin = CGPoint(x: 8, y: separatorLineView.frame.height + separatorLineView.frame.origin.y + 8)
-        imageView.frame.size = CGSize(width: dialogViewWidth - 15, height: dialogViewWidth - 15)
-        imageView.image = image
+        imageView = UIImageView()
+        let yOrigin=messageLabel.frame.height+messageLabel.frame.origin.y+CGFloat(8)
+        imageView.frame.origin = CGPoint(x:dialogViewWidth/2+20, y:yOrigin)
+        imageView.frame.size = CGSize(width:40 , height:40)
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = _image
         imageView.layer.cornerRadius = 4
         imageView.clipsToBounds = true
         userConfirmationView.addSubview(imageView)
         
-        let dialogViewHeight = titleLabel.frame.height + 8 + separatorLineView.frame.height + 8 + imageView.frame.height + 8
+        var dialogViewHeight = titleLabel.frame.height + 8 + imageView.frame.height + 8
+        dialogViewHeight += (messageLabel.frame.height + 8)
         userConfirmationView.frame.origin = CGPoint(x: 32, y: frame.height)
-        userConfirmationView.frame.size = CGSize(width: frame.width - 64, height: dialogViewHeight)
+        userConfirmationView.frame.size = CGSize(width:frame.width-64, height: dialogViewHeight)
         userConfirmationView.backgroundColor = UIColor.white
         userConfirmationView.layer.cornerRadius = 6
         userConfirmationView.clipsToBounds = true
