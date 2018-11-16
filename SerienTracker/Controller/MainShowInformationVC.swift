@@ -40,6 +40,7 @@ class MainShowInformationVC: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(bookmarkTapped))
     }
     
+
     func setupUI() {
         guard let showInfo = showInfo else { fatalError("No show info available") }
         showLabel.text = showInfo.show?.name
@@ -65,7 +66,7 @@ class MainShowInformationVC: UIViewController {
         print("tap tap")
         
         // Configure response message
-        let userConfirmation = UserActionConfirmView(title: "", message: "", image: UIImage(named: "star"))
+        let userConfirmation = UserActionConfirmView(title: "", message: "",imageName:"45-Bookmark.json")
         
         // 1. Check if selected show is already in database
         // assuming the bookmark flag is set
@@ -204,3 +205,5 @@ extension MainShowInformationVC {
         return true
     }
 }
+
+

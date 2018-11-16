@@ -3,48 +3,80 @@
 //  SerienTracker
 //
 //  Created by Andre Frank on 12.11.18.
-//  Parts of this module can be found on https://medium.com/@aatish.rajkarnikar/how-to-make-custom-alertview-dialogbox-with-animation-in-swift-3-2852f4e6f311
-//
 //  Copyright © 2018 Daniel Keglmeier. All rights reserved.
 //
 
+import Lottie
 import UIKit
 
 class UserActionConfirmView: UIView {
-    private let backgroundView = UIView()
-    private let userConfirmationView = UIView()
-   
-    private var messageLabel:UILabel!
-    private var titleLabel:UILabel!
-    private var imageView:UIImageView!
+    // BackgroundView
+    private lazy var backgroundView: UIView = {
+        let bv = UIView()
+        // Dark mode for background View
+        bv.backgroundColor = .black
+        bv.alpha = 0.4
+        return bv
+    }()
+    
+    // Main view of content views
+    private let userConfirmationView: UIView = {
+        let uv = UIView()
+        uv.backgroundColor = .white
+        uv.layer.cornerRadius = 6
+        uv.clipsToBounds = true
+        return uv
+    }()
+    
+    // Content views
+    private lazy var messageLabel: UILabel = {
+        let ml = UILabel()
+        ml.numberOfLines = 1
+        ml.font = UIFont(name: "System", size: 14)
+        ml.textAlignment = .center
+        return ml
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let tl = UILabel()
+        tl.numberOfLines = 1
+        tl.font = UIFont(name: "System", size: 17)
+        tl.textAlignment = .center
+        return tl
+    }()
+    
+    private lazy var animationView: LOTAnimationView = {
+        LOTAnimationView()
+    }()
     
     private var _title: String?
     private var _message: String?
-    private var _image: UIImage?
+    private var _image: String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupViews()
     }
     
-    @IBInspectable var CustomImage: UIImage? {
+    @IBInspectable var customImageName: String? {
         get { return self._image }
         set { self._image = newValue
-              imageView.image = newValue
+            guard let imageName = newValue else { return }
+            self.animationView.setAnimation(named: imageName)
         }
     }
     
     @IBInspectable var CustomTitle: String? {
         get { return self._title }
         set { self._title = newValue
-             titleLabel.text = newValue
+            self.titleLabel.text = newValue
         }
     }
     
     @IBInspectable var CustomMessage: String? {
         get { return _message }
         set { _message = newValue
-            messageLabel.text=newValue
+            messageLabel.text = newValue
         }
     }
     
@@ -56,57 +88,111 @@ class UserActionConfirmView: UIView {
         self.setupViews()
     }
     
-    init(title: String?, message: String?, image: UIImage?) {
+    init(title: String?, message: String?, imageName: String?) {
         self._title = title
         self._message = message
-        self._image = image
+        self._image = imageName
         super.init(frame: UIScreen.main.bounds)
         self.setupViews()
     }
+    private var portraitModeConstraints=[NSLayoutConstraint]()
+    private var landscapeModeConstraints=[NSLayoutConstraint]()
+    private var fixedConstraints=[NSLayoutConstraint]()
+   
+    func setupViewConstraints(){
+         var c1,c2,c3,c4,c5,c6:NSLayoutConstraint
+        
+        // 1.Use manual layout for background view
+        self.backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        //2.Fixed constraints for Left & top
+         c1 = backgroundView.leftAnchor.constraint(equalTo: self.leftAnchor)
+         c2 = backgroundView.topAnchor.constraint(equalTo: self.topAnchor)
+         fixedConstraints.append(contentsOf: [c1,c2])
+        
+       
+        // 3.Dynamic constraints according to the orientation mode for width & height
+        if UIDevice.current.orientation.isPortrait {
+            c3 = self.backgroundView.widthAnchor.constraint(equalTo: self.widthAnchor)
+            c4 = self.backgroundView.heightAnchor.constraint(equalTo: self.heightAnchor)
+            // Set identifier just for debuggging purposes
+            c3.identifier = "backgroundView_portraitWidth"
+            c4.identifier = "backgroundView_portraitHeight"
+            portraitModeConstraints.append(contentsOf: [c3, c4])
+            
+            c5 = self.backgroundView.widthAnchor.constraint(equalTo: self.heightAnchor)
+            c6 = self.backgroundView.heightAnchor.constraint(equalTo: self.widthAnchor)
+            c5.identifier = "backgroundView_landscapeWidth"
+            c6.identifier = "backgroundView_landscapeHeight"
+            landscapeModeConstraints.append(contentsOf: [c5, c6])
+            
+        } else {
+            c3 = self.backgroundView.widthAnchor.constraint(equalTo: self.widthAnchor)
+            c4 = self.backgroundView.heightAnchor.constraint(equalTo: self.heightAnchor)
+            // Set identifier just for debugging purposes
+            c3.identifier = "backgroundView_landscapeWidth"
+            c4.identifier = "backgroundView_landscapeHeight"
+            landscapeModeConstraints.append(contentsOf: [c3, c4])
+            
+            c5 = self.backgroundView.widthAnchor.constraint(equalTo: self.heightAnchor)
+            c6 = self.backgroundView.heightAnchor.constraint(equalTo: self.widthAnchor)
+            c5.identifier = "backgroundView_portraieWidth"
+            c6.identifier = "backgroundView_portraitHeight"
+            portraitModeConstraints.append(contentsOf: [c5, c6])
+        }
+        
+        
+    }
     
     private func setupViews() {
-        // Dark mode for background Views
-        self.backgroundView.frame = frame
-        self.backgroundView.backgroundColor = UIColor.black
-        self.backgroundView.alpha = 0.4
         addSubview(self.backgroundView)
+        addSubview(self.userConfirmationView)
+        setupViewConstraints()
         
-        // Configure subviews
-        let dialogViewWidth = frame.width - 150
-        // 1.Subview is an UILabel
-        titleLabel = UILabel(frame: CGRect(x:frame.width/2-dialogViewWidth/2-4, y: 8, width: dialogViewWidth - 16, height: 30))
-        titleLabel.text = _title
-        titleLabel.textAlignment = .center
-        userConfirmationView.addSubview(titleLabel)
+        addConstraints(fixedConstraints)
+        addConstraints(portraitModeConstraints)
+        addConstraints(landscapeModeConstraints)
         
-        // 2.Subview is an UILabel
-        messageLabel = UILabel(frame: CGRect(x: frame.width/2-dialogViewWidth/2-4, y: titleLabel.frame.height+8, width: dialogViewWidth - 16, height: 30))
-        messageLabel.text = _title
-        messageLabel.textAlignment = .center
-        userConfirmationView.addSubview(messageLabel)
+        //Fixed constraints are valid in different orieintation modes
+        _=fixedConstraints.map { $0.isActive=true}
         
-        // 3.Subview is an UIImage view animated or not
-        imageView = UIImageView()
-        let yOrigin=messageLabel.frame.height+messageLabel.frame.origin.y+CGFloat(8)
-        imageView.frame.origin = CGPoint(x:dialogViewWidth/2+20, y:yOrigin)
-        imageView.frame.size = CGSize(width:40 , height:40)
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = _image
-        imageView.layer.cornerRadius = 4
-        imageView.clipsToBounds = true
-        userConfirmationView.addSubview(imageView)
-        
-        var dialogViewHeight = titleLabel.frame.height + 8 + imageView.frame.height + 8
-        dialogViewHeight += (messageLabel.frame.height + 8)
-        userConfirmationView.frame.origin = CGPoint(x: 32, y: frame.height)
-        userConfirmationView.frame.size = CGSize(width:frame.width-64, height: dialogViewHeight)
-        userConfirmationView.backgroundColor = UIColor.white
-        userConfirmationView.layer.cornerRadius = 6
-        userConfirmationView.clipsToBounds = true
-        addSubview(userConfirmationView)
+        self.userConfirmationView.addSubview(self.titleLabel)
+        self.userConfirmationView.addSubview(self.messageLabel)
+        self.userConfirmationView.addSubview(self.animationView)
     }
+    
+   
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        UIDevice.current.orientation.isPortrait ? self.applyPortraitLayout() : self.applyLandscapeLayout()
+        
+        print("layoutSubviews")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        print("traitCollectionDidChange")
+    }
+    
+    
 }
 
+//MARK:- Orientation methods
+extension UserActionConfirmView {
+    private func applyLandscapeLayout() {
+        _=portraitModeConstraints.map({$0.isActive=false})
+        _=landscapeModeConstraints.map({$0.isActive=true})
+    }
+    
+    private func applyPortraitLayout() {
+         _=landscapeModeConstraints.map({$0.isActive=false})
+        _=portraitModeConstraints.map({$0.isActive=true})
+    }
+    
+}
+
+
+//MARK: - Animation methods
 extension UserActionConfirmView {
     func show(animated: Bool) {
         self.backgroundView.alpha = 0
@@ -122,7 +208,9 @@ extension UserActionConfirmView {
                 self.userConfirmationView.center = self.center
             }, completion: { completed in
                 if completed {
+                    // self.animationView.play()
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(3000), execute: {
+                        // self.animationView.stop()
                         self.dismiss(animated: true)
                     })
                 }
