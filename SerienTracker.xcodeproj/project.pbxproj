@@ -33,6 +33,7 @@
 		67A36325219DF8B600B05D06 /* 45-Bookmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 67A36324219DF8B600B05D06 /* 45-Bookmark.json */; };
 		67D49CD0219741E600FF767A /* RealmBookmarkShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D49CCF219741E600FF767A /* RealmBookmarkShow.swift */; };
 		67D85AF42198189F00094E34 /* mainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D85AF32198189F00094E34 /* mainCell.swift */; };
+		67F10EC121A060F0009156B6 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F10EC021A060F0009156B6 /* UIFont+Extensions.swift */; };
 		67FB0B24219BF292002D3430 /* ShowOperationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB0B23219BF292002D3430 /* ShowOperationAPI.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		67A36324219DF8B600B05D06 /* 45-Bookmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "45-Bookmark.json"; sourceTree = "<group>"; };
 		67D49CCF219741E600FF767A /* RealmBookmarkShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmBookmarkShow.swift; sourceTree = "<group>"; };
 		67D85AF32198189F00094E34 /* mainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainCell.swift; sourceTree = "<group>"; };
+		67F10EC021A060F0009156B6 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		67FB0B23219BF292002D3430 /* ShowOperationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowOperationAPI.swift; sourceTree = "<group>"; };
 		DB5049DDDD16A9401215F1D4 /* Pods_SerienTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SerienTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -125,6 +127,7 @@
 		65E7B8F021723648006FA47D /* SerienTracker */ = {
 			isa = PBXGroup;
 			children = (
+				67F10EBF21A060CE009156B6 /* Extensions */,
 				65E7B8F121723648006FA47D /* AppDelegate.swift */,
 				65E7B90321723658006FA47D /* Model */,
 				65E7B9042172366C006FA47D /* View */,
@@ -181,6 +184,14 @@
 				65E7B8F821723648006FA47D /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		67F10EBF21A060CE009156B6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				67F10EC021A060F0009156B6 /* UIFont+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		67FB0B22219BF239002D3430 /* OperationAPI */ = {
@@ -323,6 +334,7 @@
 				65E7B90C217253AE006FA47D /* Constants.swift in Sources */,
 				65E7B90A2172533F006FA47D /* ShowMainApi.swift in Sources */,
 				65E7B8F421723648006FA47D /* HomeVC.swift in Sources */,
+				67F10EC121A060F0009156B6 /* UIFont+Extensions.swift in Sources */,
 				65C14F00217B83A2001BB656 /* ShowSerachApi.swift in Sources */,
 				65C14EFC217B729D001BB656 /* MainShowInformationVC.swift in Sources */,
 				6509780E218B1050004153A5 /* epCell.swift in Sources */,

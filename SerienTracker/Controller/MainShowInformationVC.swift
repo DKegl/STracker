@@ -15,7 +15,6 @@ class MainShowInformationVC: UIViewController {
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var epButton: UIButton!
     @IBOutlet var showSummaryTextView: UITextView!
-  
     
     var showInfo: ShowSearch?
     var showMainAPI = ShowMainApi()
@@ -41,9 +40,6 @@ class MainShowInformationVC: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(bookmarkTapped))
     }
     
-   
-    
-
     func setupUI() {
         guard let showInfo = showInfo else { fatalError("No show info available") }
         showLabel.text = showInfo.show?.name
@@ -69,16 +65,17 @@ class MainShowInformationVC: UIViewController {
         print("tap tap")
         
         // Configure response message
-        let userConfirmation = UserActionConfirmView(title: "", message: "",imageName:"45-Bookmark.json")
+        let userConfirmation = UserActionConfirmView(title: "", message: "", imageName: "45-Bookmark.json")
         
         // 1. Check if selected show is already in database
         // assuming the bookmark flag is set
         if let id = showInfo?.show?.id,
             self.realmShowFilterWith(id: id).count > 0 {
             // 2. Delete the show with all episodes & images
-            userConfirmation.CustomTitle = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
-            userConfirmation.CustomMessage = "Bookmark removed from show"
+            userConfirmation.customTitle = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
+            userConfirmation.customMessage = "Bookmark removed from show"
             _ = deleteBookmarkShow(realmShow: realmShowFilterWith(id: id)[0])
+            
             userConfirmation.show(animated: true)
             
         } else {
@@ -88,10 +85,12 @@ class MainShowInformationVC: UIViewController {
             showMainAPI.getShowOverview(id: id) { [unowned self] show in
                 if let show = show {
                     self.showEpListAPI.getEpList(id: id, complition: { [unowned self] episodes in
-                        userConfirmation.CustomTitle = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
-                        userConfirmation.CustomMessage = "\(show.showName) bookmarked"
+                        userConfirmation.customTitle = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
+                        userConfirmation.customMessage = "\(show.showName) bookmarked"
                         _ = self.saveAsBookmarkShow(show: show, episodes: episodes)
-                        userConfirmation.show(animated: true)
+                        
+                        userConfirmation.show(animated: true, frames:deleteBookmarkFrames )
+                        
                     }) // end of inner block
                 } // end of if let show
             } // end of outer block
@@ -208,5 +207,3 @@ extension MainShowInformationVC {
         return true
     }
 }
-
-
