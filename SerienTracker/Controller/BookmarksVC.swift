@@ -10,12 +10,13 @@ import UIKit
 
 private let reuseIdentifier = "bookmarkCell"
 
+
 class BookmarksVC: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationItem.title="Bookmarked shows"
+        self.setTabBarEmbeddedTitle(title: "Bookmark show")
+        
         
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)

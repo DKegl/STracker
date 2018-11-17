@@ -29,6 +29,7 @@
 		65E7B90C217253AE006FA47D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B90B217253AE006FA47D /* Constants.swift */; };
 		65E7B91021725FC4006FA47D /* ShowEpListApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B90F21725FC4006FA47D /* ShowEpListApi.swift */; };
 		65EAE2DA217C8EF40024ACBB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EAE2D9217C8EF40024ACBB /* String+Extension.swift */; };
+		674D27DF21A0CDCD008D3A9A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D27DE21A0CDCD008D3A9A /* UIViewController+Extensions.swift */; };
 		6785B1F9219A2AFB0041BBC4 /* UserActionConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6785B1F8219A2AFB0041BBC4 /* UserActionConfirmView.swift */; };
 		67A36325219DF8B600B05D06 /* 45-Bookmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 67A36324219DF8B600B05D06 /* 45-Bookmark.json */; };
 		67D49CD0219741E600FF767A /* RealmBookmarkShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D49CCF219741E600FF767A /* RealmBookmarkShow.swift */; };
@@ -63,6 +64,7 @@
 		65E7B90B217253AE006FA47D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		65E7B90F21725FC4006FA47D /* ShowEpListApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEpListApi.swift; sourceTree = "<group>"; };
 		65EAE2D9217C8EF40024ACBB /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		674D27DE21A0CDCD008D3A9A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		6785B1F8219A2AFB0041BBC4 /* UserActionConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActionConfirmView.swift; sourceTree = "<group>"; };
 		67A36324219DF8B600B05D06 /* 45-Bookmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "45-Bookmark.json"; sourceTree = "<group>"; };
 		67D49CCF219741E600FF767A /* RealmBookmarkShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmBookmarkShow.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				67F10EC021A060F0009156B6 /* UIFont+Extensions.swift */,
+				674D27DE21A0CDCD008D3A9A /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				67F10EC121A060F0009156B6 /* UIFont+Extensions.swift in Sources */,
 				65C14F00217B83A2001BB656 /* ShowSerachApi.swift in Sources */,
 				65C14EFC217B729D001BB656 /* MainShowInformationVC.swift in Sources */,
+				674D27DF21A0CDCD008D3A9A /* UIViewController+Extensions.swift in Sources */,
 				6509780E218B1050004153A5 /* epCell.swift in Sources */,
 				67D85AF42198189F00094E34 /* mainCell.swift in Sources */,
 				655F01412178F8710079D430 /* ShowEpisodenInformation.swift in Sources */,
