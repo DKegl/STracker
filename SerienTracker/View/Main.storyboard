@@ -38,7 +38,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UY8-5b-pMS">
-                                                    <rect key="frame" x="5" y="-3" width="365" height="55.5"/>
+                                                    <rect key="frame" x="5" y="-3" width="657" height="55.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEe-Dd-Q8y">
                                                             <rect key="frame" x="15" y="17.5" width="42" height="21"/>
@@ -206,88 +206,107 @@
                 <viewController id="5kB-Sh-CXM" customClass="MainShowInformationVC" customModule="SerienTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pns-Vp-QJs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lAg-4w-R8M" customClass="CachedImageView" customModule="SerienTracker" customModuleProvider="target">
-                                <rect key="frame" x="85" y="156" width="199" height="160"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="60E-hZ-k4x">
+                                <rect key="frame" x="0.0" y="64" width="375" height="589"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Under the Dome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X80-gR-EFH">
+                                        <rect key="frame" x="68.5" y="0.0" width="238.5" height="35.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="27"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iKX-JO-HZa">
+                                        <rect key="frame" x="166.5" y="47.5" width="42" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="R8S-g9-s6W" customClass="CachedImageView" customModule="SerienTracker" customModuleProvider="target">
+                                        <rect key="frame" x="112.5" y="80" width="150" height="180"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="BCF-4G-NCu"/>
+                                            <constraint firstAttribute="height" constant="180" id="HEW-Fk-xql"/>
+                                            <constraint firstAttribute="width" constant="150" id="bbM-4k-i38"/>
+                                            <constraint firstAttribute="height" constant="120" id="mtQ-Q3-q1o"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="BCF-4G-NCu"/>
+                                                <exclude reference="HEW-Fk-xql"/>
+                                                <exclude reference="bbM-4k-i38"/>
+                                                <exclude reference="mtQ-Q3-q1o"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="BCF-4G-NCu"/>
+                                                <include reference="mtQ-Q3-q1o"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="HEW-Fk-xql"/>
+                                                <include reference="bbM-4k-i38"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sBU-aR-6Mq">
+                                        <rect key="frame" x="20" y="272" width="335" height="265"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofL-lY-JB6">
+                                        <rect key="frame" x="134.5" y="549" width="106" height="40"/>
+                                        <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="J7e-N1-Dk0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="22"/>
+                                        <state key="normal" title="Episoden">
+                                            <color key="titleColor" red="0.078431372549019607" green="1" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="IRq-e9-bFD" kind="show" identifier="showEpList" id="Ksu-tW-8ra"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="lAg-4w-R8M" secondAttribute="height" multiplier="199:160" id="dSt-37-VxX"/>
+                                    <constraint firstItem="sBU-aR-6Mq" firstAttribute="leading" secondItem="60E-hZ-k4x" secondAttribute="leading" constant="20" id="NO5-zx-Aot"/>
+                                    <constraint firstAttribute="trailing" secondItem="sBU-aR-6Mq" secondAttribute="trailing" constant="20" id="aBS-MQ-Kqq"/>
                                 </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under the Dome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X80-gR-EFH">
-                                <rect key="frame" x="0.0" y="84" width="375" height="35.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35.5" id="KQt-SC-dOB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="27"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHb-lc-4po">
-                                <rect key="frame" x="10" y="324" width="355" height="257"/>
-                                <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="257" id="pVa-KB-8go"/>
-                                </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLg-kw-Jqy">
-                                <rect key="frame" x="147.5" y="127" width="80" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="GO9-c0-dn4"/>
-                                    <constraint firstAttribute="height" constant="21" id="Wyl-Ng-7u6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofL-lY-JB6">
-                                <rect key="frame" x="112.5" y="606" width="150" height="41"/>
-                                <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="RHr-hO-9zk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="22"/>
-                                <state key="normal" title="Episoden">
-                                    <color key="titleColor" red="0.078431372549019607" green="1" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="IRq-e9-bFD" kind="show" identifier="showEpList" id="Ksu-tW-8ra"/>
-                                </connections>
-                            </button>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="NO5-zx-Aot"/>
+                                        <include reference="aBS-MQ-Kqq"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="X80-gR-EFH" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" id="0Lj-Nz-xAx"/>
-                            <constraint firstItem="oLg-kw-Jqy" firstAttribute="centerX" secondItem="Pns-Vp-QJs" secondAttribute="centerX" id="8cH-SB-Qhg"/>
-                            <constraint firstItem="lHb-lc-4po" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" constant="10" id="Csp-4g-6yP"/>
-                            <constraint firstItem="X80-gR-EFH" firstAttribute="trailing" secondItem="oOu-G0-vAw" secondAttribute="trailing" id="Hcb-fs-OqD"/>
-                            <constraint firstItem="oOu-G0-vAw" firstAttribute="trailing" secondItem="lHb-lc-4po" secondAttribute="trailing" constant="10" id="KxD-Ka-fuO"/>
-                            <constraint firstItem="lHb-lc-4po" firstAttribute="top" secondItem="lAg-4w-R8M" secondAttribute="bottom" constant="8" id="Pam-bt-ncV"/>
-                            <constraint firstItem="lAg-4w-R8M" firstAttribute="top" secondItem="oLg-kw-Jqy" secondAttribute="bottom" constant="8" id="S1h-IB-MsA"/>
-                            <constraint firstItem="lAg-4w-R8M" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" constant="85" id="VvH-ce-Hrs"/>
-                            <constraint firstItem="X80-gR-EFH" firstAttribute="top" secondItem="oOu-G0-vAw" secondAttribute="top" constant="20" id="WSu-iF-NeV"/>
-                            <constraint firstItem="ofL-lY-JB6" firstAttribute="top" secondItem="lHb-lc-4po" secondAttribute="bottom" constant="25" id="hTT-em-HuN"/>
-                            <constraint firstItem="ofL-lY-JB6" firstAttribute="centerX" secondItem="Pns-Vp-QJs" secondAttribute="centerX" id="mwb-Ps-cSy"/>
-                            <constraint firstItem="oLg-kw-Jqy" firstAttribute="top" secondItem="X80-gR-EFH" secondAttribute="bottom" constant="7.5" id="sUC-Un-wsl"/>
-                            <constraint firstItem="oOu-G0-vAw" firstAttribute="trailing" secondItem="lAg-4w-R8M" secondAttribute="trailing" constant="91" id="tjK-Xx-nb1"/>
+                            <constraint firstItem="60E-hZ-k4x" firstAttribute="top" secondItem="oOu-G0-vAw" secondAttribute="top" id="G0D-ma-crb"/>
+                            <constraint firstItem="oOu-G0-vAw" firstAttribute="trailing" secondItem="60E-hZ-k4x" secondAttribute="trailing" id="IQ0-Ag-JDD"/>
+                            <constraint firstItem="60E-hZ-k4x" firstAttribute="leading" secondItem="oOu-G0-vAw" secondAttribute="leading" id="jc8-ad-mof"/>
+                            <constraint firstItem="oOu-G0-vAw" firstAttribute="bottom" secondItem="60E-hZ-k4x" secondAttribute="bottom" constant="14" id="ydp-fc-w9e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oOu-G0-vAw"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="H6p-gm-nhX"/>
                     <connections>
                         <outlet property="epButton" destination="ofL-lY-JB6" id="g4j-EO-9fe"/>
-                        <outlet property="showImageView" destination="lAg-4w-R8M" id="85b-56-Qp5"/>
+                        <outlet property="showImageView" destination="R8S-g9-s6W" id="Jn1-Vf-gRa"/>
                         <outlet property="showLabel" destination="X80-gR-EFH" id="K9c-MI-Y8F"/>
-                        <outlet property="showSummaryTextView" destination="lHb-lc-4po" id="rCG-qs-xwv"/>
-                        <outlet property="statusLabel" destination="oLg-kw-Jqy" id="ASR-FQ-pE8"/>
+                        <outlet property="showSummaryTextView" destination="sBU-aR-6Mq" id="AyN-8M-pah"/>
+                        <outlet property="statusLabel" destination="iKX-JO-HZa" id="Gqo-vV-naW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3F-HN-UdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2765.5999999999999" y="124.58770614692655"/>
+            <point key="canvasLocation" x="2762.4000000000001" y="121.88905547226388"/>
         </scene>
         <!--Episodes ListVC-->
         <scene sceneID="iqm-pq-y4T">

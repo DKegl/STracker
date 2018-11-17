@@ -15,6 +15,7 @@ class MainShowInformationVC: UIViewController {
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var epButton: UIButton!
     @IBOutlet var showSummaryTextView: UITextView!
+  
     
     var showInfo: ShowSearch?
     var showMainAPI = ShowMainApi()
@@ -39,6 +40,8 @@ class MainShowInformationVC: UIViewController {
         navigationItem.title = showInfo?.show?.name
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(bookmarkTapped))
     }
+    
+   
     
 
     func setupUI() {

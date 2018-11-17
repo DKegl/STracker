@@ -177,6 +177,8 @@ class UserActionConfirmView: UIView {
     
 }
 
+
+
 //MARK:- Orientation methods
 extension UserActionConfirmView {
     private func applyLandscapeLayout() {
