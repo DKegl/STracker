@@ -11,17 +11,16 @@ import UIKit
 private let reuseIdentifier = "bookmarkCell"
 
 
-class BookmarksVC: UICollectionViewController {
+class BookmarksVC: UICollectionViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTabBarEmbeddedTitle(title: "Bookmark show")
-        
-        
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-        // Do any additional setup after loading the view.
+        // Register cell classes
+        self.collectionView!.register(bookmarkCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+    
+        
     }
 
 
@@ -46,6 +45,14 @@ class BookmarksVC: UICollectionViewController {
         return cell
     }
 
-
-
 }
+
+
+
+extension BookmarksVC:UICollectionViewDelegateFlowLayout{
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+         return CGSize(width: self.collectionView.bounds.width, height:120)
+    }
+}
+
+
