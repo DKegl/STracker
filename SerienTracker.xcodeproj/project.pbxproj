@@ -31,6 +31,7 @@
 		65EAE2DA217C8EF40024ACBB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EAE2D9217C8EF40024ACBB /* String+Extension.swift */; };
 		674D27DF21A0CDCD008D3A9A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D27DE21A0CDCD008D3A9A /* UIViewController+Extensions.swift */; };
 		674D27E121A0CFAA008D3A9A /* bookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D27E021A0CFAA008D3A9A /* bookmarkCell.swift */; };
+		675D50A621A0DCD900719CDA /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 675D50A521A0DCD900719CDA /* bookmark.png */; };
 		6785B1F9219A2AFB0041BBC4 /* UserActionConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6785B1F8219A2AFB0041BBC4 /* UserActionConfirmView.swift */; };
 		67A36325219DF8B600B05D06 /* 45-Bookmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 67A36324219DF8B600B05D06 /* 45-Bookmark.json */; };
 		67D49CD0219741E600FF767A /* RealmBookmarkShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D49CCF219741E600FF767A /* RealmBookmarkShow.swift */; };
@@ -67,6 +68,7 @@
 		65EAE2D9217C8EF40024ACBB /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		674D27DE21A0CDCD008D3A9A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		674D27E021A0CFAA008D3A9A /* bookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookmarkCell.swift; sourceTree = "<group>"; };
+		675D50A521A0DCD900719CDA /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
 		6785B1F8219A2AFB0041BBC4 /* UserActionConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActionConfirmView.swift; sourceTree = "<group>"; };
 		67A36324219DF8B600B05D06 /* 45-Bookmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "45-Bookmark.json"; sourceTree = "<group>"; };
 		67D49CCF219741E600FF767A /* RealmBookmarkShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmBookmarkShow.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		65E7B8F021723648006FA47D /* SerienTracker */ = {
 			isa = PBXGroup;
 			children = (
+				675D50A421A0DCC600719CDA /* Images */,
 				67F10EBF21A060CE009156B6 /* Extensions */,
 				65E7B8F121723648006FA47D /* AppDelegate.swift */,
 				65E7B90321723658006FA47D /* Model */,
@@ -189,6 +192,14 @@
 				65E7B8F821723648006FA47D /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		675D50A421A0DCC600719CDA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				675D50A521A0DCD900719CDA /* bookmark.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		67F10EBF21A060CE009156B6 /* Extensions */ = {
@@ -279,6 +290,7 @@
 				654CA107218653FF004DD0D3 /* .gitignore in Resources */,
 				65E7B8FC21723648006FA47D /* LaunchScreen.storyboard in Resources */,
 				67A36325219DF8B600B05D06 /* 45-Bookmark.json in Resources */,
+				675D50A621A0DCD900719CDA /* bookmark.png in Resources */,
 				65E7B8F921723648006FA47D /* Assets.xcassets in Resources */,
 				65C14F08217BD2E0001BB656 /* Main.storyboard in Resources */,
 				6509781A21922F35004153A5 /* search.json in Resources */,

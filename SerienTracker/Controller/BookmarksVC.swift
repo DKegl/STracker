@@ -17,8 +17,8 @@ class BookmarksVC: UICollectionViewController{
         super.viewDidLoad()
         self.setTabBarEmbeddedTitle(title: "Bookmark show")
 
-        // Register cell classes
-        self.collectionView!.register(bookmarkCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        // Register cell classes is StoryBoard responsibility when using IB !!
+        //self.collectionView!.register(bookmarkCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     
         
     }
@@ -28,19 +28,21 @@ class BookmarksVC: UICollectionViewController{
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! bookmarkCell
     
         // Configure the cell
+        let seen=EpisodeProgress(total:57,progress:35)
+        cell.setBookmarkCell(showImage: UIImage(named: "bookmark"), showFlag: "New", showName: "Gotham City", episodesInfo:"\(seen.progress) of \(seen.total) seen", seen:seen, seasonInfo: "5 seasons | Continous")
     
         return cell
     }

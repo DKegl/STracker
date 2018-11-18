@@ -8,19 +8,33 @@
 
 import UIKit
 
+typealias EpisodeProgress = (total: Int, progress: Int)
+
 class bookmarkCell: UICollectionViewCell {
+    @IBOutlet var showImage: UIImageView!
+    @IBOutlet var showFlag: UILabel!
+    @IBOutlet var showName: UILabel!
+    @IBOutlet var seasonsInfo: UILabel!
+    @IBOutlet var episodeInfo: UILabel!
+    @IBOutlet var episodesProgressView: UIProgressView!
     
-    @IBOutlet weak var showImage: UIImageView!
-    @IBOutlet weak var showFlag: UILabel!
-    @IBOutlet weak var showName: UILabel!
+    func setBookmarkCell(showImage: UIImage?, showFlag: String?, showName: String?, episodesInfo: String?, seen: EpisodeProgress, seasonInfo: String?) {
+        self.showImage.image = showImage
+        self.showFlag.text = showFlag
+        self.showName.text = showName
+        self.episodeInfo.text = episodesInfo
+        self.seasonsInfo.text = seasonInfo
+        self.episodesProgressView.progress = Float(Float(seen.progress) / Float(seen.total))
+    }
     
-    @IBOutlet weak var episodeInfo: UILabel!
+    private func setupViews() {
+        self.showFlag.textColor = .lightGray
+        self.showName.textColor = turquoiseColor
+        self.episodeInfo.textColor = .lightGray
+        self.seasonsInfo.textColor = .lightGray
+    }
     
-    
-    @IBOutlet weak var episodesProgressView: UIProgressView!
-    
-    
-    
-    
-    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
 }
