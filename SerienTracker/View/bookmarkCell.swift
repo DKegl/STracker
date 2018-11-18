@@ -10,13 +10,6 @@ import UIKit
 
 typealias EpisodeProgress = (total: Int, progress: Int)
 
-extension String{
-    func addPaddingCharacter(char:Character,count:Int)->String{
-       let padding=String(repeating: char, count: count)
-       return padding+self
-    }
-}
-
 class bookmarkCell: UICollectionViewCell {
     @IBOutlet var showImage: UIImageView!
     @IBOutlet var showFlag: UILabel!
@@ -26,18 +19,26 @@ class bookmarkCell: UICollectionViewCell {
     @IBOutlet var episodesProgressView: UIProgressView!
     
     //
-    @IBOutlet weak var separatorView: UIView!
+    @IBOutlet var separatorView: UIView!
     
     //
-    let etraTextPadding=13
+    let extraTextPadding = 13
     
     func setBookmarkCell(showImage: UIImage?, showFlag: String?, showName: String?, episodesInfo: String?, seen: EpisodeProgress, seasonInfo: String?) {
         self.showImage.image = showImage
         
         self.showName.text = showName
-        self.showFlag.text = showFlag?.addPaddingCharacter(char: " ", count: (showName?.count)!+etraTextPadding)
-        
-        
+        // Calculate offset of showflag dynically
+        // 1.Get actual width of content text
+        let showNameTextWidth = self.showName.intrinsicContentSize.width
+        var paddingTextLength: CGFloat = 0
+        var flagText = showFlag
+        // 2. Add padding character as long as showflag.text is shorter + extraPadding character
+        repeat {
+            flagText = flagText?.addPaddingCharacter(char: " ", count: self.extraTextPadding)
+            self.showFlag.text = flagText
+            paddingTextLength = (flagText?.width(usedFont: self.showFlag.font, boundWidth: self.showFlag.intrinsicContentSize.width))!
+        } while Int(showNameTextWidth) > Int(paddingTextLength)
         
         self.episodeInfo.text = episodesInfo
         self.seasonsInfo.text = seasonInfo
@@ -46,9 +47,8 @@ class bookmarkCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        separatorView.layer.borderWidth=0.5
-        separatorView.layer.borderColor = UIColor.lightGray.cgColor
-        
+        self.separatorView.layer.borderWidth = 0.5
+        self.separatorView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     private func setupViews() {
@@ -57,12 +57,10 @@ class bookmarkCell: UICollectionViewCell {
         self.episodeInfo.textColor = .lightGray
         self.seasonsInfo.textColor = .lightGray
         self.episodesProgressView.tintColor = turquoiseColor
-        
-        
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupViews()
+        self.setupViews()
     }
 }
