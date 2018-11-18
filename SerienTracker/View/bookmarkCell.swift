@@ -25,13 +25,17 @@ class bookmarkCell: UICollectionViewCell {
     @IBOutlet var episodeInfo: UILabel!
     @IBOutlet var episodesProgressView: UIProgressView!
     
-    let etraPadding=10
+    //
+    @IBOutlet weak var separatorView: UIView!
+    
+    //
+    let etraTextPadding=13
     
     func setBookmarkCell(showImage: UIImage?, showFlag: String?, showName: String?, episodesInfo: String?, seen: EpisodeProgress, seasonInfo: String?) {
         self.showImage.image = showImage
         
         self.showName.text = showName
-        self.showFlag.text = showFlag?.addPaddingCharacter(char: " ", count: (showName?.count)!+etraPadding)
+        self.showFlag.text = showFlag?.addPaddingCharacter(char: " ", count: (showName?.count)!+etraTextPadding)
         
         
         
@@ -40,7 +44,12 @@ class bookmarkCell: UICollectionViewCell {
         self.episodesProgressView.progress = Float(Float(seen.progress) / Float(seen.total))
     }
     
-    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        separatorView.layer.borderWidth=0.5
+        separatorView.layer.borderColor = UIColor.lightGray.cgColor
+        
+    }
     
     private func setupViews() {
         self.showFlag.textColor = .lightGray
