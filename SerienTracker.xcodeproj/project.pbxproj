@@ -112,6 +112,16 @@
 			path = "JSON Parsing";
 			sourceTree = "<group>";
 		};
+		65D0B95821A1E1C200A878F0 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				6509780D218B1050004153A5 /* epCell.swift */,
+				67D85AF32198189F00094E34 /* mainCell.swift */,
+				674D27E021A0CFAA008D3A9A /* bookmarkCell.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
 		65E7B8E521723647006FA47D = {
 			isa = PBXGroup;
 			children = (
@@ -135,11 +145,12 @@
 		65E7B8F021723648006FA47D /* SerienTracker */ = {
 			isa = PBXGroup;
 			children = (
+				65D0B95821A1E1C200A878F0 /* CustomCells */,
 				675D50A421A0DCC600719CDA /* Images */,
 				67F10EBF21A060CE009156B6 /* Extensions */,
 				65E7B8F121723648006FA47D /* AppDelegate.swift */,
 				65E7B90321723658006FA47D /* Model */,
-				65E7B9042172366C006FA47D /* View */,
+				65E7B9042172366C006FA47D /* Storyboards */,
 				655F01422178FADD0079D430 /* JSON Parsing */,
 				65E7B90521723673006FA47D /* Controller */,
 				65E7B9062172367D006FA47D /* Assets */,
@@ -161,16 +172,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		65E7B9042172366C006FA47D /* View */ = {
+		65E7B9042172366C006FA47D /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				65C14F07217BD2E0001BB656 /* Main.storyboard */,
-				6785B1F8219A2AFB0041BBC4 /* UserActionConfirmView.swift */,
-				6509780D218B1050004153A5 /* epCell.swift */,
-				67D85AF32198189F00094E34 /* mainCell.swift */,
-				674D27E021A0CFAA008D3A9A /* bookmarkCell.swift */,
 			);
-			path = View;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		65E7B90521723673006FA47D /* Controller */ = {
@@ -207,6 +214,7 @@
 		67F10EBF21A060CE009156B6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6785B1F8219A2AFB0041BBC4 /* UserActionConfirmView.swift */,
 				67F10EC021A060F0009156B6 /* UIFont+Ext.swift */,
 				674D27DE21A0CDCD008D3A9A /* UIViewController+Ext.swift */,
 				679CA8A221A17749000BB2C7 /* String+Ext.swift */,
