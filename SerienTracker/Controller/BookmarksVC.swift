@@ -53,7 +53,7 @@ class BookmarksVC: UICollectionViewController{
 
 extension BookmarksVC:UICollectionViewDelegateFlowLayout{
      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-         return CGSize(width: self.collectionView.bounds.width, height:120)
+         return CGSize(width: self.collectionView.bounds.width, height:130)
     }
 }
 

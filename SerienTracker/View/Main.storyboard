@@ -130,80 +130,121 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="3" id="GO6-kF-g9F">
-                            <size key="itemSize" width="375" height="130"/>
+                            <size key="itemSize" width="375" height="120"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="bookmarkCell" id="CYM-Vu-0ev" customClass="bookmarkCell" customModule="SerienTracker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cJo-Xf-ONk">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <stackView opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cJo-Xf-ONk">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wan-HH-gA0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="120"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wan-HH-gA0" userLabel="sv_Image">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="120"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CaW-Za-82w" userLabel="showImage">
-                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="120"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="120" id="11T-rH-UYT"/>
-                                                                <constraint firstAttribute="width" constant="100" id="a5Z-lB-Hfu"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="120"/>
                                                         </imageView>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="7wx-xc-Ahc"/>
+                                                    </constraints>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3fI-Zw-T5n">
-                                                    <rect key="frame" x="110" y="0.0" width="240" height="120"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3fI-Zw-T5n" userLabel="sv_Info">
+                                                    <rect key="frame" x="95" y="0.0" width="280" height="120"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LsZ-gW-xD6">
-                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="77"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D7f-uq-kiQ" userLabel="sv_show">
+                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="45"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="                       New" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2W-81-Vgv" userLabel="flagLabel">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="24.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="31.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gotham City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfi-FC-PPp" userLabel="titleLabel">
-                                                                    <rect key="frame" x="0.0" y="29.5" width="240" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="24.5" width="280" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Seasons ] Continuous" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mal-iv-G6R" userLabel="seasonInfo">
-                                                                    <rect key="frame" x="0.0" y="55" width="240" height="16"/>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="45" id="VSf-9q-N8j"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Bk9-38-VjN" userLabel="sv_Season">
+                                                            <rect key="frame" x="0.0" y="45" width="280" height="25"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="5 Seasons ] Continuous" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mal-iv-G6R" userLabel="seasonInfo">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="25"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmG-s3-AKl" userLabel="separatorView">
-                                                                    <rect key="frame" x="0.0" y="76" width="240" height="1"/>
-                                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="1" id="rii-7C-bS7"/>
-                                                                    </constraints>
-                                                                </view>
                                                             </subviews>
-                                                        </stackView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="35 of  57 Episodes seen " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCg-Ej-ePp" userLabel="episodeLabel">
-                                                            <rect key="frame" x="0.0" y="82" width="240" height="18"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AnX-Dp-XEn">
-                                                            <rect key="frame" x="0.0" y="105" width="240" height="15"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="15" id="Imz-CC-QvM"/>
+                                                                <constraint firstAttribute="height" constant="25" id="3cy-nG-BNG"/>
                                                             </constraints>
-                                                        </progressView>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Z8L-GB-jej" userLabel="sv_seen">
+                                                            <rect key="frame" x="0.0" y="70" width="280" height="50"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6nc-qx-wAF" userLabel="sv_Separator">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="1"/>
+                                                                    <subviews>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmG-s3-AKl" userLabel="separatorView">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="1"/>
+                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </view>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="1" id="Ny7-eN-rb7"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="280" placeholderIntrinsicHeight="35" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JyY-g5-XIg" userLabel="sv_Episode">
+                                                                    <rect key="frame" x="0.0" y="4" width="280" height="38"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="35 of  57 Episodes seen " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCg-Ej-ePp" userLabel="episodeLabel">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="38"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="Vu5-aA-PX6"/>
+                                                                    </constraints>
+                                                                    <variation key="default">
+                                                                        <mask key="constraints">
+                                                                            <exclude reference="Vu5-aA-PX6"/>
+                                                                        </mask>
+                                                                    </variation>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4kE-p2-fhH" userLabel="sv_Progress">
+                                                                    <rect key="frame" x="0.0" y="45" width="280" height="5"/>
+                                                                    <subviews>
+                                                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AnX-Dp-XEn">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="5"/>
+                                                                        </progressView>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="5" id="ByG-rI-PA9"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="VVL-FC-0U1"/>
+                                                            </constraints>
+                                                        </stackView>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -240,7 +281,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Yj-1C-0JP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2884" y="944.97751124437787"/>
+            <point key="canvasLocation" x="2980" y="895"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VaZ-o3-Xed">

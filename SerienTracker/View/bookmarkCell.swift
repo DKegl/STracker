@@ -34,6 +34,7 @@ class bookmarkCell: UICollectionViewCell {
         self.showFlag.text = showFlag?.addPaddingCharacter(char: " ", count: (showName?.count)!+etraPadding)
         
         
+        
         self.episodeInfo.text = episodesInfo
         self.seasonsInfo.text = seasonInfo
         self.episodesProgressView.progress = Float(Float(seen.progress) / Float(seen.total))
@@ -47,6 +48,8 @@ class bookmarkCell: UICollectionViewCell {
         self.episodeInfo.textColor = .lightGray
         self.seasonsInfo.textColor = .lightGray
         self.episodesProgressView.tintColor = turquoiseColor
+        
+        
     }
     
     override func awakeFromNib() {
