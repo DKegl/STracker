@@ -15,6 +15,7 @@ class MainShowInformationVC: UIViewController {
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var epButton: UIButton!
     @IBOutlet var showSummaryTextView: UITextView!
+    @IBOutlet weak var bookmarkImg: UIImageView!
     
     var showInfo: ShowSearch?
     var showMainAPI = ShowMainApi()
@@ -30,6 +31,16 @@ class MainShowInformationVC: UIViewController {
     
     func realmShowFilterWith(id: Int) -> Results<RealmBookmarkShow> {
         return realm.objects(RealmBookmarkShow.self).filter("showId==\(id)")
+    }
+    
+    func checkIfBookmarked(id: Int) -> Bool {
+        
+        let obj = realm.objects(RealmBookmarkShow.self).filter("showId==\(id)").first
+        if obj == nil {
+            return false
+        } else {
+            return true
+        }
     }
     
     override func viewDidLoad() {
@@ -57,6 +68,12 @@ class MainShowInformationVC: UIViewController {
             print("No image available")
         }
         
+        if checkIfBookmarked(id: showInfo.show!.id) == true {
+            bookmarkImg.isHidden = false
+        }else{
+            bookmarkImg.isHidden = true
+        }
+       
         statusLabel.text? = showInfo.show?.status ?? ""
         epButton.layer.cornerRadius = 20
     }

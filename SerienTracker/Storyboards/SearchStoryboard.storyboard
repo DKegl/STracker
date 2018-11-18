@@ -12,9 +12,6 @@
         <!--HomeVC-->
         <scene sceneID="1GS-0Z-Acl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Szf-LX-feg" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="ANJ-lV-YRe"/>
-                <searchDisplayController id="Vyl-I0-Bml"/>
                 <viewController id="Op8-Wq-lTz" customClass="HomeVC" customModule="SerienTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YbT-gM-NyN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -118,13 +115,15 @@
                         <outlet property="tableView" destination="U5e-YK-g4n" id="GQj-6G-RXE"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Szf-LX-feg" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="ANJ-lV-YRe"/>
+                <searchDisplayController id="Vyl-I0-Bml"/>
             </objects>
             <point key="canvasLocation" x="2908" y="124.58770614692655"/>
         </scene>
         <!--Item-->
         <scene sceneID="kWH-C4-hz7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QgW-qc-e2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="2IR-kb-18X" customClass="MainShowInformationVC" customModule="SerienTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dbc-S5-pvD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -139,12 +138,23 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWB-BC-O3B">
-                                        <rect key="frame" x="166.5" y="47.5" width="42" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="pha-4C-SaH">
+                                        <rect key="frame" x="136" y="47.5" width="103" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWB-BC-O3B">
+                                                <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="favourites" translatesAutoresizingMaskIntoConstraints="NO" id="Qmr-7R-2WU">
+                                                <rect key="frame" x="54" y="0.0" width="49" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20.5" id="rr1-53-Lf0"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="bDc-ew-fay" customClass="CachedImageView" customModule="SerienTracker" customModuleProvider="target">
                                         <rect key="frame" x="112.5" y="80" width="150" height="180"/>
                                         <constraints>
@@ -155,22 +165,22 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="XZS-dI-Yld"/>
-                                                <exclude reference="uto-Iv-rIB"/>
-                                                <exclude reference="e23-sr-oxZ"/>
                                                 <exclude reference="O0t-gn-sLC"/>
+                                                <exclude reference="XZS-dI-Yld"/>
+                                                <exclude reference="e23-sr-oxZ"/>
+                                                <exclude reference="uto-Iv-rIB"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=compact-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="XZS-dI-Yld"/>
                                                 <include reference="O0t-gn-sLC"/>
+                                                <include reference="XZS-dI-Yld"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="uto-Iv-rIB"/>
                                                 <include reference="e23-sr-oxZ"/>
+                                                <include reference="uto-Iv-rIB"/>
                                             </mask>
                                         </variation>
                                     </imageView>
@@ -198,13 +208,14 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="pha-4C-SaH" firstAttribute="leading" secondItem="THh-MT-tQO" secondAttribute="leading" constant="136" id="4nw-JQ-H2O"/>
                                     <constraint firstAttribute="trailing" secondItem="Qo1-L3-d0b" secondAttribute="trailing" constant="20" id="Udy-fS-s0j"/>
                                     <constraint firstItem="Qo1-L3-d0b" firstAttribute="leading" secondItem="THh-MT-tQO" secondAttribute="leading" constant="20" id="tQh-xr-KKD"/>
                                 </constraints>
                                 <variation key="heightClass=compact-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="tQh-xr-KKD"/>
                                         <include reference="Udy-fS-s0j"/>
+                                        <include reference="tQh-xr-KKD"/>
                                     </mask>
                                 </variation>
                             </stackView>
@@ -220,6 +231,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="UOd-XS-bbg"/>
                     <connections>
+                        <outlet property="bookmarkImg" destination="Qmr-7R-2WU" id="KLd-bw-x0J"/>
                         <outlet property="epButton" destination="c5l-NM-u6Z" id="cYm-hx-qcK"/>
                         <outlet property="showImageView" destination="bDc-ew-fay" id="HF5-bb-iLG"/>
                         <outlet property="showLabel" destination="6YU-Pp-vYC" id="f2d-Cc-a17"/>
@@ -227,13 +239,13 @@
                         <outlet property="statusLabel" destination="JWB-BC-O3B" id="oTq-tH-3JF"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QgW-qc-e2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3701.5999999999999" y="121.88905547226388"/>
         </scene>
         <!--Episodes ListVC-->
         <scene sceneID="f5d-j8-fwx">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nsP-oK-9Ab" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="AZz-5o-FC3" customClass="EpisodesListVC" customModule="SerienTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ar2-Y9-1ZU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -331,13 +343,13 @@
                         </connections>
                     </tableView>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nsP-oK-9Ab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4476" y="124.58770614692655"/>
         </scene>
         <!--Preview View Controller-->
         <scene sceneID="lsP-1y-MKX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oJ8-Jw-KAD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="preview" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CNT-ez-Phq" customClass="previewViewController" customModule="SerienTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WbJ-ij-oVP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -394,13 +406,13 @@
                         <outlet property="titleLbl" destination="dqA-V8-1qv" id="hRK-ql-yOl"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oJ8-Jw-KAD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5196" y="127.28635682158921"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UfJ-3a-Mv5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="F0H-ff-kGB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fqd-OW-YYm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="1V7-5s-la3"/>
                     <toolbarItems/>
@@ -413,8 +425,12 @@
                         <segue destination="Op8-Wq-lTz" kind="relationship" relationship="rootViewController" id="BYW-my-4T1"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F0H-ff-kGB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1968.8" y="124.58770614692655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favourites" width="418.90908813476562" height="418.90908813476562"/>
+    </resources>
 </document>
