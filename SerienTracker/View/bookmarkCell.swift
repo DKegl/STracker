@@ -10,6 +10,13 @@ import UIKit
 
 typealias EpisodeProgress = (total: Int, progress: Int)
 
+extension String{
+    func addPaddingCharacter(char:Character,count:Int)->String{
+       let padding=String(repeating: char, count: count)
+       return padding+self
+    }
+}
+
 class bookmarkCell: UICollectionViewCell {
     @IBOutlet var showImage: UIImageView!
     @IBOutlet var showFlag: UILabel!
@@ -18,23 +25,32 @@ class bookmarkCell: UICollectionViewCell {
     @IBOutlet var episodeInfo: UILabel!
     @IBOutlet var episodesProgressView: UIProgressView!
     
+    let etraPadding=10
+    
     func setBookmarkCell(showImage: UIImage?, showFlag: String?, showName: String?, episodesInfo: String?, seen: EpisodeProgress, seasonInfo: String?) {
         self.showImage.image = showImage
-        self.showFlag.text = showFlag
+        
         self.showName.text = showName
+        self.showFlag.text = showFlag?.addPaddingCharacter(char: " ", count: (showName?.count)!+etraPadding)
+        
+        
         self.episodeInfo.text = episodesInfo
         self.seasonsInfo.text = seasonInfo
         self.episodesProgressView.progress = Float(Float(seen.progress) / Float(seen.total))
     }
+    
+    
     
     private func setupViews() {
         self.showFlag.textColor = .lightGray
         self.showName.textColor = turquoiseColor
         self.episodeInfo.textColor = .lightGray
         self.seasonsInfo.textColor = .lightGray
+        self.episodesProgressView.tintColor = turquoiseColor
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupViews()
     }
 }
