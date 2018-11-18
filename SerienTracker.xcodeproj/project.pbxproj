@@ -20,6 +20,8 @@
 		65C14F02217B85C7001BB656 /* ShowSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14F01217B85C7001BB656 /* ShowSearch.swift */; };
 		65C14F04217BD009001BB656 /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14F03217BD009001BB656 /* CachedImageView.swift */; };
 		65C14F08217BD2E0001BB656 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C14F07217BD2E0001BB656 /* Main.storyboard */; };
+		65D0B95A21A1E39800A878F0 /* Bookmark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D0B95921A1E39800A878F0 /* Bookmark.storyboard */; };
+		65D0B95C21A1E3B300A878F0 /* SearchStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D0B95B21A1E3B300A878F0 /* SearchStoryboard.storyboard */; };
 		65E7B8F221723648006FA47D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B8F121723648006FA47D /* AppDelegate.swift */; };
 		65E7B8F421723648006FA47D /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B8F321723648006FA47D /* HomeVC.swift */; };
 		65E7B8F921723648006FA47D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B8F821723648006FA47D /* Assets.xcassets */; };
@@ -56,6 +58,8 @@
 		65C14F01217B85C7001BB656 /* ShowSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSearch.swift; sourceTree = "<group>"; };
 		65C14F03217BD009001BB656 /* CachedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
 		65C14F07217BD2E0001BB656 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		65D0B95921A1E39800A878F0 /* Bookmark.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Bookmark.storyboard; sourceTree = "<group>"; };
+		65D0B95B21A1E3B300A878F0 /* SearchStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchStoryboard.storyboard; sourceTree = "<group>"; };
 		65E7B8EE21723648006FA47D /* SerienTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SerienTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E7B8F121723648006FA47D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65E7B8F321723648006FA47D /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -122,6 +126,15 @@
 			path = CustomCells;
 			sourceTree = "<group>";
 		};
+		65D0B95D21A1E51E00A878F0 /* LottiAnimations */ = {
+			isa = PBXGroup;
+			children = (
+				6509781921922F35004153A5 /* search.json */,
+				67A36324219DF8B600B05D06 /* 45-Bookmark.json */,
+			);
+			path = LottiAnimations;
+			sourceTree = "<group>";
+		};
 		65E7B8E521723647006FA47D = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				65C14F07217BD2E0001BB656 /* Main.storyboard */,
+				65D0B95921A1E39800A878F0 /* Bookmark.storyboard */,
+				65D0B95B21A1E3B300A878F0 /* SearchStoryboard.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -196,8 +211,7 @@
 		65E7B9062172367D006FA47D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				6509781921922F35004153A5 /* search.json */,
-				67A36324219DF8B600B05D06 /* 45-Bookmark.json */,
+				65D0B95D21A1E51E00A878F0 /* LottiAnimations */,
 				65E7B8F821723648006FA47D /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -298,11 +312,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65D0B95A21A1E39800A878F0 /* Bookmark.storyboard in Resources */,
 				654CA107218653FF004DD0D3 /* .gitignore in Resources */,
 				65E7B8FC21723648006FA47D /* LaunchScreen.storyboard in Resources */,
 				67A36325219DF8B600B05D06 /* 45-Bookmark.json in Resources */,
 				675D50A621A0DCD900719CDA /* bookmark.png in Resources */,
 				65E7B8F921723648006FA47D /* Assets.xcassets in Resources */,
+				65D0B95C21A1E3B300A878F0 /* SearchStoryboard.storyboard in Resources */,
 				65C14F08217BD2E0001BB656 /* Main.storyboard in Resources */,
 				6509781A21922F35004153A5 /* search.json in Resources */,
 			);

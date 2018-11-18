@@ -35,7 +35,7 @@ class epCell: UITableViewCell {
         dateLbl.text = episode.airdate
         
         //Keep font size
-        titleLbl.adjustsFontSizeToFitWidth=false
+        titleLbl.adjustsFontSizeToFitWidth=true
         
         //Change position of the subview elements due to the availability of the image
         if (episode.image?.original) == nil {
