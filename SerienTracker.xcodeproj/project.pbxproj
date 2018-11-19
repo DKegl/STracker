@@ -34,6 +34,7 @@
 		674D27DF21A0CDCD008D3A9A /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D27DE21A0CDCD008D3A9A /* UIViewController+Ext.swift */; };
 		674D27E121A0CFAA008D3A9A /* bookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D27E021A0CFAA008D3A9A /* bookmarkCell.swift */; };
 		675D50A621A0DCD900719CDA /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 675D50A521A0DCD900719CDA /* bookmark.png */; };
+		676EBA7921A36F2200F9312B /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676EBA7821A36F2200F9312B /* UIApplication+Ext.swift */; };
 		6785B1F9219A2AFB0041BBC4 /* UserActionConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6785B1F8219A2AFB0041BBC4 /* UserActionConfirmView.swift */; };
 		679CA8A321A17749000BB2C7 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679CA8A221A17749000BB2C7 /* String+Ext.swift */; };
 		67A36325219DF8B600B05D06 /* 45-Bookmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 67A36324219DF8B600B05D06 /* 45-Bookmark.json */; };
@@ -74,6 +75,7 @@
 		674D27DE21A0CDCD008D3A9A /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		674D27E021A0CFAA008D3A9A /* bookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookmarkCell.swift; sourceTree = "<group>"; };
 		675D50A521A0DCD900719CDA /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
+		676EBA7821A36F2200F9312B /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		6785B1F8219A2AFB0041BBC4 /* UserActionConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActionConfirmView.swift; sourceTree = "<group>"; };
 		679CA8A221A17749000BB2C7 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		67A36324219DF8B600B05D06 /* 45-Bookmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "45-Bookmark.json"; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				67F10EC021A060F0009156B6 /* UIFont+Ext.swift */,
 				674D27DE21A0CDCD008D3A9A /* UIViewController+Ext.swift */,
 				679CA8A221A17749000BB2C7 /* String+Ext.swift */,
+				676EBA7821A36F2200F9312B /* UIApplication+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				65228A1821860AE8002AFD7A /* previewViewController.swift in Sources */,
 				65C14F02217B85C7001BB656 /* ShowSearch.swift in Sources */,
 				674D27E121A0CFAA008D3A9A /* bookmarkCell.swift in Sources */,
+				676EBA7921A36F2200F9312B /* UIApplication+Ext.swift in Sources */,
 				65E7B90821723703006FA47D /* ShowMainInformation.swift in Sources */,
 				67FB0B24219BF292002D3430 /* ShowOperationAPI.swift in Sources */,
 				6785B1F9219A2AFB0041BBC4 /* UserActionConfirmView.swift in Sources */,

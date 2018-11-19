@@ -33,6 +33,13 @@ class MainShowInformationVC: UIViewController {
         return realm.objects(RealmBookmarkShow.self).filter("showId==\(id)")
     }
     
+    // 19.11.2018 Refresh bookmark 'star'
+    var bookmark: Bool = false {
+        didSet {
+            bookmark == true ? (bookmarkImg.alpha = 1) : (bookmarkImg.alpha = 0)
+        }
+    }
+    
     func checkIfBookmarked(id: Int) -> Bool {
         let obj = realm.objects(RealmBookmarkShow.self).filter("showId==\(id)").first
         if obj == nil {
@@ -67,19 +74,14 @@ class MainShowInformationVC: UIViewController {
             print("No image available")
         }
         
-        if checkIfBookmarked(id: showInfo.show!.id) == true {
-            bookmarkImg.isHidden = false
-        } else {
-            bookmarkImg.isHidden = true
-        }
+        // 19.11.2018 - Smarter solution
+        bookmark = checkIfBookmarked(id: showInfo.show!.id) == true ? true : false
         
         statusLabel.text? = showInfo.show?.status ?? ""
         epButton.layer.cornerRadius = 20
     }
     
     @objc func bookmarkTapped() {
-        print("tap tap")
-        
         // Configure response message
         let userConfirmation = UserActionConfirmView(title: "", message: "", imageName: "45-Bookmark.json")
         
@@ -87,14 +89,11 @@ class MainShowInformationVC: UIViewController {
         // assuming the bookmark flag is set
         if let id = showInfo?.show?.id,
             self.realmShowFilterWith(id: id).count > 0 {
-            // 2. Delete the show with all episodes & images
-            userConfirmation.customTitle = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
-            userConfirmation.customMessage = "Bookmark removed from show"
-            
             _ = deleteBookmarkShow(realmShow: realmShowFilterWith(id: id)[0])
             
             // >>>>>>>>>19.11.2018 Bug fix
             userConfirmation.show(animated: true, animation: BookMarkAnimation.Remove)
+            bookmark = false
             // <<<<<<<<<<<<<<<<<<<<<<<<<<<<
             
         } else {
@@ -104,13 +103,10 @@ class MainShowInformationVC: UIViewController {
             showMainAPI.getShowOverview(id: id) { [unowned self] show in
                 if let show = show {
                     self.showEpListAPI.getEpList(id: id, complition: { [unowned self] episodes in
-                        userConfirmation.customTitle = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
-                        userConfirmation.customMessage = "\(show.showName) bookmarked"
-                        
                         _ = self.saveAsBookmarkShow(show: show, episodes: episodes)
-                        
                         // >>>>>>>>>>>>>>>>>19.11.2018 bug fix
                         userConfirmation.show(animated: true, animation: BookMarkAnimation.Add)
+                        self.bookmark = true
                         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                     }) // end of inner block
                 } // end of if let show
