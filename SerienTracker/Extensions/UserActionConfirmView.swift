@@ -9,13 +9,38 @@
 import Lottie
 import UIKit
 
-let addBookmarkFrames=30
-let deleteBookmarkFrames=100
-let displayTimeConfirmationView=600 //not including Lottie animation
+// Added 19.11.2018 - support start/stop sequence for animation
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+enum BookMarkAnimation {
+    typealias AnimationSequence = (start: NSNumber, stop: NSNumber)
+    case Add
+    case Remove
+    
+    func sequence() -> AnimationSequence {
+        switch self {
+        case .Add:
+            return AnimationSequence(start: NSNumber(integerLiteral: startAddBookmark), stop: NSNumber(integerLiteral: addBookmarkFrames))
+        case .Remove:
+            return AnimationSequence(NSNumber(integerLiteral: startDeleteBookmark), NSNumber(integerLiteral: deleteBookmarkFrames))
+        }
+    }
+}
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// Added 19.08.2018 - Support start/stop sequence for animation
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+fileprivate let startAddBookmark = 0
+fileprivate let addBookmarkFrames = 30
+fileprivate let startDeleteBookmark = 80
+fileprivate let deleteBookmarkFrames = 100
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+fileprivate let displayTimeConfirmationView = 500 // not including Lottie animation
 
 class UserActionConfirmView: UIView {
+    // MARK: - Subviews property
     
-    //MARK:- Subviews property
     // BackgroundView
     private lazy var backgroundView: UIView = {
         let bv = UIView()
@@ -40,7 +65,7 @@ class UserActionConfirmView: UIView {
         ml.numberOfLines = 1
         ml.font = UIFont(name: "System", size: 14)
         ml.textAlignment = .center
-        ml.text=_message
+        ml.text = _message
         return ml
     }()
     
@@ -49,26 +74,26 @@ class UserActionConfirmView: UIView {
         tl.numberOfLines = 1
         tl.font = UIFont(name: "Futura", size: 22)?.bold
         tl.textAlignment = .center
-        tl.text=_title
+        tl.text = _title
         return tl
     }()
     
     private lazy var animationView: LOTAnimationView = {
-        let la=LOTAnimationView()
+        let la = LOTAnimationView()
         la.contentMode = .scaleToFill
-        guard let image=_image else {return la}
+        guard let image = _image else { return la }
         la.setAnimation(named: image)
         return la
     }()
     
+    // MARK: - Private Properties
     
-    //MARK:- Private Properties
     private var _title: String?
     private var _message: String?
     private var _image: String?
     
+    // MARK: - Inspectable Properties used in IB
     
-    //MARK:- Inspectable Properties used in IB
     @IBInspectable var customImageName: String? {
         get { return self._image }
         set { self._image = newValue
@@ -91,13 +116,10 @@ class UserActionConfirmView: UIView {
         }
     }
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupViews()
     }
-    
     
     // Shouldn't be called from NIB-file
     // no title/message/image as custom properties defined
@@ -114,26 +136,24 @@ class UserActionConfirmView: UIView {
         super.init(frame: UIScreen.main.bounds)
         self.setupViews()
     }
-   
     
-    private var portraitModeConstraints=[NSLayoutConstraint]()
-    private var landscapeModeConstraints=[NSLayoutConstraint]()
-    private var fixedConstraints=[NSLayoutConstraint]()
-   
-    //This method doesn't consider size classes
-    private func setupViewConstraints(){
-        //Reused for all subviews
-         var c1,c2,c3,c4,c5,c6:NSLayoutConstraint
+    private var portraitModeConstraints = [NSLayoutConstraint]()
+    private var landscapeModeConstraints = [NSLayoutConstraint]()
+    private var fixedConstraints = [NSLayoutConstraint]()
+    
+    // This method doesn't consider size classes
+    private func setupViewConstraints() {
+        // Reused for all subviews
+        var c1, c2, c3, c4, c5, c6: NSLayoutConstraint
         
         // 1.Use manual layout for background view
         self.backgroundView.translatesAutoresizingMaskIntoConstraints = false
         
-        //2.Fixed constraints for Left & top
-         c1 = backgroundView.leftAnchor.constraint(equalTo: self.leftAnchor)
-         c2 = backgroundView.topAnchor.constraint(equalTo: self.topAnchor)
-         fixedConstraints.append(contentsOf: [c1,c2])
+        // 2.Fixed constraints for Left & top
+        c1 = backgroundView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        c2 = backgroundView.topAnchor.constraint(equalTo: self.topAnchor)
+        fixedConstraints.append(contentsOf: [c1, c2])
         
-       
         // 3.Dynamic constraints according to the orientation mode for width & height
         if UIDevice.current.orientation.isPortrait {
             c3 = self.backgroundView.widthAnchor.constraint(equalTo: self.widthAnchor)
@@ -141,14 +161,14 @@ class UserActionConfirmView: UIView {
             // Set identifier just for debuggging purposes
             c3.identifier = "backgroundView_portraitWidth"
             c4.identifier = "backgroundView_portraitHeight"
-            portraitModeConstraints.append(contentsOf: [c3, c4])
+            self.portraitModeConstraints.append(contentsOf: [c3, c4])
             
-            //Swap height & width for landscape constraints
+            // Swap height & width for landscape constraints
             c5 = self.backgroundView.widthAnchor.constraint(equalTo: self.heightAnchor)
             c6 = self.backgroundView.heightAnchor.constraint(equalTo: self.widthAnchor)
             c5.identifier = "backgroundView_landscapeWidth"
             c6.identifier = "backgroundView_landscapeHeight"
-            landscapeModeConstraints.append(contentsOf: [c5, c6])
+            self.landscapeModeConstraints.append(contentsOf: [c5, c6])
             
         } else {
             c3 = self.backgroundView.widthAnchor.constraint(equalTo: self.widthAnchor)
@@ -156,68 +176,64 @@ class UserActionConfirmView: UIView {
             // Set identifier just for debugging purposes
             c3.identifier = "backgroundView_landscapeWidth"
             c4.identifier = "backgroundView_landscapeHeight"
-            landscapeModeConstraints.append(contentsOf: [c3, c4])
+            self.landscapeModeConstraints.append(contentsOf: [c3, c4])
             
             c5 = self.backgroundView.widthAnchor.constraint(equalTo: self.heightAnchor)
             c6 = self.backgroundView.heightAnchor.constraint(equalTo: self.widthAnchor)
             c5.identifier = "backgroundView_portraieWidth"
             c6.identifier = "backgroundView_portraitHeight"
-            portraitModeConstraints.append(contentsOf: [c5, c6])
+            self.portraitModeConstraints.append(contentsOf: [c5, c6])
         }
         
-        //2.Main subview
-        userConfirmationView.translatesAutoresizingMaskIntoConstraints=false
-        c1 = userConfirmationView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor)
-        c2 = userConfirmationView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor)
-        fixedConstraints.append(contentsOf: [c1,c2])
+        // 2.Main subview
+        self.userConfirmationView.translatesAutoresizingMaskIntoConstraints = false
+        c1 = self.userConfirmationView.centerXAnchor.constraint(equalTo: self.backgroundView.centerXAnchor)
+        c2 = self.userConfirmationView.centerYAnchor.constraint(equalTo: self.backgroundView.centerYAnchor)
+        self.fixedConstraints.append(contentsOf: [c1, c2])
         
-        c3 = userConfirmationView.heightAnchor.constraint(equalToConstant: 200)
-        c4 = userConfirmationView.widthAnchor.constraint(equalToConstant: 200)
-        portraitModeConstraints.append(contentsOf: [c3,c4])
+        c3 = self.userConfirmationView.heightAnchor.constraint(equalToConstant: 200)
+        c4 = self.userConfirmationView.widthAnchor.constraint(equalToConstant: 200)
+        self.portraitModeConstraints.append(contentsOf: [c3, c4])
         
-        c4 = userConfirmationView.heightAnchor.constraint(equalToConstant: 200)
-        c5 = userConfirmationView.widthAnchor.constraint(equalToConstant: 200)
-        landscapeModeConstraints.append(contentsOf: [c4,c5])
+        c4 = self.userConfirmationView.heightAnchor.constraint(equalToConstant: 200)
+        c5 = self.userConfirmationView.widthAnchor.constraint(equalToConstant: 200)
+        self.landscapeModeConstraints.append(contentsOf: [c4, c5])
         
-        //3.Title label
-        titleLabel.translatesAutoresizingMaskIntoConstraints=false
-        c1 = titleLabel.centerXAnchor.constraint(equalTo:userConfirmationView.centerXAnchor)
-         c2 = titleLabel.topAnchor.constraint(equalTo: userConfirmationView.topAnchor, constant: 10)
-         c3 = titleLabel.heightAnchor.constraint(equalToConstant: 45)
-        fixedConstraints.append(contentsOf: [c1,c2])
+        // 3.Title label
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        c1 = self.titleLabel.centerXAnchor.constraint(equalTo: self.userConfirmationView.centerXAnchor)
+        c2 = self.titleLabel.topAnchor.constraint(equalTo: self.userConfirmationView.topAnchor, constant: 10)
+        c3 = self.titleLabel.heightAnchor.constraint(equalToConstant: 45)
+        self.fixedConstraints.append(contentsOf: [c1, c2])
         
+        // 4. Message label
+        // currently Not used!!!!
         
-        //4. Message label
-        //currently Not used!!!!
-        
-        //5. animated image
-        animationView.translatesAutoresizingMaskIntoConstraints=false
-        c1=animationView.centerXAnchor.constraint(equalTo: userConfirmationView.centerXAnchor)
-        c2=animationView.centerYAnchor.constraint(equalTo: userConfirmationView.centerYAnchor)
-        c3=animationView.widthAnchor.constraint(equalToConstant: 800)
-        c4=animationView.heightAnchor.constraint(equalToConstant:600)
-        fixedConstraints.append(contentsOf: [c1,c2,c3,c4])
-        
-        
+        // 5. animated image
+        self.animationView.translatesAutoresizingMaskIntoConstraints = false
+        c1 = self.animationView.centerXAnchor.constraint(equalTo: self.userConfirmationView.centerXAnchor)
+        c2 = self.animationView.centerYAnchor.constraint(equalTo: self.userConfirmationView.centerYAnchor)
+        c3 = self.animationView.widthAnchor.constraint(equalToConstant: 800)
+        c4 = self.animationView.heightAnchor.constraint(equalToConstant: 600)
+        self.fixedConstraints.append(contentsOf: [c1, c2, c3, c4])
     }
     
     private func setupViews() {
-        //Add subviews before building & adding constraints
+        // Add subviews before building & adding constraints
         addSubview(self.backgroundView)
-        backgroundView.addSubview(self.userConfirmationView)
+        self.backgroundView.addSubview(self.userConfirmationView)
         self.userConfirmationView.addSubview(self.titleLabel)
         self.userConfirmationView.addSubview(self.messageLabel)
         self.userConfirmationView.addSubview(self.animationView)
-        //Constraints
-        setupViewConstraints()
-        addConstraints(fixedConstraints)
-        addConstraints(portraitModeConstraints)
-        addConstraints(landscapeModeConstraints)
+        // Constraints
+        self.setupViewConstraints()
+        addConstraints(self.fixedConstraints)
+        addConstraints(self.portraitModeConstraints)
+        addConstraints(self.landscapeModeConstraints)
         
-        //Enable fixed constraints for different orientation modes
-        _=fixedConstraints.map { $0.isActive=true}}
+        // Enable fixed constraints for different orientation modes
+        _ = self.fixedConstraints.map { $0.isActive = true } }
     
-   
     override func layoutSubviews() {
         super.layoutSubviews()
         UIDevice.current.orientation.isPortrait ? self.applyPortraitLayout() : self.applyLandscapeLayout()
@@ -229,30 +245,26 @@ class UserActionConfirmView: UIView {
         super.traitCollectionDidChange(previousTraitCollection)
         print("traitCollectionDidChange")
     }
-    
-    
 }
 
+// MARK: - Orientation methods
 
-
-//MARK:- Orientation methods
 extension UserActionConfirmView {
     private func applyLandscapeLayout() {
-        _=portraitModeConstraints.map({$0.isActive=false})
-        _=landscapeModeConstraints.map({$0.isActive=true})
+        _ = self.portraitModeConstraints.map({ $0.isActive = false })
+        _ = self.landscapeModeConstraints.map({ $0.isActive = true })
     }
     
     private func applyPortraitLayout() {
-         _=landscapeModeConstraints.map({$0.isActive=false})
-        _=portraitModeConstraints.map({$0.isActive=true})
+        _ = self.landscapeModeConstraints.map({ $0.isActive = false })
+        _ = self.portraitModeConstraints.map({ $0.isActive = true })
     }
-    
 }
 
+// MARK: - Show/Dismiss UserActionView
 
-//MARK: - Show/Dismiss
 extension UserActionConfirmView {
-    func show(animated: Bool,frames:Int=addBookmarkFrames) {
+    func show(animated: Bool, animation: BookMarkAnimation) {
         self.backgroundView.alpha = 0
         
         self.userConfirmationView.center = CGPoint(x: self.center.x, y: self.frame.height + self.userConfirmationView.frame.height / 2)
@@ -261,17 +273,20 @@ extension UserActionConfirmView {
         if animated {
             UIView.animate(withDuration: 0.33, animations: {
                 self.backgroundView.alpha = 0.80
-               
+                
             })
             UIView.animate(withDuration: 0.33, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: UIView.AnimationOptions(rawValue: 0), animations: {
                 self.userConfirmationView.center = self.center
             }, completion: { completed in
                 if completed {
-                    self.animationView.play(toFrame: NSNumber.init(value:frames), withCompletion: { (isCompleted) in
+                    // 19.08.2018 added support for start/stop animation sequence
+                    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                    self.animationView.play(fromFrame: animation.sequence().start, toFrame: animation.sequence().stop, withCompletion: { [weak self] _ in
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(displayTimeConfirmationView), execute: {
-                            self.animationView.stop()
-                            self.dismiss(animated: true)
+                            self?.animationView.stop()
+                            self?.dismiss(animated: true)
                         })
+                        
                     })
                 }
             })

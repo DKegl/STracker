@@ -15,7 +15,7 @@ class MainShowInformationVC: UIViewController {
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var epButton: UIButton!
     @IBOutlet var showSummaryTextView: UITextView!
-    @IBOutlet weak var bookmarkImg: UIImageView!
+    @IBOutlet var bookmarkImg: UIImageView!
     
     var showInfo: ShowSearch?
     var showMainAPI = ShowMainApi()
@@ -34,7 +34,6 @@ class MainShowInformationVC: UIViewController {
     }
     
     func checkIfBookmarked(id: Int) -> Bool {
-        
         let obj = realm.objects(RealmBookmarkShow.self).filter("showId==\(id)").first
         if obj == nil {
             return false
@@ -70,10 +69,10 @@ class MainShowInformationVC: UIViewController {
         
         if checkIfBookmarked(id: showInfo.show!.id) == true {
             bookmarkImg.isHidden = false
-        }else{
+        } else {
             bookmarkImg.isHidden = true
         }
-       
+        
         statusLabel.text? = showInfo.show?.status ?? ""
         epButton.layer.cornerRadius = 20
     }
@@ -91,9 +90,11 @@ class MainShowInformationVC: UIViewController {
             // 2. Delete the show with all episodes & images
             userConfirmation.customTitle = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
             userConfirmation.customMessage = "Bookmark removed from show"
-            _ = deleteBookmarkShow(realmShow: realmShowFilterWith(id: id)[0])
             
-            userConfirmation.show(animated: true)
+            _ = deleteBookmarkShow(realmShow: realmShowFilterWith(id: id)[0])
+            // >>>>>>>>>19.11.2018 Bug fix
+            userConfirmation.show(animated: true, animation: BookMarkAnimation.Remove)
+            // <<<<<<<<<<<<<<<<<<<<<<<<<<<<
             
         } else {
             // 3.Selected show isn't boookmarked so load show information with episodes from endpoint
@@ -104,9 +105,11 @@ class MainShowInformationVC: UIViewController {
                     self.showEpListAPI.getEpList(id: id, complition: { [unowned self] episodes in
                         userConfirmation.customTitle = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
                         userConfirmation.customMessage = "\(show.showName) bookmarked"
-                        _ = self.saveAsBookmarkShow(show: show, episodes: episodes)
                         
-                        userConfirmation.show(animated: true, frames:deleteBookmarkFrames )
+                        _ = self.saveAsBookmarkShow(show: show, episodes: episodes)
+                        // >>>>>>>>>>>>>>>>>19.11.2018 bug fix
+                        userConfirmation.show(animated: true, animation: BookMarkAnimation.Add)
+                        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                         
                     }) // end of inner block
                 } // end of if let show
