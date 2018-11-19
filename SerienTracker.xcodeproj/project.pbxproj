@@ -168,7 +168,6 @@
 				65E7B90521723673006FA47D /* Controller */,
 				65E7B9062172367D006FA47D /* Assets */,
 				65E7B8FD21723648006FA47D /* Info.plist */,
-				65E7B90B217253AE006FA47D /* Constants.swift */,
 			);
 			path = SerienTracker;
 			sourceTree = "<group>";
@@ -213,6 +212,7 @@
 			children = (
 				65D0B95D21A1E51E00A878F0 /* LottiAnimations */,
 				65E7B8F821723648006FA47D /* Assets.xcassets */,
+				65E7B90B217253AE006FA47D /* Constants.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
