@@ -8,6 +8,37 @@
 
 import Foundation
 
+// MARK: - Using NSOperation queue to save/delete bookmarks
+
+extension MainShowInformationVC {
+    func excuteOperationsWithShowInformation(id: Int) {
+        let queue = OperationQueue()
+        
+        // Create Operations in sequence for nested asyn methods
+        let operation1 = ShowOperation(id: id)
+        let operation2 = EpisodesOperation(id: id)
+        // Output operation
+        let combinedOperation = BlockOperation { [unowned operation1, operation2] in
+            let show = operation1.outData as? ShowMainInformation
+            let episodes = operation2.outData as? [ShowEpisodenInformation]
+            // Output must be executed in main thread
+            OperationQueue.main.addOperation {
+                if let showObject = self.realm.object(ofType: RealmBookmarkShow.self, forPrimaryKey: show?.showId) {
+                    _ = self.deleteBookmarkShow(realmShow: showObject)
+                } else {
+                    _ = self.saveAsBookmarkShow(show: show!, episodes: episodes!)
+                }
+            }
+        }
+        
+        // Dependencies between them
+        operation2.addDependency(operation1)
+        combinedOperation.addDependency(operation2)
+        // Execute all operations
+        queue.addOperations([operation1, operation2, combinedOperation], waitUntilFinished: false)
+    }
+}
+
 
 class EpisodesOperation : BaseOperation {
     
