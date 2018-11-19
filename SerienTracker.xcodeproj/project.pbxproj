@@ -167,7 +167,6 @@
 				655F01422178FADD0079D430 /* JSON Parsing */,
 				65E7B90521723673006FA47D /* Controller */,
 				65E7B9062172367D006FA47D /* Assets */,
-				65E7B8FA21723648006FA47D /* LaunchScreen.storyboard */,
 				65E7B8FD21723648006FA47D /* Info.plist */,
 				65E7B90B217253AE006FA47D /* Constants.swift */,
 			);
@@ -191,6 +190,7 @@
 				65C14F07217BD2E0001BB656 /* Main.storyboard */,
 				65D0B95921A1E39800A878F0 /* Bookmark.storyboard */,
 				65D0B95B21A1E3B300A878F0 /* SearchStoryboard.storyboard */,
+				65E7B8FA21723648006FA47D /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
