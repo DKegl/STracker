@@ -9,11 +9,19 @@
 import UIKit
 import RealmSwift
 
+extension UIApplicationDelegate{
+    func delayLaunchScreen(time:TimeInterval=0){
+        RunLoop.current.run(until: Date.init(timeIntervalSinceNow: time))
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var realm:Realm?
+    
+    let concurrentQueue=DispatchQueue(label: "initRealmQueue", qos: DispatchQoS.default, attributes: DispatchQueue.Attributes.concurrent)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -27,15 +35,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = turquoiseColor
       // UITabBar.appearance().bartint
         
-        //init Realm database
-        do{
-            realm=try Realm()
-            print(Realm.Configuration.defaultConfiguration.fileURL!)
-            
-        }catch let error{
-           print(Realm.Configuration.defaultConfiguration.fileURL!)
-            fatalError(error.localizedDescription)
+        //init Realm database in a different task concurrently
+        concurrentQueue.async { [weak self] in
+            do{
+                self?.realm=try Realm()
+                print(Realm.Configuration.defaultConfiguration.fileURL!)
+                
+            }catch let error{
+                print(Realm.Configuration.defaultConfiguration.fileURL!)
+                fatalError(error.localizedDescription)
+            }
         }
+        
+        //Delay return in main task
+        self.delayLaunchScreen(time: 2)
+        //no delay
+        //self.delayLaunchScreen()
         
         return true
     }
