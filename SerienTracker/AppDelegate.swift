@@ -6,77 +6,65 @@
 //  Copyright © 2018 Daniel Keglmeier. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
-extension UIApplicationDelegate{
-    func delayLaunchScreen(time:TimeInterval=0){
-        RunLoop.current.run(until: Date.init(timeIntervalSinceNow: time))
+extension UIApplicationDelegate {
+    func delayLaunchScreen(time: TimeInterval = 0) {
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: time))
     }
 }
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-    var realm:Realm?
+    var realm: Realm?
     
-    let concurrentQueue=DispatchQueue(label: "initRealmQueue", qos: DispatchQoS.default, attributes: DispatchQueue.Attributes.concurrent)
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        //MARK: - Navbar Setup
-        UINavigationBar.appearance().barTintColor = blackColor
-        UINavigationBar.appearance().tintColor = turquoiseColor
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.08, green:1.00, blue:0.93, alpha:1.0)]
-        UINavigationBar.appearance().isTranslucent = false
-        
-        //MARK: - Tabbar Setup
-        UITabBar.appearance().tintColor = turquoiseColor
-      // UITabBar.appearance().bartint
-        
-        //init Realm database in a different task concurrently
-        concurrentQueue.async { [weak self] in
-            do{
-                self?.realm=try Realm()
-                print(Realm.Configuration.defaultConfiguration.fileURL!)
-                
-            }catch let error{
-                print(Realm.Configuration.defaultConfiguration.fileURL!)
-                fatalError(error.localizedDescription)
-            }
-        }
-        
-        //Delay return in main task
-        self.delayLaunchScreen(time: 2)
-        //no delay
-        //self.delayLaunchScreen()
-        
+        // MARK: - Navbar Setup
+        setupNavigationBar()
+        // MARK: - Tabbar Setup
+        setupTabBar()
+        // init Realm database use different task but in main-thread!!
+        setupRealm()
+        // Delay return in main task
+        delayLaunchScreen(time: 2)
+        // no delay use:
+        // self.delayLaunchScreen()
         return true
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-
 }
 
+// MARK: - Setup methods of the app
+
+extension AppDelegate {
+    func setupNavigationBar() {
+        UINavigationBar.appearance().barTintColor = blackColor
+        UINavigationBar.appearance().tintColor = turquoiseColor
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 0.08, green: 1.00, blue: 0.93, alpha: 1.0)]
+        UINavigationBar.appearance().isTranslucent = false
+    }
+    
+    func setupTabBar() {
+        UITabBar.appearance().tintColor = turquoiseColor
+        // UITabBar.appearance().bartint
+    }
+    
+    func setupRealm() {
+        let concurrentQueue = DispatchQueue(label: "initRealmQueue", qos: DispatchQoS.default, attributes: DispatchQueue.Attributes.concurrent)
+        concurrentQueue.async { [weak self] in
+            
+            DispatchQueue.main.async { [weak self] in
+                do {
+                    let realm = try Realm()
+                    self?.realm = realm
+                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+                    
+                } catch let error {
+                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+                    fatalError(error.localizedDescription)
+                }
+            }
+        }
+    }
+}
