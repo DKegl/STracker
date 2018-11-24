@@ -10,7 +10,15 @@ import UIKit
 import JTAppleCalendar
 
 class CalendarCollectionCustomCell: JTAppleCell {
+
+    @IBOutlet weak var indicatorView: UIView!
     @IBOutlet weak var dayLbl: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        indicatorView.layer.cornerRadius = 3
+        
+    }
     
     
 }
