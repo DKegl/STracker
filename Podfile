@@ -11,4 +11,5 @@ target 'SerienTracker' do
 pod 'RealmSwift'
 pod 'Alamofire'
 pod 'lottie-ios'
+pod 'JTAppleCalendar', '~> 7.0'  # Pods for Calendar
 end

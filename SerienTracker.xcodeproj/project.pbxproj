@@ -14,6 +14,8 @@
 		654CA107218653FF004DD0D3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 654CA106218653FF004DD0D3 /* .gitignore */; };
 		655F01412178F8710079D430 /* ShowEpisodenInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F01402178F8710079D430 /* ShowEpisodenInformation.swift */; };
 		657A77E22198542E005DB872 /* BookmarksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657A77E12198542E005DB872 /* BookmarksVC.swift */; };
+		658BEEC521A9C7B10097F105 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658BEEC421A9C7B10097F105 /* Calendar.storyboard */; };
+		658BEEC721A9D1530097F105 /* CalendarCollectionCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658BEEC621A9D1530097F105 /* CalendarCollectionCustomCell.swift */; };
 		65C14EFC217B729D001BB656 /* MainShowInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14EFB217B729D001BB656 /* MainShowInformationVC.swift */; };
 		65C14EFE217B72E9001BB656 /* EpisodesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14EFD217B72E9001BB656 /* EpisodesListVC.swift */; };
 		65C14F00217B83A2001BB656 /* ShowSerachApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14EFF217B83A2001BB656 /* ShowSerachApi.swift */; };
@@ -53,6 +55,8 @@
 		654CA106218653FF004DD0D3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		655F01402178F8710079D430 /* ShowEpisodenInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEpisodenInformation.swift; sourceTree = "<group>"; };
 		657A77E12198542E005DB872 /* BookmarksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksVC.swift; sourceTree = "<group>"; };
+		658BEEC421A9C7B10097F105 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
+		658BEEC621A9D1530097F105 /* CalendarCollectionCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionCustomCell.swift; sourceTree = "<group>"; };
 		65C14EFB217B729D001BB656 /* MainShowInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainShowInformationVC.swift; sourceTree = "<group>"; };
 		65C14EFD217B72E9001BB656 /* EpisodesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesListVC.swift; sourceTree = "<group>"; };
 		65C14EFF217B83A2001BB656 /* ShowSerachApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSerachApi.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 				6509780D218B1050004153A5 /* epCell.swift */,
 				67D85AF32198189F00094E34 /* mainCell.swift */,
 				674D27E021A0CFAA008D3A9A /* bookmarkCell.swift */,
+				658BEEC621A9D1530097F105 /* CalendarCollectionCustomCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -188,10 +193,11 @@
 		65E7B9042172366C006FA47D /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				65E7B8FA21723648006FA47D /* LaunchScreen.storyboard */,
 				65C14F07217BD2E0001BB656 /* Main.storyboard */,
 				65D0B95921A1E39800A878F0 /* Bookmark.storyboard */,
 				65D0B95B21A1E3B300A878F0 /* SearchStoryboard.storyboard */,
-				65E7B8FA21723648006FA47D /* LaunchScreen.storyboard */,
+				658BEEC421A9C7B10097F105 /* Calendar.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -323,6 +329,7 @@
 				65E7B8F921723648006FA47D /* Assets.xcassets in Resources */,
 				65D0B95C21A1E3B300A878F0 /* SearchStoryboard.storyboard in Resources */,
 				65C14F08217BD2E0001BB656 /* Main.storyboard in Resources */,
+				658BEEC521A9C7B10097F105 /* Calendar.storyboard in Resources */,
 				6509781A21922F35004153A5 /* search.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +363,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SerienTracker/Pods-SerienTracker-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
@@ -363,6 +371,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
@@ -401,6 +410,7 @@
 				67FB0B24219BF292002D3430 /* ShowOperationAPI.swift in Sources */,
 				6785B1F9219A2AFB0041BBC4 /* UserActionConfirmView.swift in Sources */,
 				65C14EFE217B72E9001BB656 /* EpisodesListVC.swift in Sources */,
+				658BEEC721A9D1530097F105 /* CalendarCollectionCustomCell.swift in Sources */,
 				65E7B8F221723648006FA47D /* AppDelegate.swift in Sources */,
 				65C14F04217BD009001BB656 /* CachedImageView.swift in Sources */,
 				65E7B91021725FC4006FA47D /* ShowEpListApi.swift in Sources */,

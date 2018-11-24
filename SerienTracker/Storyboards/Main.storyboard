@@ -23,6 +23,7 @@
                     <connections>
                         <segue destination="RfO-aO-OpN" kind="relationship" relationship="viewControllers" id="u9W-jA-mYI"/>
                         <segue destination="z4p-FP-3Yg" kind="relationship" relationship="viewControllers" id="pgb-pY-tJQ"/>
+                        <segue destination="8Kd-II-MSk" kind="relationship" relationship="viewControllers" id="6n2-YQ-lsM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uhz-SQ-Chi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -48,6 +49,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHj-5Q-Ogy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1270" y="585"/>
+        </scene>
+        <!--Calendar-->
+        <scene sceneID="SSw-ue-pdT">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Calendar" id="8Kd-II-MSk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="OmZ-YO-FXX"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="272-Ff-wIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1650" y="585"/>
         </scene>
     </scenes>
 </document>
