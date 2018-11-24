@@ -38,7 +38,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIn-sg-47o">
-                                                    <rect key="frame" x="5" y="-3" width="657" height="55.5"/>
+                                                    <rect key="frame" x="5" y="-3" width="365" height="55.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjD-gO-qS6">
                                                             <rect key="frame" x="15" y="17.5" width="42" height="21"/>
@@ -138,18 +138,20 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="pha-4C-SaH">
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pha-4C-SaH">
                                         <rect key="frame" x="125" y="47.5" width="125" height="220.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWB-BC-O3B">
-                                                <rect key="frame" x="0.0" y="100" width="42" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="100" width="105" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="favourites" translatesAutoresizingMaskIntoConstraints="NO" id="Qmr-7R-2WU">
-                                                <rect key="frame" x="54" y="100" width="71" height="20.5"/>
+                                                <rect key="frame" x="105" y="100" width="20" height="20.5"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20.5" id="Olx-d5-49A"/>
+                                                    <constraint firstAttribute="width" constant="20" id="fON-oL-f1a"/>
                                                     <constraint firstAttribute="height" constant="20.5" id="rr1-53-Lf0"/>
                                                 </constraints>
                                             </imageView>
