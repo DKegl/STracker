@@ -14,14 +14,13 @@ class CalenderVC: UIViewController {
     @IBOutlet var yearLbl: UILabel!
     @IBOutlet var monthLbl: UILabel!
     @IBOutlet var calendarView: JTAppleCalendarView!
-    @IBOutlet weak var dayCalendarView: UITableView!
+    @IBOutlet var dayCalendarView: UITableView!
     
     let formatter = DateFormatter()
     let currentDate = Date()
     var selectedDate: String = ""
-
-    var showAtDateTable: Results<RealmEpisodenInformation>?
     
+    var showAtDateTable: Results<RealmEpisodenInformation>?
     
     lazy var realm: Realm = {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -36,6 +35,7 @@ class CalenderVC: UIViewController {
         calendarView.scrollToDate(currentDate)
     }
     
+    // load calendar wirh dates and remove spacing
     func setupCalendar() {
         calendarView.minimumInteritemSpacing = 0
         calendarView.minimumLineSpacing = 0
@@ -45,6 +45,7 @@ class CalenderVC: UIViewController {
         }
     }
     
+    // set month and year Lbl
     func setupViewsOfCalendar(from visibleDates: DateSegmentInfo) {
         let date = visibleDates.monthDates.first!.date
         formatter.dateFormat = "yyyy"
@@ -54,6 +55,7 @@ class CalenderVC: UIViewController {
         monthLbl.text = formatter.string(from: date)
     }
     
+    // helper function for loading the dot which indicates there was a show airing
     func indicatorEpisodeAvailable(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? CalendarCollectionCustomCell else { return }
         let date = cellState.date.description
@@ -65,11 +67,14 @@ class CalenderVC: UIViewController {
             validCell.indicatorView.isHidden = true
     } }
     
-    func getCellDateAsString(view: JTAppleCell?, cellState: CellState)-> String {
+    // helper converting cellstate to string for searching the database
+    func getCellDateAsString(view: JTAppleCell?, cellState: CellState) -> String {
         let date = cellState.date.description
         let cutdate: String = String(date.prefix(10))
         return cutdate
     }
+    
+    // color setup vor the calendar
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? CalendarCollectionCustomCell else {
             return
@@ -105,6 +110,7 @@ extension CalenderVC: JTAppleCalendarViewDataSource {
 }
 
 extension CalenderVC: JTAppleCalendarViewDelegate {
+    // not sure what this does but the readme says its needed :D
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         let cell = cell as! CalendarCollectionCustomCell
         cell.dayLbl.text = cellState.text
@@ -131,7 +137,6 @@ extension CalenderVC: JTAppleCalendarViewDelegate {
         handleCellTextColor(view: cell, cellState: cellState)
         dayCalendarView.isHidden = true
         dayCalendarView.reloadData()
-        
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
@@ -144,32 +149,25 @@ extension CalenderVC: JTAppleCalendarViewDelegate {
     }
 }
 
+// MARK: - Extensions for TableView
+
 extension CalenderVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate ).isEmpty
-        {
+        if realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate).isEmpty {
             return 0
         } else {
-            showAtDateTable = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate )
+            showAtDateTable = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate)
             return showAtDateTable!.count
         }
-        
-
-        
-    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let showAtDate = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate )
+        let showAtDate = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate)
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendarTableViewCell", for: indexPath)
         cell.textLabel?.text = showAtDate[indexPath.row].name
         cell.detailTextLabel?.text = showAtDate[indexPath.row].show?.showName
         return cell
     }
-    
-    
 }
-extension CalenderVC: UITableViewDelegate {
-    
-}
+
+extension CalenderVC: UITableViewDelegate {}
