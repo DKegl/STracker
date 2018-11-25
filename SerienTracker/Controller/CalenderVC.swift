@@ -14,9 +14,14 @@ class CalenderVC: UIViewController {
     @IBOutlet var yearLbl: UILabel!
     @IBOutlet var monthLbl: UILabel!
     @IBOutlet var calendarView: JTAppleCalendarView!
+    @IBOutlet weak var dayCalendarView: UITableView!
     
     let formatter = DateFormatter()
     let currentDate = Date()
+    var selectedDate: String = ""
+
+    var showAtDateTable: Results<RealmEpisodenInformation>?
+    
     
     lazy var realm: Realm = {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -60,6 +65,11 @@ class CalenderVC: UIViewController {
             validCell.indicatorView.isHidden = true
     } }
     
+    func getCellDateAsString(view: JTAppleCell?, cellState: CellState)-> String {
+        let date = cellState.date.description
+        let cutdate: String = String(date.prefix(10))
+        return cutdate
+    }
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? CalendarCollectionCustomCell else {
             return
@@ -112,10 +122,16 @@ extension CalenderVC: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         handleCellTextColor(view: cell, cellState: cellState)
+        selectedDate = getCellDateAsString(view: cell, cellState: cellState)
+        dayCalendarView.isHidden = false
+        dayCalendarView.reloadData()
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         handleCellTextColor(view: cell, cellState: cellState)
+        dayCalendarView.isHidden = true
+        dayCalendarView.reloadData()
+        
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
@@ -126,4 +142,34 @@ extension CalenderVC: JTAppleCalendarViewDelegate {
         formatter.dateFormat = "MMMM"
         monthLbl.text = formatter.string(from: date)
     }
+}
+
+extension CalenderVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate ).isEmpty
+        {
+            return 0
+        } else {
+            showAtDateTable = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate )
+            return showAtDateTable!.count
+        }
+        
+
+        
+    
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let showAtDate = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate )
+        let cell = tableView.dequeueReusableCell(withIdentifier: "calendarTableViewCell", for: indexPath)
+        cell.textLabel?.text = showAtDate[indexPath.row].name
+        cell.detailTextLabel?.text = showAtDate[indexPath.row].show?.showName
+        return cell
+    }
+    
+    
+}
+extension CalenderVC: UITableViewDelegate {
+    
 }
