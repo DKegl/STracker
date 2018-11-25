@@ -44,11 +44,29 @@ class CalenderVC: UIViewController {
     }
     
     func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
-
+        guard let validCell = view as? CalendarCollectionCustomCell else { return }
+        if cellState.isSelected {
+            validCell.indicatorView.isHidden = false
+        } else {
+            validCell.indicatorView.isHidden = true
+        }
     }
     
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
         
+        guard let validCell = view as? CalendarCollectionCustomCell  else {
+            return
+        }
+        
+        if cellState.isSelected {
+            validCell.dayLbl.textColor = turquoiseColor
+        } else {
+            if cellState.dateBelongsTo == .thisMonth {
+                validCell.dayLbl.textColor = darkblack
+            } else {
+                validCell.dayLbl.textColor = blackColor
+            }
+        }
     }
 }
 
@@ -63,7 +81,7 @@ extension CalenderVC: JTAppleCalendarViewDataSource {
         let startDate = formatter.date(from: "2017 01 01")!
         let endDate = formatter.date(from: "2022 12 31")!
         
-        let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate)
+        let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate, firstDayOfWeek: .monday)
         
         return parameters
     }
@@ -79,8 +97,8 @@ extension CalenderVC: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCollectionViewCell", for: indexPath) as! CalendarCollectionCustomCell
         cell.dayLbl.text = cellState.text
-        //handleCellSelected(view: cell, cellState: cellState)
-        //handleCellTextColor(view: cell, cellState: cellState)
+        handleCellSelected(view: cell, cellState: cellState)
+        handleCellTextColor(view: cell, cellState: cellState)
         return cell
     }
     
@@ -88,7 +106,10 @@ extension CalenderVC: JTAppleCalendarViewDelegate {
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
     }
-    
+    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        handleCellSelected(view: cell, cellState: cellState)
+        handleCellTextColor(view: cell, cellState: cellState)
+    }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         let date = visibleDates.monthDates.first!.date
