@@ -8,6 +8,7 @@
 
 import JTAppleCalendar
 import UIKit
+import RealmSwift
 
 class CalenderVC: UIViewController {
     @IBOutlet var yearLbl: UILabel!
@@ -17,13 +18,27 @@ class CalenderVC: UIViewController {
     let formatter = DateFormatter()
     let currentDate = Date()
     
+    lazy var realm: Realm = {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.realm!
+    }()
+    
+    
+        
+    
+        
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarView.calendarDelegate = self
         calendarView.calendarDataSource = self
         setupCalendar()
         calendarView.scrollToDate(currentDate)
-    }
+  
+        }
+       
+    
     
     func setupCalendar() {
         calendarView.minimumInteritemSpacing = 0
@@ -43,14 +58,14 @@ class CalenderVC: UIViewController {
         monthLbl.text = formatter.string(from: date)
     }
     
-    func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
-        guard let validCell = view as? CalendarCollectionCustomCell else { return }
-        if cellState.isSelected {
-            validCell.indicatorView.isHidden = false
-        } else {
-            validCell.indicatorView.isHidden = true
-        }
-    }
+//    func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
+//        guard let validCell = view as? CalendarCollectionCustomCell else { return }
+//        if cellState.isSelected {
+//            validCell.indicatorView.isHidden = false
+//        } else {
+//            validCell.indicatorView.isHidden = true
+//        }
+//    }
     
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
         
@@ -92,22 +107,37 @@ extension CalenderVC: JTAppleCalendarViewDelegate {
         let cell = cell as! CalendarCollectionCustomCell
         cell.dayLbl.text = cellState.text
         
+        
+
+        
     }
     
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCollectionViewCell", for: indexPath) as! CalendarCollectionCustomCell
+        let date = cellState.date.description
+        let cutdate: String = String(date.prefix(10))
         cell.dayLbl.text = cellState.text
-        handleCellSelected(view: cell, cellState: cellState)
+        
+        let showAtDate = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@",cutdate).first
+        if ((showAtDate?.airdate) != nil) {
+            cell.indicatorView.isHidden = false
+            print(showAtDate?.name)
+        }
+
+        
+        
+        //handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
         return cell
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        handleCellSelected(view: cell, cellState: cellState)
+        //handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+
     }
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        handleCellSelected(view: cell, cellState: cellState)
+        //handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
     }
     
