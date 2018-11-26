@@ -16,6 +16,13 @@ class CalenderVC: UIViewController {
     @IBOutlet var calendarView: JTAppleCalendarView!
     @IBOutlet var dayCalendarView: UITableView!
     
+    
+    //Cell variable may later custom cel
+    
+    
+    
+    
+    
     let formatter = DateFormatter()
     let currentDate = Date()
     var selectedDate: String = ""
@@ -163,9 +170,11 @@ extension CalenderVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let showAtDate = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "calendarTableViewCell", for: indexPath)
-        cell.textLabel?.text = showAtDate[indexPath.row].name
-        cell.detailTextLabel?.text = showAtDate[indexPath.row].show?.showName
+        let cell = tableView.dequeueReusableCell(withIdentifier: "calendarTableViewCell", for: indexPath) as! CalendarTableViewCell
+        let show = showAtDate[indexPath.row]
+        cell.setShowAtDay(show: show)
+//        cell.textLabel?.text = showAtDate[indexPath.row].name
+//        cell.detailTextLabel?.text = showAtDate[indexPath.row].show?.showName
         return cell
     }
 }

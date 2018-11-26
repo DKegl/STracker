@@ -17,6 +17,7 @@
 		658BEEC521A9C7B10097F105 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658BEEC421A9C7B10097F105 /* Calendar.storyboard */; };
 		658BEEC721A9D1530097F105 /* CalendarCollectionCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658BEEC621A9D1530097F105 /* CalendarCollectionCustomCell.swift */; };
 		658BEECB21A9D39E0097F105 /* CalenderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658BEECA21A9D39E0097F105 /* CalenderVC.swift */; };
+		658BEECD21AC83320097F105 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658BEECC21AC83320097F105 /* CalendarTableViewCell.swift */; };
 		65C14EFC217B729D001BB656 /* MainShowInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14EFB217B729D001BB656 /* MainShowInformationVC.swift */; };
 		65C14EFE217B72E9001BB656 /* EpisodesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14EFD217B72E9001BB656 /* EpisodesListVC.swift */; };
 		65C14F00217B83A2001BB656 /* ShowSerachApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14EFF217B83A2001BB656 /* ShowSerachApi.swift */; };
@@ -59,6 +60,7 @@
 		658BEEC421A9C7B10097F105 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		658BEEC621A9D1530097F105 /* CalendarCollectionCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionCustomCell.swift; sourceTree = "<group>"; };
 		658BEECA21A9D39E0097F105 /* CalenderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderVC.swift; sourceTree = "<group>"; };
+		658BEECC21AC83320097F105 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		65C14EFB217B729D001BB656 /* MainShowInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainShowInformationVC.swift; sourceTree = "<group>"; };
 		65C14EFD217B72E9001BB656 /* EpisodesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesListVC.swift; sourceTree = "<group>"; };
 		65C14EFF217B83A2001BB656 /* ShowSerachApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSerachApi.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				67D85AF32198189F00094E34 /* mainCell.swift */,
 				674D27E021A0CFAA008D3A9A /* bookmarkCell.swift */,
 				658BEEC621A9D1530097F105 /* CalendarCollectionCustomCell.swift */,
+				658BEECC21AC83320097F105 /* CalendarTableViewCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				65E7B90C217253AE006FA47D /* Constants.swift in Sources */,
 				65E7B90A2172533F006FA47D /* ShowMainApi.swift in Sources */,
 				65E7B8F421723648006FA47D /* HomeVC.swift in Sources */,
+				658BEECD21AC83320097F105 /* CalendarTableViewCell.swift in Sources */,
 				67F10EC121A060F0009156B6 /* UIFont+Ext.swift in Sources */,
 				65C14F00217B83A2001BB656 /* ShowSerachApi.swift in Sources */,
 				65C14EFC217B729D001BB656 /* MainShowInformationVC.swift in Sources */,
