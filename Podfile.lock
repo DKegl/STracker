@@ -1,12 +1,12 @@
 PODS:
-  - Alamofire (4.7.3)
+  - Alamofire (4.8.0)
   - JTAppleCalendar (7.1.6)
   - lottie-ios (2.5.2)
-  - Realm (3.11.2):
-    - Realm/Headers (= 3.11.2)
-  - Realm/Headers (3.11.2)
-  - RealmSwift (3.11.2):
-    - Realm (= 3.11.2)
+  - Realm (3.12.0):
+    - Realm/Headers (= 3.12.0)
+  - Realm/Headers (3.12.0)
+  - RealmSwift (3.12.0):
+    - Realm (= 3.12.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -23,11 +23,11 @@ SPEC REPOS:
     - RealmSwift
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   JTAppleCalendar: abb30678f42a4ef8a340a932b1dcb8c85a33dac2
   lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
-  Realm: 864477d028db77f7c5a0cba64a4892ad53db128a
-  RealmSwift: 12b8262fc08020b47de4fd88eb3d5c9425b34ec7
+  Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
+  RealmSwift: 5576324033f0aa5ef1e0a839a3da2281dff47a7f
 
 PODFILE CHECKSUM: b0d3f59c56e5bf6e96b868a2345b3562807f0b20
 
