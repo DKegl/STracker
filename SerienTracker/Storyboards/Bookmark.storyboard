@@ -36,7 +36,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Gs7-ld-ONi" userLabel="sv_Image">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="124"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hAY-zu-hqy" userLabel="showImage">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hAY-zu-hqy" userLabel="showImage" customClass="CachedImageView" customModule="SerienTracker" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="124"/>
                                                         </imageView>
                                                     </subviews>
@@ -176,15 +176,6 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="52L-dE-2tP">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="eux-Vh-uoc">
-                            <rect key="frame" x="83" y="7" width="209" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Favorits"/>
-                                <segment title="Episodes"/>
-                                <segment title="Archive"/>
-                            </segments>
-                        </segmentedControl>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHc-78-woy" userLabel="First Responder" sceneMemberID="firstResponder"/>

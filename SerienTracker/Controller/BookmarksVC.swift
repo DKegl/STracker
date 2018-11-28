@@ -20,30 +20,28 @@ class BookmarksVC: UICollectionViewController{
         // Register cell classes is StoryBoard responsibility when using IB !!
         //self.collectionView!.register(bookmarkCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     
-        
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        //Reload data because database may have changed
+        collectionView.reloadData()
+    }
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 1
+        return ShowStoreManager.shared.bookmarkShows.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! bookmarkCell
     
         // Configure the cell
-        let seen=EpisodeProgress(total:57,progress:35)
-        cell.setBookmarkCell(showImage: UIImage(named: "bookmark"), showFlag: "New", showName: "Gotham City", episodesInfo:"\(seen.progress) of \(seen.total) seen", seen:seen, seasonInfo: "5 seasons | Continous")
-    
+        let bookmarkShows=ShowStoreManager.shared.bookmarkShows
+        guard bookmarkShows.count>0 else {return cell}
+        
+        cell.setBookmarkCell(show: bookmarkShows[indexPath.row])
         return cell
     }
 

@@ -11,7 +11,7 @@ import UIKit
 typealias EpisodeProgress = (total: Int, progress: Int)
 
 class bookmarkCell: UICollectionViewCell {
-    @IBOutlet var showImage: UIImageView!
+    @IBOutlet var showImage: CachedImageView!
     @IBOutlet var showFlag: UILabel!
     @IBOutlet var showName: UILabel!
     @IBOutlet var seasonsInfo: UILabel!
@@ -24,10 +24,7 @@ class bookmarkCell: UICollectionViewCell {
     //
     let extraTextPadding = 13
     
-    func setBookmarkCell(showImage: UIImage?, showFlag: String?, showName: String?, episodesInfo: String?, seen: EpisodeProgress, seasonInfo: String?) {
-        self.showImage.image = showImage
-        
-        self.showName.text = showName
+    private func setPositionOfFlagText(showFlag:String?){
         // Calculate offset of showflag dynically
         // 1.Get actual width of content text
         let showNameTextWidth = self.showName.intrinsicContentSize.width
@@ -40,9 +37,29 @@ class bookmarkCell: UICollectionViewCell {
             paddingTextLength = (flagText?.width(usedFont: self.showFlag.font, boundWidth: self.showFlag.intrinsicContentSize.width))!
         } while Int(showNameTextWidth) > Int(paddingTextLength)
         
-        self.episodeInfo.text = episodesInfo
-        self.seasonsInfo.text = seasonInfo
-        self.episodesProgressView.progress = Float(Float(seen.progress) / Float(seen.total))
+        
+    }
+    
+    func setBookmarkCell(show:RealmBookmarkShow){
+        self.showName.text=show.showName
+        //Should be set after showName is present
+        //setPositionOfFlagText(showFlag: show.showStatus)
+        self.showFlag.text=show.showStatus
+        
+        if let imageUrl=show.image?.original{
+            showImage.loadImageFromUrl(imageUrl)
+        }
+        
+        let seenCounter=show.realmEpisoden.reduce(0) { (result, episode) -> Int in
+            var newResult:Int=0
+            if episode.isSeen{
+                newResult=result+1
+            }
+            return newResult
+        }
+        self.episodeInfo.text = "\(seenCounter) of \(show.realmEpisoden.count) seen"
+        self.episodesProgressView.progress = Float(seenCounter)/Float(show.realmEpisoden.count)
+        
     }
     
     override func layoutSubviews() {

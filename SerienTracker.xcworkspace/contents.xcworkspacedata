@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/andrefrank/Documents/Privat/Programmieren/Swift/STracker/SerienTracker/Model/ShowStoreManager.swift">
-   </FileRef>
-   <FileRef
       location = "group:SerienTracker.xcodeproj">
    </FileRef>
    <FileRef
