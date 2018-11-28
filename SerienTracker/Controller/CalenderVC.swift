@@ -18,22 +18,24 @@ class CalenderVC: UIViewController {
     
     
     //Cell variable may later custom cel
-    
-    
-    
-    
-    
+    //
+    //
     let formatter = DateFormatter()
     let currentDate = Date()
     var selectedDate: String = ""
     
     var showAtDateTable: Results<RealmEpisodenInformation>?
-    
-    lazy var realm: Realm = {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.realm!
+
+    //26.11.2018 - Realm is now part of ShowStoreManager
+    lazy var showStore:ShowStoreManager={
+         return ShowStoreManager.shared
     }()
     
+//    lazy var realm: Realm = {
+//       let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        return appDelegate.realm!
+//    }()
+//
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarView.calendarDelegate = self
@@ -67,7 +69,11 @@ class CalenderVC: UIViewController {
         guard let validCell = view as? CalendarCollectionCustomCell else { return }
         let date = cellState.date.description
         let cutdate: String = String(date.prefix(10))
-        let showAtDate = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", cutdate).first
+        
+        let showAtDate = showStore.filter(type: ShowStoreFilter.Episodes(airdate: cutdate))?.first
+        
+//        let showAtDate = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", cutdate).first
+        
         if (showAtDate?.airdate) != nil {
             validCell.indicatorView.isHidden = false
         } else {
@@ -159,24 +165,41 @@ extension CalenderVC: JTAppleCalendarViewDelegate {
 // MARK: - Extensions for TableView
 
 extension CalenderVC: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate).isEmpty {
-            return 0
-        } else {
-            showAtDateTable = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate)
-            return showAtDateTable!.count
-        }
+//        if realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate).isEmpty {
+//            return 0
+//        } else {
+//            showAtDateTable = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate)
+//            return showAtDateTable!.count
+//        }
+        
+        if let isEmpty=showStore.filter(type: ShowStoreFilter.Episodes(airdate: selectedDate))?.isEmpty,
+            isEmpty != true,
+            let queryCount=showStore.filter(type: ShowStoreFilter.Episodes(airdate: selectedDate))?.count{
+               return queryCount
+        }else{
+                return 0
+       }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let showAtDate = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate)
+//        let showAtDate = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate)
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendarTableViewCell", for: indexPath) as! CalendarTableViewCell
+        
+        guard let showAtDate=showStore.filter(type: ShowStoreFilter.Episodes(airdate: selectedDate)) else {return cell}
+        
         let show = showAtDate[indexPath.row]
         cell.setShowAtDay(show: show)
 //        cell.textLabel?.text = showAtDate[indexPath.row].name
 //        cell.detailTextLabel?.text = showAtDate[indexPath.row].show?.showName
         return cell
+        }
     }
-}
 
 extension CalenderVC: UITableViewDelegate {}
+
+
+
+

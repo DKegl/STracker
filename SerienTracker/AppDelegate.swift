@@ -10,7 +10,7 @@ import RealmSwift
 import UIKit
 
 extension UIApplicationDelegate {
-    func delayLaunchScreen(time: TimeInterval = 0) {
+    func displayLaunchScreen(time: TimeInterval = 0) {
         RunLoop.current.run(until: Date(timeIntervalSinceNow: time))
     }
 }
@@ -25,10 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupNavigationBar()
         // MARK: - Tabbar Setup
         setupTabBar()
-        // init Realm database use different task but in main-thread!!
-        setupRealm()
+        // 26.11.2018 - Realm is now part of ShowStoreManager
+        //>>>>>setupRealm()
+        
+        
         // Delay return in main task
-        delayLaunchScreen(time: 2)
+        displayLaunchScreen(time: 2)
         // no delay use:
         // self.delayLaunchScreen()
         return true
@@ -50,21 +52,24 @@ extension AppDelegate {
         // UITabBar.appearance().bartint
     }
     
-    func setupRealm() {
-        let concurrentQueue = DispatchQueue(label: "initRealmQueue", qos: DispatchQoS.default, attributes: DispatchQueue.Attributes.concurrent)
-        concurrentQueue.async { [weak self] in
-            
-            DispatchQueue.main.async { [weak self] in
-                do {
-                    let realm = try Realm()
-                    self?.realm = realm
-                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-                    
-                } catch let error {
-                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-                    fatalError(error.localizedDescription)
-                }
-            }
-        }
-    }
+    
+    //26.11.2018 - Realm is now part of ShowStoreManager
+    
+//    func setupRealm() {
+//        let concurrentQueue = DispatchQueue(label: "initRealmQueue", qos: DispatchQoS.default, attributes: DispatchQueue.Attributes.concurrent)
+//        concurrentQueue.async { [weak self] in
+//
+//            DispatchQueue.main.async { [weak self] in
+//                do {
+//                    let realm = try Realm()
+//                    self?.realm = realm
+//                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+//
+//                } catch let error {
+//                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+//                    fatalError(error.localizedDescription)
+//                }
+//            }
+//        }
+//    }
 }
