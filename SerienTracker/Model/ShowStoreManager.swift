@@ -8,8 +8,8 @@
 import Foundation
 import RealmSwift
 
-enum ShowStoreFilter<T:Any & Equatable>{
-    case Episodes(airdate:T)
+enum ShowStoreFilter{
+    case EpisodesBy(airdate:String)
 }
 
 //Public interface of ShowStore
@@ -17,7 +17,7 @@ protocol ShowStoreManagerQueries{
     func showFilterWith(id: Int) -> Results<RealmBookmarkShow>
     func isShowBookmark(id: Int) -> Bool
     func showAvailable(id:Int)->Bool
-    func filter(type:ShowStoreFilter<String>)->Results<RealmEpisodenInformation>?
+    func filter(type:ShowStoreFilter)->Results<RealmEpisodenInformation>?
 }
 
 
@@ -61,10 +61,9 @@ extension ShowStoreManager:InternalShowStore{
 
 
 extension ShowStoreManager:ShowStoreManagerQueries{
-    func filter(type: ShowStoreFilter<String>) -> Results<RealmEpisodenInformation>? {
+    func filter(type: ShowStoreFilter) -> Results<RealmEpisodenInformation>? {
             switch type {
-                
-            case .Episodes(airdate: let airDate):
+            case .EpisodesBy(airdate: let airDate):
                 return filter(objectType: RealmEpisodenInformation.self,query:"airdate", value: airDate )
             }
     }

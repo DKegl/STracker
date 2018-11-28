@@ -70,7 +70,7 @@ class CalenderVC: UIViewController {
         let date = cellState.date.description
         let cutdate: String = String(date.prefix(10))
         
-        let showAtDate = showStore.filter(type: ShowStoreFilter.Episodes(airdate: cutdate))?.first
+        let showAtDate = showStore.filter(type: ShowStoreFilter.EpisodesBy(airdate: cutdate))?.first
         
 //        let showAtDate = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", cutdate).first
         
@@ -173,14 +173,8 @@ extension CalenderVC: UITableViewDataSource {
 //            showAtDateTable = realm.objects(RealmEpisodenInformation.self).filter("airdate == %@", selectedDate)
 //            return showAtDateTable!.count
 //        }
-        
-        if let isEmpty=showStore.filter(type: ShowStoreFilter.Episodes(airdate: selectedDate))?.isEmpty,
-            isEmpty != true,
-            let queryCount=showStore.filter(type: ShowStoreFilter.Episodes(airdate: selectedDate))?.count{
-               return queryCount
-        }else{
-                return 0
-       }
+        guard let count=showStore.filter(type: ShowStoreFilter.EpisodesBy(airdate: selectedDate))?.count, count>0 else {return 0}
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -188,7 +182,7 @@ extension CalenderVC: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendarTableViewCell", for: indexPath) as! CalendarTableViewCell
         
-        guard let showAtDate=showStore.filter(type: ShowStoreFilter.Episodes(airdate: selectedDate)) else {return cell}
+        guard let showAtDate=showStore.filter(type: ShowStoreFilter.EpisodesBy(airdate: selectedDate)) else {return cell}
         
         let show = showAtDate[indexPath.row]
         cell.setShowAtDay(show: show)
