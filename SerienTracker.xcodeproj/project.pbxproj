@@ -18,7 +18,6 @@
 		658BEEC721A9D1530097F105 /* CalendarCollectionCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658BEEC621A9D1530097F105 /* CalendarCollectionCustomCell.swift */; };
 		658BEECB21A9D39E0097F105 /* CalenderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658BEECA21A9D39E0097F105 /* CalenderVC.swift */; };
 		658BEECD21AC83320097F105 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658BEECC21AC83320097F105 /* CalendarTableViewCell.swift */; };
-		65AE984B21B06C0000E20DE3 /* ShowStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AE984A21B06C0000E20DE3 /* ShowStoreManager.swift */; };
 		65C14EFC217B729D001BB656 /* MainShowInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14EFB217B729D001BB656 /* MainShowInformationVC.swift */; };
 		65C14EFE217B72E9001BB656 /* EpisodesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14EFD217B72E9001BB656 /* EpisodesListVC.swift */; };
 		65C14F00217B83A2001BB656 /* ShowSerachApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C14EFF217B83A2001BB656 /* ShowSerachApi.swift */; };
@@ -61,7 +60,6 @@
 		658BEEC621A9D1530097F105 /* CalendarCollectionCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionCustomCell.swift; sourceTree = "<group>"; };
 		658BEECA21A9D39E0097F105 /* CalenderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderVC.swift; sourceTree = "<group>"; };
 		658BEECC21AC83320097F105 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
-		65AE984A21B06C0000E20DE3 /* ShowStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowStoreManager.swift; sourceTree = "<group>"; };
 		65C14EFB217B729D001BB656 /* MainShowInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainShowInformationVC.swift; sourceTree = "<group>"; };
 		65C14EFD217B72E9001BB656 /* EpisodesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesListVC.swift; sourceTree = "<group>"; };
 		65C14EFF217B83A2001BB656 /* ShowSerachApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSerachApi.swift; sourceTree = "<group>"; };
@@ -126,15 +124,6 @@
 			path = "JSON Parsing";
 			sourceTree = "<group>";
 		};
-		65AE984921B06BB500E20DE3 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				65AE984A21B06C0000E20DE3 /* ShowStoreManager.swift */,
-			);
-			name = Manager;
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		65D0B95821A1E1C200A878F0 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,7 +167,6 @@
 		65E7B8F021723648006FA47D /* SerienTracker */ = {
 			isa = PBXGroup;
 			children = (
-				65AE984921B06BB500E20DE3 /* Manager */,
 				65D0B95821A1E1C200A878F0 /* CustomCells */,
 				675D50A421A0DCC600719CDA /* Images */,
 				67F10EBF21A060CE009156B6 /* Extensions */,
@@ -397,7 +385,6 @@
 			files = (
 				65E7B90C217253AE006FA47D /* Constants.swift in Sources */,
 				65E7B90A2172533F006FA47D /* ShowMainApi.swift in Sources */,
-				65AE984B21B06C0000E20DE3 /* ShowStoreManager.swift in Sources */,
 				65E7B8F421723648006FA47D /* HomeVC.swift in Sources */,
 				658BEECD21AC83320097F105 /* CalendarTableViewCell.swift in Sources */,
 				67F10EC121A060F0009156B6 /* UIFont+Ext.swift in Sources */,
