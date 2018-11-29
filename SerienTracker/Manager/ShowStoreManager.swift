@@ -1,7 +1,8 @@
 //
 //  ShowStoreManager.swift
 //
-// mmmmmmmmmmm               Dani du Sahne?
+// mmmmmmmmmmm
+// Dani du Sahne?
 //  Created by Andre Frank on 27.11.18.
 //
 
