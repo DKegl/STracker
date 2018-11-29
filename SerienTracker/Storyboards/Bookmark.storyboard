@@ -166,6 +166,7 @@
                                     <outlet property="showFlag" destination="RAd-4L-yKh" id="m1f-d0-iX9"/>
                                     <outlet property="showImage" destination="hAY-zu-hqy" id="EDN-eq-Qff"/>
                                     <outlet property="showName" destination="AoA-h0-4ZO" id="GKx-Md-DqB"/>
+                                    <segue destination="TW4-lJ-jby" kind="show" identifier="episodesFromBookmarkShow" id="E6X-LZ-KA5"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -181,6 +182,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHc-78-woy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2665" y="1119"/>
+        </scene>
+        <!--EpisodesListVC-->
+        <scene sceneID="CiB-EL-rj9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SearchStoryboard" referencedIdentifier="EpisodesListVC" id="TW4-lJ-jby" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ks2-Ni-FWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3245" y="1122"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Gnv-v3-XfU">

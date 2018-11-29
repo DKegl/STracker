@@ -261,7 +261,7 @@
         <!--Episodes ListVC-->
         <scene sceneID="f5d-j8-fwx">
             <objects>
-                <tableViewController id="AZz-5o-FC3" customClass="EpisodesListVC" customModule="SerienTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EpisodesListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AZz-5o-FC3" customClass="EpisodesListVC" customModule="SerienTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ar2-Y9-1ZU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

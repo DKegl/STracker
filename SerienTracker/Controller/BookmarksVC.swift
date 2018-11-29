@@ -47,6 +47,23 @@ class BookmarksVC: UICollectionViewController{
 
 }
 
+extension BookmarksVC{
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "episodesFromBookmarkShow"{
+            guard let selectedShowCellIndex=collectionView.indexPathsForSelectedItems?.first else {return}
+            let bookmarkShow=ShowStoreManager.shared.bookmarkShows[selectedShowCellIndex.item]
+            (segue.destination as! EpisodesListVC).bookmarkShow=bookmarkShow
+        }
+        
+        
+        
+    }
+    
+}
 
 
 extension BookmarksVC:UICollectionViewDelegateFlowLayout{

@@ -11,6 +11,7 @@ import RealmSwift
 
 enum ShowStoreFilter {
     case EpisodesBy(airdate: String)
+    case EpisodesByShow(Id:Int)
 }
 
 // Public interface of ShowStore
@@ -64,7 +65,10 @@ extension ShowStoreManager: ShowStoreManagerQueries {
         switch type {
         case .EpisodesBy(airdate: let airDate):
             return filter(objectType: RealmEpisodenInformation.self, query: "airdate", value: airDate)
+        case .EpisodesByShow(let Id):
+            break
         }
+        return nil
     }
     
     internal func showAvailable(id: Int) -> Bool {
