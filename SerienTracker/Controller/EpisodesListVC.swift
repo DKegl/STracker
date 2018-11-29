@@ -101,6 +101,7 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
         
         //>> Todo read value from realm database
         
+        //Invert seen flag when selected
         expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row].seen = !(expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row].seen ?? false)
 //
         // Refresh modified rows(episodes) from tableview
