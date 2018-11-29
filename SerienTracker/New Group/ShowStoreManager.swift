@@ -11,8 +11,6 @@ enum ShowStoreFilter {
     case EpisodesBy(airdate: String)
 }
 
-// Public interface of ShowStore
-// Dani du Sahne?
 protocol ShowStoreManagerQueries {
     func showFilterWith(id: Int) -> Results<RealmBookmarkShow>
     func isShowBookmark(id: Int) -> Bool
