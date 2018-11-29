@@ -1,7 +1,7 @@
 //
 //  ShowStoreManager.swift
 //
-//
+// mmmmmmmmmmm               Dani du Sahne?
 //  Created by Andre Frank on 27.11.18.
 //
 
@@ -13,7 +13,7 @@ enum ShowStoreFilter {
 }
 
 // Public interface of ShowStore
-// Dani du Sahne?
+
 protocol ShowStoreManagerQueries {
     func showFilterWith(id: Int) -> Results<RealmBookmarkShow>
     func isShowBookmark(id: Int) -> Bool
