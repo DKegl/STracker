@@ -9,20 +9,22 @@
 import Foundation
 import RealmSwift
 
+
+//MARK: - Grouped filter types associated with th data model
 enum ShowStoreFilter {
     case EpisodesBy(airdate: String)
-    case EpisodesByShow(Id:Int)
 }
 
-// Public interface of ShowStore
-
+// MARK:- Filter protocol of ShowStoreManager
 protocol ShowStoreManagerQueries {
-    func showFilterWith(id: Int) -> Results<RealmBookmarkShow>
+    func showWith(id: Int) -> Results<RealmBookmarkShow>
     func isShowBookmark(id: Int) -> Bool
     func showAvailable(id: Int) -> Bool
     func filter(type: ShowStoreFilter) -> Results<RealmEpisodenInformation>?
+    func episodesBy(show:RealmBookmarkShow)->[ShowEpisodenInformation]?
 }
 
+// MARK: - Base public ShowStoreManager protocol
 protocol ShowStoreManagerBase {
     func saveAsBookmarkShow(show: ShowMainInformation, episodes: [ShowEpisodenInformation]?) -> Bool
     func deleteBookmarkShow(realmShow: RealmBookmarkShow) -> Bool
@@ -30,11 +32,13 @@ protocol ShowStoreManagerBase {
     var bookmarkShows: Results<RealmBookmarkShow> { get }
 }
 
+// MARK: - Generic filter protocol
 private protocol InternalShowStore {
     func filter<T: Object, K: Equatable>(objectType: T.Type, query: String, value: K) -> Results<T>?
 }
 
-class ShowStoreManager: NSObject {
+// MARK: - The ShowStore Singleton which mages the Realm accesses
+final class ShowStoreManager: NSObject {
     static let shared = ShowStoreManager()
     
     private override init() {
@@ -61,21 +65,36 @@ extension ShowStoreManager: InternalShowStore {
 }
 
 extension ShowStoreManager: ShowStoreManagerQueries {
+    func episodesBy(show: RealmBookmarkShow) -> [ShowEpisodenInformation]? {
+        let realmEpisodes=show.realmEpisoden
+        //Transform Realm objects into original form
+        let episodes:[ShowEpisodenInformation]=Array(realmEpisodes).map { realmEpisode in
+            var image:ShowEpisodenInformation.epImage?
+            //Create image object
+            if let realmImage=realmEpisode.image{
+                image=ShowEpisodenInformation.epImage(medium: realmImage.medium, original: realmImage.original)
+            }
+            
+            let ep=ShowEpisodenInformation(id: realmEpisode.id, url: realmEpisode.url, name: realmEpisode.name, airdate: realmEpisode.airdate, season: realmEpisode.season, number: realmEpisode.number, image:image, seen: realmEpisode.isSeen, summary: realmEpisode.summary)
+            return ep
+        }
+        return episodes
+    }
+    
+    
+    
     func filter(type: ShowStoreFilter) -> Results<RealmEpisodenInformation>? {
         switch type {
         case .EpisodesBy(airdate: let airDate):
             return filter(objectType: RealmEpisodenInformation.self, query: "airdate", value: airDate)
-        case .EpisodesByShow(let Id):
-            break
         }
-        return nil
     }
     
     internal func showAvailable(id: Int) -> Bool {
         return realm.objects(RealmBookmarkShow.self).filter("showId==\(id)").count > 0
     }
     
-    internal func showFilterWith(id: Int) -> Results<RealmBookmarkShow> {
+    internal func showWith(id: Int) -> Results<RealmBookmarkShow> {
         return realm.objects(RealmBookmarkShow.self).filter("showId==\(id)")
     }
     
@@ -96,7 +115,7 @@ extension ShowStoreManager: ShowStoreManagerBase {
     
     internal func deleteBookmarkShow(id: Int) -> Bool {
         if showAvailable(id: id) {
-            let show = showFilterWith(id: id)
+            let show = showWith(id: id)
             return deleteBookmarkShow(realmShow: show.first!)
         } else { return false }
     }

@@ -25,9 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupNavigationBar()
         // MARK: - Tabbar Setup
         setupTabBar()
-        // 26.11.2018 - Realm is now part of ShowStoreManager
-        //>>>>>setupRealm()
-        
         
         // Delay return in main task
         displayLaunchScreen(time: 2)
@@ -51,25 +48,4 @@ extension AppDelegate {
         UITabBar.appearance().tintColor = turquoiseColor
         // UITabBar.appearance().bartint
     }
-    
-    
-    //26.11.2018 - Realm is now part of ShowStoreManager
-    
-//    func setupRealm() {
-//        let concurrentQueue = DispatchQueue(label: "initRealmQueue", qos: DispatchQoS.default, attributes: DispatchQueue.Attributes.concurrent)
-//        concurrentQueue.async { [weak self] in
-//
-//            DispatchQueue.main.async { [weak self] in
-//                do {
-//                    let realm = try Realm()
-//                    self?.realm = realm
-//                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-//
-//                } catch let error {
-//                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-//                    fatalError(error.localizedDescription)
-//                }
-//            }
-//        }
-//    }
 }

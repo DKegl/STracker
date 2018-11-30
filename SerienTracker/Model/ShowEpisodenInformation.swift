@@ -30,7 +30,35 @@ struct ShowEpisodenInformation: Codable {
     }
     
     struct epImage: Codable {
-        let medium, original: String
-    }    
+        let medium, original: String?
+        
+        init(medium:String?,original:String?) {
+            self.medium=medium
+            self.original=original
+        }
+        
+        init(image:epImage) {
+            self.init(medium: image.medium, original: image.original)
+        }
+    }
+    
+    init(id:Int,url:String?,name:String?,airdate:String?,season:Int?,number:Int?,image:epImage?,seen:Bool,summary:String?) {
+        self.id=id
+        self.url=url
+        self.name=name
+        self.airdate=airdate
+        self.season=season
+        self.number=number
+        self.seen=seen
+        if let image=image{
+          self.image=epImage(medium: image.medium, original:image.original)
+        }else{
+            self.image=nil
+        }
+        self.summary=summary
+    }
+    
+   
+    
 }
 

@@ -9,39 +9,34 @@
 import UIKit
 
 // Used to expand/collapse structure to show hide sections (Seasons and contained episodes)
-struct ShowHideSection {
+struct ShowHideSection<T>{
     var isExpanded: Bool
     // Removed 29.11.2018
     // var episodes: [ShowEpisodenInformation]
     
     // Added 29.11.2018
     // One section contains an section number and assigned episodes
-    var episodesBySection = [ShowEpisodenInformation]()
+    var episodesBySection = [T]()
     // Added 29.11.2018
     mutating func expandSection(expand: Bool) {
         isExpanded = expand
     }
 }
 
-class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate {
+class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
+    // Added 29.11.2018
+    var expandableSections = [ShowHideSection<ShowEpisodenInformation>]()
+   
     //Get from Search
     var showInfo: Int?
     
-    //Get from bookmark
+    //Get from bookmarkVC
     var bookmarkShow:RealmBookmarkShow?
     
     var showName: String!
     
     //Endpoint API
     var showepList = ShowEpListApi()
-    
-    // >> var groupedEpisodes = [[ShowEpisodenInformation]]()
-    
-    // Removed 29.11.2018
-    // var expandableGroupedEpisodes = [[ShowHideSection]]()
-    
-    // Added 29.11.2018
-    var expandableSections = [ShowHideSection]()
     
     func setupUI(){
         // Disable lines between cells
@@ -60,41 +55,37 @@ class EpisodesListVC: UITableViewController, UIViewControllerPreviewingDelegate 
         return false
     }
     
+    func createGroupedEpisodes(episodes:[ShowEpisodenInformation])->[ShowHideSection<ShowEpisodenInformation>]{
+        //Build an Dictionary Grouped by 'season'
+        let groupedDictionary = Dictionary(grouping: episodes){$0.season!}
+        
+        // Get keys in sorted order (1,2,3...)
+        let keys = groupedDictionary.keys.sorted()
+        
+        //Transfrom dictionay into grouped sections
+        var groupedSections=[ShowHideSection<ShowEpisodenInformation>]()
+        keys.forEach({ key in
+            // Added 29.11.2018
+            groupedSections.append(ShowHideSection(isExpanded: true, episodesBySection: groupedDictionary[key]!))
+        })
+        return groupedSections
+    }
+    
     func loadEpisodeListFromEndpointAPIWith(id:Int){
         // Read all episodes from show
         showepList.getEpList(id: id) { [unowned self] episoden in
-            if let episoden = episoden {
-                // Create dictionary for each season
-                let groupedDictionary = Dictionary(grouping: episoden) { (episode) -> Int in
-                    return episode.season!
-                }
-                
-                // Get keys in sorted order (1,2,3...)
-                let keys = groupedDictionary.keys.sorted()
-                
-                // Fill array for each key
-                // groupedEpisodes[season n][episode n]
-                keys.forEach({ key in
-                    
-                    // Removed 29.11.2018
-                    
-                    //   self?.expandableGroupedEpisodes.append([ShowHideEpsiodes(isExpanded: true, episodes: groupedDictionary[key]!)])
-                    
-                    // Added 29.11.2018
-                    self.expandableSections.append(ShowHideSection(isExpanded: true, episodesBySection: groupedDictionary[key]!))
-                })
-                
-                // Refresh tableview
-                self.tableView.reloadData()
-            }
+            guard let episoden = episoden else {return}
+            self.expandableSections=self.createGroupedEpisodes(episodes: episoden)
+            // Refresh tableview
+            self.tableView.reloadData()
         }
+        
     }
     
     func loadEpisodeFromShowStoreManagerWith(show:RealmBookmarkShow){
-       
-        //>>>>>>>>>>>>>>>>>>   ToDo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        //just for fun...
-        print(show)
+        guard let episodes=ShowStoreManager.shared.episodesBy(show: show) else {return}
+        expandableSections=createGroupedEpisodes(episodes:episodes)
+          tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -131,18 +122,11 @@ extension EpisodesListVC {
         // Added 29.11.2018
         let expandableRows = expandableSections[section].isExpanded ? expandableSections[section].episodesBySection.count : 0
         
-        // Removed 29.11.2018
-        // let expandableRows = expandableGroupedEpisodes[section][0].isExpanded ? expandableGroupedEpisodes[section][0].episodes.count : 0
-        
         return expandableRows
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "episodenCell") as! epCell
-        
-        // Rremoved 29.11.2018
-        // Get episode from season(section) and row
-        // let episode = expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row]
         
         // Added 29.11.2018
         let episode = expandableSections[indexPath.section].episodesBySection[indexPath.row]
@@ -164,20 +148,10 @@ extension EpisodesListVC {
 
 extension EpisodesListVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Checkmark seen episode
-        // >> groupedEpisodes[indexPath.section][indexPath.row].seen = !(groupedEpisodes[indexPath.section][indexPath.row].seen ?? false)
-        
-        // >> Todo read value from realm database
-        
-        // Invert seen flag when selected
-        // Removed 29.11.2018
-        //        expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row].seen = !(expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row].seen ?? false)
-        
         // Added 29.11.2018
         // Invert seen flag by selecting the cell
         expandableSections[indexPath.section].episodesBySection[indexPath.row].seen = !(expandableSections[indexPath.section].episodesBySection[indexPath.row].seen ?? false)
         
-        //
         // Refresh modified rows(episodes) from tableview
         tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
     }
@@ -186,7 +160,7 @@ extension EpisodesListVC {
 // MARK: - Force Touch Preview
 
 extension EpisodesListVC {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    @objc func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         // Obtain the index path and the cell that was pressed.
         guard let indexPath = tableView.indexPathForRow(at: location),
             let cell = tableView.cellForRow(at: indexPath) else { return nil }
@@ -205,7 +179,7 @@ extension EpisodesListVC {
         return detailViewController
     }
     
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+    @objc(previewingContext:commitViewController:) func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         //        let detailView = storyboard?.instantiateViewController(withIdentifier: "detailEpisode")
         //        show(detailView!, sender: self)
     }
@@ -223,15 +197,9 @@ extension EpisodesListVC {
         // The view is a button
         let titleButton = UIButton()
         
-        // Use the globally used text style to show the Season sections
-        // >> let title = "Season \(groupedEpisodes[section][0].season!)"
-        
-        // Removed 29.11.2018
-        // let title = "Season \(expandableGroupedEpisodes[section][0].episodes[0].season!)"
-        
         // Added 29.11.2018
         let title = "Season \(expandableSections[section].episodesBySection[0].season!)"
-        
+        // Set header font stroke
         let strokeTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.font: UIFont(name: "Futura", size: 12)!
@@ -257,11 +225,6 @@ extension EpisodesListVC {
         // get all episodes from season
         var indexPaths = [IndexPath]()
         
-        // Removed 29.11.2018
-        //        for row in expandableGroupedEpisodes[expandSection][0].episodes.indices {
-//            let index = IndexPath(row: row, section: expandSection)
-//            indexPaths.append(index)
-//        }
         // Added 29.11.2018
         for row in expandableSections[expandSection].episodesBySection.indices {
             let index = IndexPath(row: row, section: expandSection)
@@ -270,13 +233,7 @@ extension EpisodesListVC {
         // Prepare expandable sections
         let isExpanded = expandableSections[expandSection].isExpanded
         expandableSections[expandSection].expandSection(expand: !isExpanded)
-        
-        // Removed 29.11.2018
-//        // Get expand flag
-//        let isExpanded = expandableGroupedEpisodes[expandSection][0].isExpanded
-//        // Revert it
-//        expandableGroupedEpisodes[expandSection][0].isExpanded = !isExpanded
-        
+                
         if isExpanded { // Yes, fold
             tableView.deleteRows(at: indexPaths, with: UITableView.RowAnimation.fade)
         } else { // No - unfold
