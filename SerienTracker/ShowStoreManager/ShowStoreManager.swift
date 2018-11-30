@@ -21,7 +21,7 @@ protocol ShowStoreManagerQueries {
     func isShowBookmark(id: Int) -> Bool
     func showAvailable(id: Int) -> Bool
     func filter(type: ShowStoreFilter) -> Results<RealmEpisodenInformation>?
-    func episodesBy(show:RealmBookmarkShow)->[ShowEpisodenInformation]?
+    func episodesBy(bookmarkShow:RealmBookmarkShow)->[ShowEpisodenInformation]?
 }
 
 // MARK: - Base public ShowStoreManager protocol
@@ -65,7 +65,7 @@ extension ShowStoreManager: InternalShowStore {
 }
 
 extension ShowStoreManager: ShowStoreManagerQueries {
-    func episodesBy(show: RealmBookmarkShow) -> [ShowEpisodenInformation]? {
+    func episodesBy(bookmarkShow show: RealmBookmarkShow) -> [ShowEpisodenInformation]? {
         let realmEpisodes=show.realmEpisoden
         //Transform Realm objects into original form
         let episodes:[ShowEpisodenInformation]=Array(realmEpisodes).map { realmEpisode in

@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupTabBar()
         
         // Delay return in main task
-        displayLaunchScreen(time: 2)
+        displayLaunchScreen(time: 1)
         // no delay use:
         // self.delayLaunchScreen()
         return true

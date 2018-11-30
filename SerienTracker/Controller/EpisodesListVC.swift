@@ -83,7 +83,7 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
     }
     
     func loadEpisodeFromShowStoreManagerWith(show:RealmBookmarkShow){
-        guard let episodes=ShowStoreManager.shared.episodesBy(show: show) else {return}
+        guard let episodes=ShowStoreManager.shared.episodesBy(bookmarkShow: show) else {return}
         expandableSections=createGroupedEpisodes(episodes:episodes)
           tableView.reloadData()
     }
