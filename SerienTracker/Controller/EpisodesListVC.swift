@@ -16,7 +16,7 @@ struct ShowHideSection<T>{
     
     // Added 29.11.2018
     // One section contains an section number and assigned episodes
-    var episodesBySection = [T]()
+    var itemsBySection = [T]()
     // Added 29.11.2018
     mutating func expandSection(expand: Bool) {
         isExpanded = expand
@@ -66,7 +66,7 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
         var groupedSections=[ShowHideSection<ShowEpisodenInformation>]()
         keys.forEach({ key in
             // Added 29.11.2018
-            groupedSections.append(ShowHideSection(isExpanded: true, episodesBySection: groupedDictionary[key]!))
+            groupedSections.append(ShowHideSection(isExpanded: true, itemsBySection: groupedDictionary[key]!))
         })
         return groupedSections
     }
@@ -120,7 +120,7 @@ extension EpisodesListVC {
         // number of episodes in seasons (section points to actual season)
         
         // Added 29.11.2018
-        let expandableRows = expandableSections[section].isExpanded ? expandableSections[section].episodesBySection.count : 0
+        let expandableRows = expandableSections[section].isExpanded ? expandableSections[section].itemsBySection.count : 0
         
         return expandableRows
     }
@@ -129,7 +129,7 @@ extension EpisodesListVC {
         let cell = tableView.dequeueReusableCell(withIdentifier: "episodenCell") as! epCell
         
         // Added 29.11.2018
-        let episode = expandableSections[indexPath.section].episodesBySection[indexPath.row]
+        let episode = expandableSections[indexPath.section].itemsBySection[indexPath.row]
         
         cell.setEp(episode: episode)
         
@@ -150,7 +150,7 @@ extension EpisodesListVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Added 29.11.2018
         // Invert seen flag by selecting the cell
-        expandableSections[indexPath.section].episodesBySection[indexPath.row].seen = !(expandableSections[indexPath.section].episodesBySection[indexPath.row].seen ?? false)
+        expandableSections[indexPath.section].itemsBySection[indexPath.row].seen = !(expandableSections[indexPath.section].itemsBySection[indexPath.row].seen ?? false)
         
         // Refresh modified rows(episodes) from tableview
         tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
@@ -170,7 +170,7 @@ extension EpisodesListVC {
         
         // Removed 29.11.2018
         // let previewDetail = expandableGroupedEpisodes[indexPath.section][0].episodes[indexPath.row]
-        let previewDetail = expandableSections[indexPath.section].episodesBySection[indexPath.row]
+        let previewDetail = expandableSections[indexPath.section].itemsBySection[indexPath.row]
         
         detailViewController.episodenDetail = previewDetail
         
@@ -198,7 +198,7 @@ extension EpisodesListVC {
         let titleButton = UIButton()
         
         // Added 29.11.2018
-        let title = "Season \(expandableSections[section].episodesBySection[0].season!)"
+        let title = "Season \(expandableSections[section].itemsBySection[0].season!)"
         // Set header font stroke
         let strokeTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -226,7 +226,7 @@ extension EpisodesListVC {
         var indexPaths = [IndexPath]()
         
         // Added 29.11.2018
-        for row in expandableSections[expandSection].episodesBySection.indices {
+        for row in expandableSections[expandSection].itemsBySection.indices {
             let index = IndexPath(row: row, section: expandSection)
             indexPaths.append(index)
         }
