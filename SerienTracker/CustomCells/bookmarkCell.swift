@@ -74,6 +74,7 @@ class bookmarkCell: UICollectionViewCell {
         self.episodeInfo.textColor = .lightGray
         self.seasonsInfo.textColor = .lightGray
         self.episodesProgressView.tintColor = turquoiseColor
+        
     }
     
     override func awakeFromNib() {

@@ -42,6 +42,7 @@ class CalenderVC: UIViewController {
         calendarView.calendarDataSource = self
         setupCalendar()
         calendarView.scrollToDate(currentDate)
+        navigationController?.navigationBar.topItem?.title = "Calendar"
     }
     
     // load calendar wirh dates and remove spacing
