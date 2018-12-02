@@ -64,33 +64,39 @@ class MainShowInformationVC: UIViewController {
         epButton.layer.cornerRadius = 20
     }
     
-    @objc func bookmarkTapped() {
+    func loadAndSaveShow(id:Int){
         // Configure response message
         let userConfirmation = UserActionConfirmView(title: "", message: "", imageName: "45-Bookmark.json")
         
+        // 3.Selected show isn't boookmarked so load show information with episodes from endpoint
+        // and save the show in the database within the sequentilly nested completion blocks
+        showMainAPI.getShowOverview(id: id) { [unowned self] show in
+            if let show = show {
+                self.showEpListAPI.getEpList(id: id, complition: { [unowned self] episodes in
+                    _ = self.showStore.saveAsBookmarkShow(show: show, episodes: episodes)
+                    
+                    // >>>>>>>>>>>>>>>>>19.11.2018 bug fix
+                    userConfirmation.show(animated: true, animation: BookMarkAnimation.Add)
+                    self.bookmark = true
+                    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                }) // end of inner block
+            } // end of if let show
+        } // end of outer block
+    }
+    
+    @objc func bookmarkTapped() {
         // 1. Check if selected show is already in database
         // assuming the bookmark flag is set
         if let id = showInfo?.show?.id, showStore.isShowBookmark(id: id) {
             _ = showStore.deleteBookmarkShow(id: id)
             // User response message
+            // Configure response message
+            let userConfirmation = UserActionConfirmView(title: "", message: "", imageName: "45-Bookmark.json")
             userConfirmation.show(animated: true, animation: BookMarkAnimation.Remove)
             bookmark = false
         } else {
-            // 3.Selected show isn't boookmarked so load show information with episodes from endpoint
-            // and save the show in the database within the sequentilly nested completion blocks
-            guard let id = showInfo?.show?.id else { return }
-            showMainAPI.getShowOverview(id: id) { [unowned self] show in
-                if let show = show {
-                    self.showEpListAPI.getEpList(id: id, complition: { [unowned self] episodes in
-                        _ = self.showStore.saveAsBookmarkShow(show: show, episodes: episodes)
-                        
-                        // >>>>>>>>>>>>>>>>>19.11.2018 bug fix
-                        userConfirmation.show(animated: true, animation: BookMarkAnimation.Add)
-                        self.bookmark = true
-                        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                    }) // end of inner block
-                } // end of if let show
-            } // end of outer block
+            guard let id=showInfo?.show?.id else {return}
+            loadAndSaveShow(id: id)
         } // else
     } // end of method
     
