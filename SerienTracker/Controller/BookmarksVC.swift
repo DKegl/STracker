@@ -10,21 +10,20 @@ import UIKit
 
 private let reuseIdentifier = "bookmarkCell"
 
-
-class BookmarksVC: UICollectionViewController{
-
+class BookmarksVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setTabBarEmbeddedTitle(title: "Bookmark show")
+        collectionView.reloadData()
 
         // Register cell classes is StoryBoard responsibility when using IB !!
-        //self.collectionView!.register(bookmarkCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-    
+        // self.collectionView!.register(bookmarkCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        //Reload data because database may have changed
+        // Reload data because database may have changed
         collectionView.reloadData()
+
+        title = "Bookmarked Shows"
     }
 
     // MARK: UICollectionViewDataSource
@@ -36,40 +35,31 @@ class BookmarksVC: UICollectionViewController{
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! bookmarkCell
-    
+
         // Configure the cell
-        let bookmarkShows=ShowStoreManager.shared.bookmarkShows
-        guard bookmarkShows.count>0 else {return cell}
-        
+        let bookmarkShows = ShowStoreManager.shared.bookmarkShows
+        guard bookmarkShows.count > 0 else { return cell }
+        cell.backgroundColor = greyColor
         cell.setBookmarkCell(show: bookmarkShows[indexPath.row])
+
         return cell
     }
-
 }
 
-extension BookmarksVC{
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
+extension BookmarksVC {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {}
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "episodesFromBookmarkShow"{
-            guard let selectedShowCellIndex=collectionView.indexPathsForSelectedItems?.first else {return}
-            let bookmarkShow=ShowStoreManager.shared.bookmarkShows[selectedShowCellIndex.item]
-            (segue.destination as! EpisodesListVC).bookmarkShow=bookmarkShow
+        if segue.identifier == "episodesFromBookmarkShow" {
+            guard let selectedShowCellIndex = collectionView.indexPathsForSelectedItems?.first else { return }
+            let bookmarkShow = ShowStoreManager.shared.bookmarkShows[selectedShowCellIndex.item]
+            (segue.destination as! EpisodesListVC).bookmarkShow = bookmarkShow
         }
-        
-        
-        
-    }
-    
-}
-
-
-extension BookmarksVC:UICollectionViewDelegateFlowLayout{
-     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-         return CGSize(width: self.collectionView.bounds.width, height:130)
     }
 }
 
-
+extension BookmarksVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.collectionView.bounds.width, height: 130)
+    }
+}

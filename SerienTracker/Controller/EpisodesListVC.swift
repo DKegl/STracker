@@ -97,9 +97,11 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
         //Check if show is bookmarked
         if let bookmarkShow=self.bookmarkShow{
             loadEpisodeFromShowStoreManagerWith(show: bookmarkShow)
+             title = bookmarkShow.showName
         }else{//Load from endpoint
             guard let showInfo=self.showInfo else {return}
             loadEpisodeListFromEndpointAPIWith(id: showInfo)
+
         }
         
     }
