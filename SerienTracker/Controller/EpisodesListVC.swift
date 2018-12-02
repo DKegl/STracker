@@ -88,6 +88,15 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
           tableView.reloadData()
     }
     
+    func showConfirmationAlert(title:String,message:String,actions:[UIAlertAction], inController:UIViewController){
+        let alert=UIAlertController(title: title, message: message
+            , preferredStyle: .alert)
+        actions.forEach { (action) in
+            alert.addAction(action)
+        }
+        inController.present(alert, animated: false, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -149,13 +158,40 @@ extension EpisodesListVC {
 // MARK: - TableView delegate method
 
 extension EpisodesListVC {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Added 29.11.2018
+    func episodeSeenIn(indexPath:IndexPath,on:Bool=false){
         // Invert seen flag by selecting the cell
-        expandableSections[indexPath.section].itemsBySection[indexPath.row].seen = !(expandableSections[indexPath.section].itemsBySection[indexPath.row].seen ?? false)
-        
+        expandableSections[indexPath.section].itemsBySection[indexPath.row].seen = on
         // Refresh modified rows(episodes) from tableview
         tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+    }
+    
+    
+    func episodeSeenToggle(indexPath:IndexPath){
+        // Invert seen flag by selecting the cell
+        expandableSections[indexPath.section].itemsBySection[indexPath.row].seen = !(expandableSections[indexPath.section].itemsBySection[indexPath.row].seen  ?? false)
+        // Refresh modified rows(episodes) from tableview
+        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Added 02.12.2018
+        //Check if show already bookmarked
+        if self.bookmarkShow==nil{
+            let okAction=UIAlertAction(title: "Ok", style: .default) {[unowned self]_ in
+                self.episodeSeenIn(indexPath: indexPath,on: true)
+            }
+            let cancelAction=UIAlertAction(title: "Cancel", style: .cancel){ _ in
+                // Refresh modified rows(episodes) from tableview to hide selection
+                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+            }
+            
+            showConfirmationAlert(title: "Episodes", message: "Would you like to bookmark the show?", actions: [okAction,cancelAction], inController: self)
+            }else{
+                episodeSeenToggle(indexPath: indexPath)
+            }
+        
+       
     }
 }
 
