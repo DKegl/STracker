@@ -32,6 +32,9 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
     //Get from bookmarkVC
     var bookmarkShow:RealmBookmarkShow?
     
+    //All episodes shown in this tableView
+    var episodes:[ShowEpisodenInformation]?
+    
     //Endpoint API
     var showepList = ShowEpListApi()
     
@@ -55,6 +58,9 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
     }
     
     func createGroupedEpisodes(episodes:[ShowEpisodenInformation])->[ShowHideSection<ShowEpisodenInformation>]{
+        //Save episodes anyway for later use
+        self.episodes=episodes
+        
         //Build an Dictionary Grouped by 'season'
         let groupedDictionary = Dictionary(grouping: episodes){$0.season!}
         
@@ -184,6 +190,12 @@ extension EpisodesListVC {
         if self.bookmarkShow==nil && !ShowStoreManager.shared.isShowBookmark(id: showId!){
             let okAction=UIAlertAction(title: "Ok", style: .default) {[unowned self]_ in
                 self.episodeSeenIn(indexPath: indexPath,on: true)
+                // Configure response message
+                let userConfirmation = UserActionConfirmView(title: "", message: "", imageName: "45-Bookmark.json")
+                
+                _ = ShowStoreManager.shared.saveAsBookmarkShow(show: self.showMainInfo!, episodes: self.episodes)
+                
+                 userConfirmation.show(animated: true, animation: BookMarkAnimation.Add)
             }
             
             let customAction=UIAlertAction(title: "Do not ask again", style:.destructive){ _ in

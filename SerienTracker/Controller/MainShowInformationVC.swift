@@ -64,9 +64,14 @@ class MainShowInformationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setupNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //03.12.2018
+        //Update GUI in viewWillApear also reflects changes from other views
         setupUI()
-        navigationItem.title = showInfo?.show?.name
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(bookmarkTapped))
     }
     
     func getShowMainInformation() {
@@ -74,6 +79,11 @@ class MainShowInformationVC: UIViewController {
         showMainAPI.getShowOverview(id: id) { [unowned self] info in
             self.showMainInfo = info
         }
+    }
+    
+    func setupNavigationBar(){
+        navigationItem.title = showInfo?.show?.name
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(bookmarkTapped))
     }
     
     func setupUI() {
