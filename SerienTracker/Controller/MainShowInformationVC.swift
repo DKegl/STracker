@@ -9,6 +9,33 @@
 import RealmSwift
 import UIKit
 
+//Protocol for proxy object
+protocol SyncShowRequest {
+    func getShowMainInfo(id: Int) -> ShowMainInformation?
+}
+
+//This is a proxy class to encapsulate an async call ( in this case the Alamofire.request into an serialized sync call
+class ShowRequestProxy: SyncShowRequest {
+    private let semaphore = DispatchSemaphore(value: 0)
+    private let queue = DispatchQueue(label: "queueSerialRequest")
+    private let api = ShowMainApi()
+    private var mainInfo: ShowMainInformation?
+    
+    func getShowMainInfo(id: Int) -> ShowMainInformation? {
+        queue.async { [weak self] in
+            self?.api.getShowOverview(id: id, queue: self?.queue) { info in
+                defer {
+                 self?.semaphore.signal()
+                }
+                self?.mainInfo = info
+            }
+        }
+        //Block until signal() is called in async call (this must be done from the current used queue
+        semaphore.wait()
+        return mainInfo
+    }
+}
+
 class MainShowInformationVC: UIViewController {
     @IBOutlet var showLabel: UILabel!
     @IBOutlet var showImageView: CachedImageView!
@@ -18,8 +45,10 @@ class MainShowInformationVC: UIViewController {
     @IBOutlet var bookmarkImg: UIImageView!
     
     var showInfo: ShowSearch?
-    var showMainAPI = ShowMainApi()
-    var showEpListAPI = ShowEpListApi()
+    var showMainInfo: ShowMainInformation!
+    
+    let showMainAPI = ShowMainApi()
+    let showEpListAPI = ShowEpListApi()
     
     lazy var showStore: ShowStoreManager = {
         ShowStoreManager.shared
@@ -38,6 +67,13 @@ class MainShowInformationVC: UIViewController {
         setupUI()
         navigationItem.title = showInfo?.show?.name
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(bookmarkTapped))
+    }
+    
+    func getShowMainInformation() {
+        guard let id = showInfo?.show?.id else { fatalError("No show info available") }
+        showMainAPI.getShowOverview(id: id) { [unowned self] info in
+            self.showMainInfo = info
+        }
     }
     
     func setupUI() {
@@ -64,7 +100,7 @@ class MainShowInformationVC: UIViewController {
         epButton.layer.cornerRadius = 20
     }
     
-    func loadAndSaveShow(id:Int){
+    func loadAndSaveShow(id: Int) {
         // Configure response message
         let userConfirmation = UserActionConfirmView(title: "", message: "", imageName: "45-Bookmark.json")
         
@@ -95,14 +131,19 @@ class MainShowInformationVC: UIViewController {
             userConfirmation.show(animated: true, animation: BookMarkAnimation.Remove)
             bookmark = false
         } else {
-            guard let id=showInfo?.show?.id else {return}
+            guard let id = showInfo?.show?.id else { return }
             loadAndSaveShow(id: id)
         } // else
     } // end of method
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let epListVC = segue.destination as! EpisodesListVC
-        epListVC.showInfo = showInfo?.show?.id
+
+        //Added 03.12.2018
+        let t = ShowRequestProxy()
+        epListVC.showMainInfo = t.getShowMainInfo(id: (showInfo?.show?.id)!)
+        
+        epListVC.showId = showInfo?.show?.id
         epListVC.showName = showInfo?.show?.name
     }
 }

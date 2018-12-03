@@ -10,13 +10,13 @@ import Foundation
 import Alamofire
 
 class ShowMainApi {
-    
-    func getShowOverview(id: Int,complition: @escaping ShowResponseCompletion) {
+    //Added DispatchQueue 03.12.2018 by default Alamofire uses the main thread in some rare cases (to sync the call )you must use a different queue
+    func getShowOverview(id: Int,queue:DispatchQueue?=nil,complition: @escaping ShowResponseCompletion) {
         
         guard let url = URL(string: "\(SHOW_URL)"+"\(id)") else { return}
         print(url)
         
-        Alamofire.request(url).responseJSON { (response) in
+        Alamofire.request(url).responseJSON(queue: queue, options: JSONSerialization.ReadingOptions.mutableContainers) { (response) in
             if let error = response.result.error {
                 print("hier")
                 print(error.localizedDescription)
@@ -28,7 +28,7 @@ class ShowMainApi {
             do {
                 let showInfo = try jsonDecoder.decode(ShowMainInformation.self, from: data)
                 complition(showInfo)
-
+                
             } catch  {
                 print("oder hier")
                 debugPrint(error.localizedDescription)

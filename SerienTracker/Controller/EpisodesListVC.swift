@@ -11,12 +11,8 @@ import UIKit
 // Used to expand/collapse structure to show hide sections (Seasons and contained episodes)
 struct ShowHideSection<T>{
     var isExpanded: Bool
-    // Removed 29.11.2018
-    // var episodes: [ShowEpisodenInformation]
-    
-    // Added 29.11.2018
-    // One section contains an section number and assigned episodes
     var itemsBySection = [T]()
+    
     // Added 29.11.2018
     mutating func expandSection(expand: Bool) {
         isExpanded = expand
@@ -28,15 +24,18 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
     var expandableSections = [ShowHideSection<ShowEpisodenInformation>]()
    
     //Get from Search
-    var showInfo: Int?
+    var showId: Int?
+    //Added 03.12.2018
+    var showMainInfo:ShowMainInformation?
+    var showName: String!
     
     //Get from bookmarkVC
     var bookmarkShow:RealmBookmarkShow?
     
-    var showName: String!
-    
     //Endpoint API
     var showepList = ShowEpListApi()
+    
+    var isAlertBlocked:Bool=false
     
     func setupUI(){
         // Disable lines between cells
@@ -104,16 +103,21 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
         _=forceTouchAvailable()
         
         //Check if show is bookmarked
+        
         if let bookmarkShow=self.bookmarkShow{
             loadEpisodeFromShowStoreManagerWith(show: bookmarkShow)
              title = bookmarkShow.showName
         }else{//Load from endpoint
-            guard let showInfo=self.showInfo else {return}
+            guard let showInfo=self.showId else {return}
             loadEpisodeListFromEndpointAPIWith(id: showInfo)
-
         }
-        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //By default confirm it again for next show
+        isAlertBlocked=false
+    }
+    
 }
 
 // MARK: - TableView DataSource methods
@@ -177,21 +181,26 @@ extension EpisodesListVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Added 02.12.2018
         //Check if show already bookmarked
-        if self.bookmarkShow==nil{
+        if self.bookmarkShow==nil && !ShowStoreManager.shared.isShowBookmark(id: showId!){
             let okAction=UIAlertAction(title: "Ok", style: .default) {[unowned self]_ in
                 self.episodeSeenIn(indexPath: indexPath,on: true)
             }
+            
+            let customAction=UIAlertAction(title: "Do not ask again", style:.destructive){ _ in
+                //Add flag that do not set seen and not show the alert again
+                self.isAlertBlocked=true
+            }
+            
             let cancelAction=UIAlertAction(title: "Cancel", style: .cancel){ _ in
                 // Refresh modified rows(episodes) from tableview to hide selection
                 tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
             }
-            
-            showConfirmationAlert(title: "Episodes", message: "Would you like to bookmark the show?", actions: [okAction,cancelAction], inController: self)
+            if !isAlertBlocked{
+            showConfirmationAlert(title: "Episodes", message: "Would you like to bookmark the show?", actions: [okAction,customAction,cancelAction], inController: self)
+            }
             }else{
                 episodeSeenToggle(indexPath: indexPath)
             }
-        
-       
     }
 }
 
