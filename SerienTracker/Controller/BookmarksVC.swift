@@ -26,6 +26,7 @@ class BookmarksVC: UICollectionViewController {
         title = "Bookmarked Shows"
     }
 
+    
     // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

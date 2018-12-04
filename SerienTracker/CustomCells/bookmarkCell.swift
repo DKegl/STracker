@@ -50,12 +50,13 @@ class bookmarkCell: UICollectionViewCell {
             showImage.loadImageFromUrl(imageUrl)
         }
         
+        //Bug fix 04.12.2018
         let seenCounter=show.realmEpisoden.reduce(0) { (result, episode) -> Int in
-            var newResult:Int=0
+            //var newResult:Int=0
             if episode.isSeen{
-                newResult=result+1
+                return result+1
             }
-            return newResult
+            return result
         }
         self.episodeInfo.text = "\(seenCounter) of \(show.realmEpisoden.count) seen"
         self.episodesProgressView.progress = Float(seenCounter)/Float(show.realmEpisoden.count)
