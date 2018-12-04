@@ -205,10 +205,15 @@ extension EpisodesListVC {
                 self.episodeSeenIn(indexPath: indexPath,on: true)
                 // Configure response message
                 let userConfirmation = UserActionConfirmView(title: "", message: "", imageName: "45-Bookmark.json")
+
+                  _=ShowStoreManager.shared.saveAsBookmarkShow(show: self.showMainInfo!, episodes:self.extractEpisodes())
                 
-                _ = ShowStoreManager.shared.saveAsBookmarkShow(show: self.showMainInfo!, episodes:self.extractEpisodes())
+                //Bug fix to prevent recursive calls on showConfirmationAlert ok_completion handler
+                self.bookmarkShow=ShowStoreManager.shared.showWith(id: self.showId!)
                 
                  userConfirmation.show(animated: true, animation: BookMarkAnimation.Add)
+                let episode=self.expandableSections[indexPath.section].itemsBySection[indexPath.row]
+                ShowStoreManager.shared.updateEpisode(episode, id:(self.bookmarkShow?.showId)!)
             }
             
             let customAction=UIAlertAction(title: "Do not ask again", style:.destructive){ _ in
@@ -223,11 +228,13 @@ extension EpisodesListVC {
             if !isAlertBlocked{
             showConfirmationAlert(title: "Episodes", message: "Would you like to bookmark the show?", actions: [okAction,customAction,cancelAction], inController: self)
             }
-            }else{
+            
+        }else{
                 episodeSeenToggle(indexPath: indexPath)
                 //ToDo set/clear seen flag in database
                 let episode=expandableSections[indexPath.section].itemsBySection[indexPath.row]
-            ShowStoreManager.shared.updateEpisode(episode, id:(bookmarkShow?.showId)!)
+                ShowStoreManager.shared.updateEpisode(episode, id:(bookmarkShow?.showId)!)
+
             }
     }
 }

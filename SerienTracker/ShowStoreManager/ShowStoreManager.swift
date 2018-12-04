@@ -43,6 +43,8 @@ private protocol InternalShowStore {
 final class ShowStoreManager: NSObject {
     static let shared = ShowStoreManager()
     
+    private let serialQueue=DispatchQueue(label: "serialQueue")
+    
     private override init() {
         super.init()
     }
@@ -151,6 +153,7 @@ extension ShowStoreManager: ShowStoreManagerBase {
     }
     
     internal func saveAsBookmarkShow(show: ShowMainInformation, episodes: [ShowEpisodenInformation]?) -> Bool {
+        
         do {
             try realm.write {
                 let realmShow = RealmBookmarkShow()
@@ -197,8 +200,10 @@ extension ShowStoreManager: ShowStoreManagerBase {
         } catch let error {
             print(error.localizedDescription)
             return false
-        }
+       }
+        
         return true
+        
     }
     
     internal func deleteBookmarkShow(realmShow: RealmBookmarkShow) -> Bool {
