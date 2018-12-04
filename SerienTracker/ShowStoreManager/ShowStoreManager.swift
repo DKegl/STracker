@@ -17,7 +17,8 @@ enum ShowStoreFilter {
 
 // MARK:- Filter protocol of ShowStoreManager
 protocol ShowStoreManagerQueries {
-    func showWith(id: Int) -> Results<RealmBookmarkShow>
+    //Modified 04.12. to get only one show object
+    func showWith(id: Int) -> RealmBookmarkShow?
     func isShowBookmark(id: Int) -> Bool
     func showAvailable(id: Int) -> Bool
     func filter(type: ShowStoreFilter) -> Results<RealmEpisodenInformation>?
@@ -30,6 +31,7 @@ protocol ShowStoreManagerBase {
     func deleteBookmarkShow(realmShow: RealmBookmarkShow) -> Bool
     func deleteBookmarkShow(id: Int) -> Bool
     var bookmarkShows: Results<RealmBookmarkShow> { get }
+    func updateEpisode(_ episode:ShowEpisodenInformation,id:Int)
 }
 
 // MARK: - Generic filter protocol
@@ -94,8 +96,8 @@ extension ShowStoreManager: ShowStoreManagerQueries {
         return realm.objects(RealmBookmarkShow.self).filter("showId==\(id)").count > 0
     }
     
-    internal func showWith(id: Int) -> Results<RealmBookmarkShow> {
-        return realm.objects(RealmBookmarkShow.self).filter("showId==\(id)")
+    internal func showWith(id: Int) -> RealmBookmarkShow? {
+        return realm.objects(RealmBookmarkShow.self).filter("showId==\(id)").first
     }
     
     internal func isShowBookmark(id: Int) -> Bool {
@@ -109,6 +111,34 @@ extension ShowStoreManager: ShowStoreManagerQueries {
 }
 
 extension ShowStoreManager: ShowStoreManagerBase {
+    func updateEpisode(_ episode:ShowEpisodenInformation,id: Int) {
+        let realmEp=RealmEpisodenInformation()
+        realmEp.id=episode.id
+        realmEp.airdate=episode.airdate
+        realmEp.name=episode.name
+        realmEp.number=episode.number ?? 0
+        realmEp.season=episode.season ?? 0
+        realmEp.show=showWith(id: id)
+        realmEp.summary=episode.summary
+        realmEp.isSeen=episode.seen ?? false
+        realmEp.url=episode.url
+        
+        let image = RealmEpImage()
+        image.original=episode.image?.original
+        image.medium=episode.image?.medium
+        image.showId=id
+        image.episodeId=episode.id
+        realmEp.setValue(image, forKey: "image")
+        
+        do{
+            try realm.write {
+                realm.add(realmEp, update: true)
+            }
+        }catch let error{
+            print(error.localizedDescription)
+        }
+    }
+    
     var bookmarkShows: Results<RealmBookmarkShow> {
         return realm.objects(RealmBookmarkShow.self)
     }
@@ -116,7 +146,7 @@ extension ShowStoreManager: ShowStoreManagerBase {
     internal func deleteBookmarkShow(id: Int) -> Bool {
         if showAvailable(id: id) {
             let show = showWith(id: id)
-            return deleteBookmarkShow(realmShow: show.first!)
+            return deleteBookmarkShow(realmShow: show!)
         } else { return false }
     }
     
@@ -149,7 +179,7 @@ extension ShowStoreManager: ShowStoreManagerBase {
                         realmEp.number = episode.number ?? 0
                         realmEp.airdate = episode.airdate
                         realmEp.summary = episode.summary
-                        realmEp.isSeen = false
+                        realmEp.isSeen = episode.seen ?? false
                         
                         let image = RealmEpImage()
                         image.medium = episode.image?.medium

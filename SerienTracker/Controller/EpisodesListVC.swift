@@ -76,6 +76,19 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
         return groupedSections
     }
     
+    func extractEpisodes(indexPath:IndexPath=IndexPath())->[ShowEpisodenInformation]{
+        var ep=[ShowEpisodenInformation]()
+        for (index,section) in expandableSections.enumerated(){
+            let episodes=section.itemsBySection
+            for episode in episodes{
+                print("Episode:\(episode.name) \(episode.seen)")
+            }
+            ep.append(contentsOf: section.itemsBySection)
+        }
+        return ep
+    }
+    
+    
     func loadEpisodeListFromEndpointAPIWith(id:Int){
         // Read all episodes from show
         showepList.getEpList(id: id) { [unowned self] episoden in
@@ -108,20 +121,20 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
         setupUI()
         _=forceTouchAvailable()
         
-        //Check if show is bookmarked
-        
-        if let bookmarkShow=self.bookmarkShow{
-            loadEpisodeFromShowStoreManagerWith(show: bookmarkShow)
-             title = bookmarkShow.showName
-        }else{//Load from endpoint
-            guard let showInfo=self.showId else {return}
-            loadEpisodeListFromEndpointAPIWith(id: showInfo)
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         //By default confirm it again for next show
         isAlertBlocked=false
+        
+         //Check if show is bookmarked if so load episodes from database
+        if let bookmarkShow=self.bookmarkShow{
+            loadEpisodeFromShowStoreManagerWith(show: bookmarkShow)
+            title = bookmarkShow.showName
+        }else{//Load episodes from endpoint
+            guard let showInfo=self.showId else {return}
+            loadEpisodeListFromEndpointAPIWith(id: showInfo)
+        }
     }
     
 }
@@ -193,7 +206,7 @@ extension EpisodesListVC {
                 // Configure response message
                 let userConfirmation = UserActionConfirmView(title: "", message: "", imageName: "45-Bookmark.json")
                 
-                _ = ShowStoreManager.shared.saveAsBookmarkShow(show: self.showMainInfo!, episodes: self.episodes)
+                _ = ShowStoreManager.shared.saveAsBookmarkShow(show: self.showMainInfo!, episodes:self.extractEpisodes())
                 
                  userConfirmation.show(animated: true, animation: BookMarkAnimation.Add)
             }
@@ -212,6 +225,9 @@ extension EpisodesListVC {
             }
             }else{
                 episodeSeenToggle(indexPath: indexPath)
+                //ToDo set/clear seen flag in database
+                let episode=expandableSections[indexPath.section].itemsBySection[indexPath.row]
+            ShowStoreManager.shared.updateEpisode(episode, id:(bookmarkShow?.showId)!)
             }
     }
 }

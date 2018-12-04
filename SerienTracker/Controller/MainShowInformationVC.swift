@@ -149,10 +149,15 @@ class MainShowInformationVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let epListVC = segue.destination as! EpisodesListVC
 
-        //Added 03.12.2018
-        let t = ShowRequestProxy()
-        epListVC.showMainInfo = t.getShowMainInfo(id: (showInfo?.show?.id)!)
-        
+        //Added 03.12.2018 - Modified 04.12.2018
+        //Check if show bookmark flag, if so load show from database
+        if bookmark{
+            epListVC.bookmarkShow=ShowStoreManager.shared.showWith(id: (showInfo?.show?.id)!)
+        }else{//Read show from Endpoint - synchronously - otherwise we do not get the expected show because of delayed return from Alamofire
+            let t = ShowRequestProxy()
+            epListVC.showMainInfo = t.getShowMainInfo(id: (showInfo?.show?.id)!)
+        }
+        //Additional show infos - possibly redundant information
         epListVC.showId = showInfo?.show?.id
         epListVC.showName = showInfo?.show?.name
     }
