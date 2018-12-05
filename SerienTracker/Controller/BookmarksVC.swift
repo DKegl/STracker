@@ -26,7 +26,6 @@ class BookmarksVC: UICollectionViewController {
         title = "Bookmarked Shows"
     }
 
-    
     // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -41,6 +40,8 @@ class BookmarksVC: UICollectionViewController {
         let bookmarkShows = ShowStoreManager.shared.bookmarkShows
         guard bookmarkShows.count > 0 else { return cell }
         cell.backgroundColor = greyColor
+        cell.delegate = self
+        cell.name = bookmarkShows[indexPath.row].showName
         cell.setBookmarkCell(show: bookmarkShows[indexPath.row])
 
         return cell
@@ -62,5 +63,12 @@ extension BookmarksVC {
 extension BookmarksVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.collectionView.bounds.width, height: 130)
+    }
+}
+
+extension BookmarksVC: bookmarkCellDelegate {
+    func shareBtnTapped(name: String) {
+        let ac = UIActivityViewController(activityItems: ["My new Favorite Show: ", name], applicationActivities: nil)
+        present(ac, animated: true, completion: nil)
     }
 }

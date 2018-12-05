@@ -10,6 +10,10 @@ import UIKit
 
 typealias EpisodeProgress = (total: Int, progress: Int)
 
+protocol bookmarkCellDelegate {
+    func shareBtnTapped(name: String)
+}
+
 class bookmarkCell: UICollectionViewCell {
     @IBOutlet var showImage: CachedImageView!
     @IBOutlet var showFlag: UILabel!
@@ -20,7 +24,9 @@ class bookmarkCell: UICollectionViewCell {
     
     //
     @IBOutlet var separatorView: UIView!
-    
+    //Share variables
+    var delegate: bookmarkCellDelegate?
+    var name: String?
     //
     let extraTextPadding = 13
     
@@ -81,5 +87,8 @@ class bookmarkCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setupViews()
+    }
+    @IBAction func shareBtnPressed(_ sender: Any) {
+        delegate?.shareBtnTapped(name: name!)
     }
 }

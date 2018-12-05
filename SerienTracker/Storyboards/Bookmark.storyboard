@@ -15,7 +15,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Flb-m3-cWB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="0.0" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="3" id="l0l-Bb-YeB">
                             <size key="itemSize" width="375" height="120"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -68,17 +68,37 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="260" height="45"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="                       New" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAd-4L-yKh" userLabel="flagLabel">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="31.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="14.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gotham City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AoA-h0-4ZO" userLabel="titleLabel">
-                                                                    <rect key="frame" x="0.0" y="24.5" width="260" height="20.5"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwx-tk-m0o">
+                                                                    <rect key="frame" x="0.0" y="7.5" width="260" height="37.5"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gotham City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AoA-h0-4ZO" userLabel="titleLabel">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="230" height="37.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLT-zt-XBR">
+                                                                            <rect key="frame" x="230" y="0.0" width="30" height="37.5"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="30" id="3qB-9G-g6H"/>
+                                                                            </constraints>
+                                                                            <state key="normal" title="Button" image="share"/>
+                                                                            <connections>
+                                                                                <action selector="shareBtnPressed:" destination="m8f-KJ-L40" eventType="touchUpInside" id="rbY-et-MMw"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="bottom" secondItem="xLT-zt-XBR" secondAttribute="bottom" id="7NY-St-M4E"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="xLT-zt-XBR" secondAttribute="trailing" id="DPm-3v-aqN"/>
+                                                                        <constraint firstItem="xLT-zt-XBR" firstAttribute="top" secondItem="Zwx-tk-m0o" secondAttribute="top" id="k3O-2D-huv"/>
+                                                                    </constraints>
+                                                                </stackView>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="45" id="0jO-U2-sCr"/>
@@ -213,4 +233,7 @@
             <point key="canvasLocation" x="1818" y="1119"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="share" width="51.200000762939453" height="51.200000762939453"/>
+    </resources>
 </document>
