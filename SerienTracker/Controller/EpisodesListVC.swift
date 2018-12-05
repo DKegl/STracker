@@ -166,7 +166,7 @@ extension EpisodesListVC {
         let episode = expandableSections[indexPath.section].itemsBySection[indexPath.row]
         
         cell.setEp(episode: episode)
-        
+        cell.backgroundColor = greyColor
         // >> ToDo Checkmark seen episodes
         if episode.seen == true {
             cell.accessoryType = .checkmark
@@ -278,7 +278,7 @@ extension EpisodesListVC {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         // The view is a button
         let titleButton = UIButton()
-        
+        titleButton.backgroundColor = greyColor
         // Added 29.11.2018
         let title = "Season \(expandableSections[section].itemsBySection[0].season!)"
         // Set header font stroke

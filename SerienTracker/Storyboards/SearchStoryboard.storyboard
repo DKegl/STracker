@@ -59,7 +59,7 @@
                                                 <constraint firstItem="fIn-sg-47o" firstAttribute="centerY" secondItem="J3S-g6-CXV" secondAttribute="centerY" id="gtH-Bv-N0Q"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="fIn-sg-47o" firstAttribute="leading" secondItem="BJR-Rz-kRU" secondAttribute="leading" constant="5" id="Rhz-2t-Uei"/>
@@ -336,7 +336,7 @@
                                         <constraint firstItem="Wbg-qy-bcE" firstAttribute="centerY" secondItem="RMB-He-T3a" secondAttribute="centerY" id="CYz-fv-Ciy"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.22352941179999999" green="0.24313725489999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Wbg-qy-bcE" secondAttribute="trailing" constant="5" id="afm-cq-g8e"/>
                                     <constraint firstItem="Wbg-qy-bcE" firstAttribute="leading" secondItem="xm0-tp-pho" secondAttribute="leading" constant="5" id="mcP-aW-bO5"/>

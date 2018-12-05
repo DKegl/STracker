@@ -29,7 +29,7 @@ class epCell: UITableViewCell {
         containerView.layer.cornerRadius = 20
         containerView.layer.borderWidth = 2
         containerView.layer.borderColor = turquoiseColor.cgColor
-        
+        containerView.backgroundColor = greyColor
         noLbl.text = "\(episode.number ?? 00)."
         titleLbl.text = episode.name
         dateLbl.text = episode.airdate

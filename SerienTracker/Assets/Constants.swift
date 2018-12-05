@@ -30,5 +30,6 @@ let darkblack = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0)
 
 //Schwarz: 212121
 //Grau 323232
+
 //Türkis 0d7377
 //Grün 14ffec

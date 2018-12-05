@@ -41,7 +41,7 @@ extension AppDelegate {
         UINavigationBar.appearance().barTintColor = blackColor
         UINavigationBar.appearance().tintColor = turquoiseColor
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 0.08, green: 1.00, blue: 0.93, alpha: 1.0)]
-        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().isTranslucent = true
     }
     
     func setupTabBar() {
