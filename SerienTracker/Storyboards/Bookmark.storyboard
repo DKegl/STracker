@@ -64,41 +64,49 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="E5S-sJ-U8R" userLabel="sv_Info">
                                                     <rect key="frame" x="95" y="0.0" width="260" height="124"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ajr-l1-teZ" userLabel="sv_show">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ajr-l1-teZ" userLabel="sv_show">
                                                             <rect key="frame" x="0.0" y="0.0" width="260" height="45"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="                       New" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAd-4L-yKh" userLabel="flagLabel">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="14.5"/>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="MgZ-wj-yaB">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="22"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwx-tk-m0o">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="22"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gotham City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AoA-h0-4ZO" userLabel="titleLabel">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="230" height="22"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLT-zt-XBR">
+                                                                                    <rect key="frame" x="230" y="0.0" width="30" height="22"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="30" id="3qB-9G-g6H"/>
+                                                                                    </constraints>
+                                                                                    <state key="normal" title="Button" image="share"/>
+                                                                                    <connections>
+                                                                                        <action selector="shareBtnPressed:" destination="m8f-KJ-L40" eventType="touchUpInside" id="rbY-et-MMw"/>
+                                                                                    </connections>
+                                                                                </button>
+                                                                            </subviews>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="bottom" secondItem="xLT-zt-XBR" secondAttribute="bottom" id="7NY-St-M4E"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="xLT-zt-XBR" secondAttribute="trailing" id="DPm-3v-aqN"/>
+                                                                                <constraint firstItem="xLT-zt-XBR" firstAttribute="top" secondItem="Zwx-tk-m0o" secondAttribute="top" id="k3O-2D-huv"/>
+                                                                            </constraints>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                </stackView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" placeholderIntrinsicWidth="260" placeholderIntrinsicHeight="35" text="New" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAd-4L-yKh" userLabel="flagLabel">
+                                                                    <rect key="frame" x="0.0" y="15" width="260" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="GG3-jh-X6y"/>
+                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                                    <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwx-tk-m0o">
-                                                                    <rect key="frame" x="0.0" y="7.5" width="260" height="37.5"/>
-                                                                    <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gotham City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AoA-h0-4ZO" userLabel="titleLabel">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="230" height="37.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLT-zt-XBR">
-                                                                            <rect key="frame" x="230" y="0.0" width="30" height="37.5"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="30" id="3qB-9G-g6H"/>
-                                                                            </constraints>
-                                                                            <state key="normal" title="Button" image="share"/>
-                                                                            <connections>
-                                                                                <action selector="shareBtnPressed:" destination="m8f-KJ-L40" eventType="touchUpInside" id="rbY-et-MMw"/>
-                                                                            </connections>
-                                                                        </button>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="xLT-zt-XBR" secondAttribute="bottom" id="7NY-St-M4E"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="xLT-zt-XBR" secondAttribute="trailing" id="DPm-3v-aqN"/>
-                                                                        <constraint firstItem="xLT-zt-XBR" firstAttribute="top" secondItem="Zwx-tk-m0o" secondAttribute="top" id="k3O-2D-huv"/>
-                                                                    </constraints>
-                                                                </stackView>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="45" id="0jO-U2-sCr"/>

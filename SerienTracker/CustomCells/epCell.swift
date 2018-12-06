@@ -22,14 +22,20 @@ class epCell: UITableViewCell {
     override func awakeFromNib() {
         //Save the value of the imageView's width constraint constant
         _backingImageWidthConstraintConst=imageWidthConstraint.constant
+        
+         setupViews()
     }
     
-    func setEp(episode: ShowEpisodenInformation) {
+    func setupViews(){
         //Round corner for the container view
         containerView.layer.cornerRadius = 20
         containerView.layer.borderWidth = 2
         containerView.layer.borderColor = turquoiseColor.cgColor
         containerView.backgroundColor = greyColor
+    }
+    
+    func setEp(episode: ShowEpisodenInformation) {
+        
         noLbl.text = "\(episode.number ?? 00)."
         titleLbl.text = episode.name
         dateLbl.text = episode.airdate
