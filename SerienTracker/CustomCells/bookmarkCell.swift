@@ -64,8 +64,18 @@ class bookmarkCell: UICollectionViewCell {
             }
             return result
         }
-        self.episodeInfo.text = "\(seenCounter) of \(show.realmEpisoden.count) seen"
+        self.episodeInfo.text = "\(seenCounter) episodes of \(show.realmEpisoden.count) seen"
         self.episodesProgressView.progress = Float(seenCounter)/Float(show.realmEpisoden.count)
+        
+        var currentSeason:Int=0
+        let seasonCounter=show.realmEpisoden.reduce(0) { (counter,episode) -> Int in
+            if episode.season != currentSeason{
+                currentSeason=episode.season
+                return counter+1
+            }
+            return counter
+        }
+        self.seasonsInfo.text="\(seasonCounter) seasons"
         
     }
     
