@@ -56,26 +56,31 @@ class bookmarkCell: UICollectionViewCell {
             showImage.loadImageFromUrl(imageUrl)
         }
         
-        //Bug fix 04.12.2018
-        let seenCounter=show.realmEpisoden.reduce(0) { (result, episode) -> Int in
-            //var newResult:Int=0
+        //Calculate Seasons and seen episodes
+        typealias ShowCounters = (seasonCounter:Int,episodenCounter:Int)
+        var prevSeason:Int=0
+        let showCounter:ShowCounters = show.realmEpisoden.reduce((0,0)) { (tempResult, episode) in
+            var result:ShowCounters=(0,0)
+            
             if episode.isSeen{
-                return result+1
+                result.episodenCounter += 1
             }
+            if episode.season != prevSeason{
+                result.seasonCounter += 1
+                prevSeason=episode.season
+            }
+            result.episodenCounter += tempResult.1
+            result.seasonCounter += tempResult.0
+            
             return result
         }
-        self.episodeInfo.text = "\(seenCounter) episodes of \(show.realmEpisoden.count) seen"
-        self.episodesProgressView.progress = Float(seenCounter)/Float(show.realmEpisoden.count)
         
-        var currentSeason:Int=0
-        let seasonCounter=show.realmEpisoden.reduce(0) { (counter,episode) -> Int in
-            if episode.season != currentSeason{
-                currentSeason=episode.season
-                return counter+1
-            }
-            return counter
-        }
-        self.seasonsInfo.text="\(seasonCounter) seasons"
+        
+        self.episodeInfo.text = "\(showCounter.episodenCounter) episodes of \(show.realmEpisoden.count) seen"
+        
+        self.episodesProgressView.progress = Float(showCounter.episodenCounter)/Float(show.realmEpisoden.count)
+        
+        self.seasonsInfo.text="\(showCounter.seasonCounter) seasons"
         
     }
     
