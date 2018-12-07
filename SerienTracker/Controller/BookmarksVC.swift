@@ -18,12 +18,20 @@ class BookmarksVC: UICollectionViewController {
         // Register cell classes is StoryBoard responsibility when using IB !!
         // self.collectionView!.register(bookmarkCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
+    
 
     override func viewWillAppear(_ animated: Bool) {
         // Reload data because database may have changed
         collectionView.reloadData()
 
         title = "Bookmarked Shows"
+        setupViews()
+    }
+    
+    //Configure subviews
+    //Added 07.12.2018
+    func setupViews(){
+        collectionView.backgroundColor=greyColor
     }
 
     // MARK: UICollectionViewDataSource

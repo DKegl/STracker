@@ -21,7 +21,6 @@ class bookmarkCell: UICollectionViewCell {
     @IBOutlet var seasonsInfo: UILabel!
     @IBOutlet var episodeInfo: UILabel!
     @IBOutlet var episodesProgressView: UIProgressView!
-    
     //
     @IBOutlet var separatorView: UIView!
     //Share variables
@@ -96,7 +95,6 @@ class bookmarkCell: UICollectionViewCell {
         self.episodeInfo.textColor = .lightGray
         self.seasonsInfo.textColor = .lightGray
         self.episodesProgressView.tintColor = turquoiseColor
-        
     }
     
     override func awakeFromNib() {

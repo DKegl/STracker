@@ -31,7 +31,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2bK-Fh-40h" userLabel="sv_showBookmark">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="120"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Gs7-ld-ONi" userLabel="sv_Image">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="120"/>
@@ -200,7 +200,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHc-78-woy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2665" y="1119"/>
+            <point key="canvasLocation" x="2664.8000000000002" y="1118.5907046476761"/>
         </scene>
         <!--EpisodesListVC-->
         <scene sceneID="CiB-EL-rj9">
