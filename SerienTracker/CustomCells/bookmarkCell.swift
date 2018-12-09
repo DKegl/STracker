@@ -146,23 +146,21 @@ extension bookmarkCell{
         
     }
     
-    @objc func swipeRightAction(){
+    func animateDeleteBookmarkView(show:Bool){
         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.deleteBookmarkViewLeadingConstraint.constant=self.hide
+            self.deleteBookmarkViewLeadingConstraint.constant = show ? self.show : self.hide
             self.layoutIfNeeded()
         }) { (finished) in
-            self.delegate?.allowEpisodeSegue=true
+            self.delegate?.allowEpisodeSegue = !show
         }
     }
     
+    @objc func swipeRightAction(){
+       animateDeleteBookmarkView(show: false)
+    }
+    
     @objc func swipeLeftAction(){
-       
-        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.deleteBookmarkViewLeadingConstraint.constant=self.show
-            self.layoutIfNeeded()
-        }) { (finished) in
-            self.delegate?.allowEpisodeSegue=false
-        }
+       animateDeleteBookmarkView(show: true)
     }
     
     
