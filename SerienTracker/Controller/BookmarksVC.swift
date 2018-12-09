@@ -83,10 +83,10 @@ extension BookmarksVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension BookmarksVC: bookmarkCellDelegate {
-    func deleteBookmark() {
-        //Does nothing at the moment
+    func deleteBookmark(showId: Int) {
+        _=ShowStoreManager.shared.deleteBookmarkShow(id: showId)
+        collectionView.reloadData()
     }
-    
 
     func shareBtnTapped(name: String) {
         let ac = UIActivityViewController(activityItems: ["My new Favorite Show: ", name], applicationActivities: nil)

@@ -10,10 +10,10 @@ import UIKit
 
 typealias EpisodeProgress = (total: Int, progress: Int)
 
-protocol bookmarkCellDelegate {
+protocol bookmarkCellDelegate:class {
     func shareBtnTapped(name: String)
-    var allowEpisodeSegue:Bool{get set}
-    func deleteBookmark()
+    var allowEpisodeSegue: Bool { get set }
+    func deleteBookmark(showId:Int)
 }
 
 class bookmarkCell: UICollectionViewCell {
@@ -25,19 +25,21 @@ class bookmarkCell: UICollectionViewCell {
     @IBOutlet var episodesProgressView: UIProgressView!
     //
     @IBOutlet var separatorView: UIView!
-    //- Delete bookmark UI
-    @IBOutlet weak var deleteBookmarkViewLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var deleteBookmarkView: UIView!
-    @IBOutlet weak var deleteBookmarkButton: UIButton!
+    // - Delete bookmark UI
+    @IBOutlet var deleteBookmarkViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var deleteBookmarkView: UIView!
+    @IBOutlet var deleteBookmarkButton: UIButton!
     
-    //Share variables
-    var delegate: bookmarkCellDelegate?
+    // Share variables
+    weak var delegate: bookmarkCellDelegate?
     var name: String?
     //
     let extraTextPadding = 13
     
-    //Currently not used - the show flag text will be left aligned in view
-    private func setPositionOfFlagText(showFlag:String?){
+    private var _backingShowId:Int!
+    
+    // Currently not used - the show flag text will be left aligned in view
+    private func setPositionOfFlagText(showFlag: String?) {
         // Calculate offset of showflag dynically
         // 1.Get actual width of content text
         let showNameTextWidth = self.showName.intrinsicContentSize.width
@@ -49,32 +51,33 @@ class bookmarkCell: UICollectionViewCell {
             self.showFlag.text = flagText
             paddingTextLength = (flagText?.width(usedFont: self.showFlag.font, boundWidth: self.showFlag.intrinsicContentSize.width))!
         } while Int(showNameTextWidth) > Int(paddingTextLength)
-        
-        
     }
     
-    func setBookmarkCell(show:RealmBookmarkShow){
-        self.showName.text=show.showName
-        //Should be set after showName is present
-        //setPositionOfFlagText(showFlag: show.showStatus)
-        self.showFlag.text=show.showStatus
+    func setBookmarkCell(show: RealmBookmarkShow) {
+        self.showName.text = show.showName
+        // Should be set after showName is present
+        // setPositionOfFlagText(showFlag: show.showStatus)
+        self.showFlag.text = show.showStatus
         
-        if let imageUrl=show.image?.original{
-            showImage.loadImageFromUrl(imageUrl)
+        //Used as a parameter in delete bookmark view
+        _backingShowId=show.showId
+        
+        if let imageUrl = show.image?.original {
+            self.showImage.loadImageFromUrl(imageUrl)
         }
         
-        //Calculate Seasons and seen episodes
-        typealias ShowCounters = (seasonCounter:Int,episodenCounter:Int)
-        var prevSeason:Int=0
-        let showCounter:ShowCounters = show.realmEpisoden.reduce((0,0)) { (tempResult, episode) in
-            var result:ShowCounters=(0,0)
+        // Calculate Seasons and seen episodes
+        typealias ShowCounters = (seasonCounter: Int, episodenCounter: Int)
+        var prevSeason: Int = 0
+        let showCounter: ShowCounters = show.realmEpisoden.reduce((0, 0)) { tempResult, episode in
+            var result: ShowCounters = (0, 0)
             
-            if episode.isSeen{
+            if episode.isSeen {
                 result.episodenCounter += 1
             }
-            if episode.season != prevSeason{
+            if episode.season != prevSeason {
                 result.seasonCounter += 1
-                prevSeason=episode.season
+                prevSeason = episode.season
             }
             result.episodenCounter += tempResult.1
             result.seasonCounter += tempResult.0
@@ -82,13 +85,11 @@ class bookmarkCell: UICollectionViewCell {
             return result
         }
         
-        
         self.episodeInfo.text = "\(showCounter.episodenCounter) episodes of \(show.realmEpisoden.count) seen"
         
-        self.episodesProgressView.progress = Float(showCounter.episodenCounter)/Float(show.realmEpisoden.count)
+        self.episodesProgressView.progress = Float(showCounter.episodenCounter) / Float(show.realmEpisoden.count)
         
-        self.seasonsInfo.text="\(showCounter.seasonCounter) seasons"
-        
+        self.seasonsInfo.text = "\(showCounter.seasonCounter) seasons"
     }
     
     override func layoutSubviews() {
@@ -100,14 +101,17 @@ class bookmarkCell: UICollectionViewCell {
     private func setupViews() {
         self.showFlag.textColor = .lightGray
         self.showName.textColor = turquoiseColor
+        
         self.episodeInfo.textColor = .lightGray
         self.seasonsInfo.textColor = .lightGray
         self.episodesProgressView.tintColor = turquoiseColor
         
-        //Configure swipe view
-        deleteBookmarkButton.backgroundColor=greyColor
-        deleteBookmarkButton.setTitleColor(turquoiseColor, for: UIControl.State.normal)
-        deleteBookmarkViewLeadingConstraint.constant=hide
+        // Configure swipe view with default color style
+        self.deleteBookmarkButton.backgroundColor = greyColor
+        self.deleteBookmarkButton.setTitleColor(turquoiseColor, for: UIControl.State.normal)
+        // By default this view will not be shown
+        self.deleteBookmarkViewLeadingConstraint.constant = constraintToHide
+        // install neccessary gestures to handle user interaction
         setupDeleteBookmarkSwipeGestures()
         setupDeleteBookmarkTap()
     }
@@ -116,59 +120,66 @@ class bookmarkCell: UICollectionViewCell {
         super.awakeFromNib()
         self.setupViews()
     }
+    
     @IBAction func shareBtnPressed(_ sender: Any) {
-        delegate?.shareBtnTapped(name: name!)
+        self.delegate?.shareBtnTapped(name: self.name!)
     }
 }
 
+// MARK: - Show/Hide delete bookmark show View
 
-//MARK:- Show/Hide delete bookmark show View
-extension bookmarkCell{
-    func setupDeleteBookmarkTap(){
-        deleteBookmarkButton.addTarget(self, action: #selector(deleteBookmarkTapped), for: UIControl.Event.touchUpInside)
+extension bookmarkCell {
+    func setupDeleteBookmarkTap() {
+        self.deleteBookmarkButton.addTarget(self, action: #selector(self.deleteBookmarkTapped), for: UIControl.Event.touchUpInside)
     }
     
-    @objc func deleteBookmarkTapped(){
-        print("Has tapped")
-        delegate?.deleteBookmark()
-        swipeRightAction()
+    @objc func deleteBookmarkTapped() {
+        self.delegate?.deleteBookmark(showId: _backingShowId)
+        self.swipeRightAction()
     }
     
-    func setupDeleteBookmarkSwipeGestures(){
-        var gesture=UISwipeGestureRecognizer(target:self ,action: #selector(swipeLeftAction))
+    /// Setup the gestures for the deleteBookmark view
+    ///
+    /// - Parameter show:
+    ///
+    func setupDeleteBookmarkSwipeGestures() {
+        var gesture = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeftAction))
         gesture.direction = .left
         self.addGestureRecognizer(gesture)
         
-        gesture=UISwipeGestureRecognizer(target: self, action: #selector(swipeRightAction))
+        gesture = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeRightAction))
         
         gesture.direction = .right
-        deleteBookmarkView.addGestureRecognizer(gesture)
-        
+        self.deleteBookmarkView.addGestureRecognizer(gesture)
     }
     
-    func animateDeleteBookmarkView(show:Bool){
+    /// Animates the deleteBockmark view with a spring effect
+    ///
+    /// - Parameter show: TRUE --> view will be shown / FALSE-->view will be discarded
+    ///
+    ///   When view is visible no further cell action is possible
+    func animateDeleteBookmarkView(show: Bool) {
         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.deleteBookmarkViewLeadingConstraint.constant = show ? self.show : self.hide
+            self.deleteBookmarkViewLeadingConstraint.constant = show ? self.constraintToShow : self.constraintToHide
             self.layoutIfNeeded()
-        }) { (finished) in
+        }) { _ in
             self.delegate?.allowEpisodeSegue = !show
         }
     }
     
-    @objc func swipeRightAction(){
-       animateDeleteBookmarkView(show: false)
+    @objc func swipeRightAction() {
+        self.animateDeleteBookmarkView(show: false)
     }
     
-    @objc func swipeLeftAction(){
-       animateDeleteBookmarkView(show: true)
+    @objc func swipeLeftAction() {
+        self.animateDeleteBookmarkView(show: true)
     }
     
-    
-    var hide:CGFloat{
+    var constraintToHide: CGFloat {
         return self.frame.width
     }
     
-    var show:CGFloat{
-        return self.frame.width/2
+    var constraintToShow: CGFloat {
+        return 0
     }
 }

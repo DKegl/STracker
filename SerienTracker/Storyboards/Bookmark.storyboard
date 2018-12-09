@@ -168,13 +168,13 @@
                                             <rect key="frame" x="0.0" y="60" width="375" height="60"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49A-fg-Idv">
-                                                    <rect key="frame" x="0.0" y="15" width="117" height="30"/>
+                                                    <rect key="frame" x="253" y="15" width="117" height="30"/>
                                                     <state key="normal" title="Delete bookmark"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="49A-fg-Idv" firstAttribute="leading" secondItem="vev-hB-4te" secondAttribute="leading" id="OGU-bF-W1z"/>
+                                                <constraint firstAttribute="trailing" secondItem="49A-fg-Idv" secondAttribute="trailing" constant="5" id="oO6-W4-f1R"/>
                                                 <constraint firstAttribute="height" constant="60" id="rbL-BF-jl7"/>
                                                 <constraint firstItem="49A-fg-Idv" firstAttribute="centerY" secondItem="vev-hB-4te" secondAttribute="centerY" id="tYW-OI-E3t"/>
                                             </constraints>
