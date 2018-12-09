@@ -12,6 +12,8 @@ typealias EpisodeProgress = (total: Int, progress: Int)
 
 protocol bookmarkCellDelegate {
     func shareBtnTapped(name: String)
+    var allowEpisodeSegue:Bool{get set}
+    func deleteBookmark()
 }
 
 class bookmarkCell: UICollectionViewCell {
@@ -23,12 +25,18 @@ class bookmarkCell: UICollectionViewCell {
     @IBOutlet var episodesProgressView: UIProgressView!
     //
     @IBOutlet var separatorView: UIView!
+    //- Delete bookmark UI
+    @IBOutlet weak var deleteBookmarkViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var deleteBookmarkView: UIView!
+    @IBOutlet weak var deleteBookmarkButton: UIButton!
+    
     //Share variables
     var delegate: bookmarkCellDelegate?
     var name: String?
     //
     let extraTextPadding = 13
     
+    //Currently not used - the show flag text will be left aligned in view
     private func setPositionOfFlagText(showFlag:String?){
         // Calculate offset of showflag dynically
         // 1.Get actual width of content text
@@ -95,6 +103,13 @@ class bookmarkCell: UICollectionViewCell {
         self.episodeInfo.textColor = .lightGray
         self.seasonsInfo.textColor = .lightGray
         self.episodesProgressView.tintColor = turquoiseColor
+        
+        //Configure swipe view
+        deleteBookmarkButton.backgroundColor=greyColor
+        deleteBookmarkButton.setTitleColor(turquoiseColor, for: UIControl.State.normal)
+        deleteBookmarkViewLeadingConstraint.constant=hide
+        setupDeleteBookmarkSwipeGestures()
+        setupDeleteBookmarkTap()
     }
     
     override func awakeFromNib() {
@@ -103,5 +118,59 @@ class bookmarkCell: UICollectionViewCell {
     }
     @IBAction func shareBtnPressed(_ sender: Any) {
         delegate?.shareBtnTapped(name: name!)
+    }
+}
+
+
+//MARK:- Show/Hide delete bookmark show View
+extension bookmarkCell{
+    func setupDeleteBookmarkTap(){
+        deleteBookmarkButton.addTarget(self, action: #selector(deleteBookmarkTapped), for: UIControl.Event.touchUpInside)
+    }
+    
+    @objc func deleteBookmarkTapped(){
+        print("Has tapped")
+        delegate?.deleteBookmark()
+        swipeRightAction()
+    }
+    
+    func setupDeleteBookmarkSwipeGestures(){
+        var gesture=UISwipeGestureRecognizer(target:self ,action: #selector(swipeLeftAction))
+        gesture.direction = .left
+        self.addGestureRecognizer(gesture)
+        
+        gesture=UISwipeGestureRecognizer(target: self, action: #selector(swipeRightAction))
+        
+        gesture.direction = .right
+        deleteBookmarkView.addGestureRecognizer(gesture)
+        
+    }
+    
+    @objc func swipeRightAction(){
+        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.deleteBookmarkViewLeadingConstraint.constant=self.hide
+            self.layoutIfNeeded()
+        }) { (finished) in
+            self.delegate?.allowEpisodeSegue=true
+        }
+    }
+    
+    @objc func swipeLeftAction(){
+       
+        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.deleteBookmarkViewLeadingConstraint.constant=self.show
+            self.layoutIfNeeded()
+        }) { (finished) in
+            self.delegate?.allowEpisodeSegue=false
+        }
+    }
+    
+    
+    var hide:CGFloat{
+        return self.frame.width
+    }
+    
+    var show:CGFloat{
+        return self.frame.width/2
     }
 }

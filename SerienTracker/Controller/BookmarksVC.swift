@@ -11,6 +11,9 @@ import UIKit
 private let reuseIdentifier = "bookmarkCell"
 
 class BookmarksVC: UICollectionViewController {
+    
+    var allowEpisodeSegue: Bool=true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.reloadData()
@@ -23,7 +26,7 @@ class BookmarksVC: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         // Reload data because database may have changed
         collectionView.reloadData()
-
+        
         title = "Bookmarked Shows"
         setupViews()
     }
@@ -32,6 +35,7 @@ class BookmarksVC: UICollectionViewController {
     //Added 07.12.2018
     func setupViews(){
         collectionView.backgroundColor=greyColor
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
     }
 
     // MARK: UICollectionViewDataSource
@@ -58,6 +62,10 @@ class BookmarksVC: UICollectionViewController {
 
 extension BookmarksVC {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {}
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return allowEpisodeSegue
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "episodesFromBookmarkShow" {
@@ -75,6 +83,11 @@ extension BookmarksVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension BookmarksVC: bookmarkCellDelegate {
+    func deleteBookmark() {
+        //Does nothing at the moment
+    }
+    
+
     func shareBtnTapped(name: String) {
         let ac = UIActivityViewController(activityItems: ["My new Favorite Show: ", name], applicationActivities: nil)
         present(ac, animated: true, completion: nil)
