@@ -22,6 +22,7 @@ class bookmarkCell: UICollectionViewCell {
     @IBOutlet var showName: UILabel!
     @IBOutlet var seasonsInfo: UILabel!
     @IBOutlet var episodeInfo: UILabel!
+    @IBOutlet weak var shareButton: UIButton!
     @IBOutlet var episodesProgressView: UIProgressView!
     //
     @IBOutlet var separatorView: UIView!
@@ -164,6 +165,7 @@ extension bookmarkCell {
             self.layoutIfNeeded()
         }) { _ in
             self.delegate?.allowEpisodeSegue = !show
+            self.shareButton.isUserInteractionEnabled = !show
         }
     }
     

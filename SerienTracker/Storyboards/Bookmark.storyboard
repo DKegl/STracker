@@ -198,6 +198,7 @@
                                     <outlet property="episodesProgressView" destination="six-iQ-N0O" id="i4M-gM-oIC"/>
                                     <outlet property="seasonsInfo" destination="gnj-ou-C0F" id="Gep-Cz-0ZA"/>
                                     <outlet property="separatorView" destination="wHD-fj-nSR" id="dWd-D5-aYX"/>
+                                    <outlet property="shareButton" destination="xLT-zt-XBR" id="2np-Ax-Ezn"/>
                                     <outlet property="showFlag" destination="RAd-4L-yKh" id="m1f-d0-iX9"/>
                                     <outlet property="showImage" destination="hAY-zu-hqy" id="EDN-eq-Qff"/>
                                     <outlet property="showName" destination="AoA-h0-4ZO" id="GKx-Md-DqB"/>

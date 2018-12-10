@@ -43,6 +43,9 @@ class EpisodesListVC:UITableViewController,UIViewControllerPreviewingDelegate {
     func setupUI(){
         // Disable lines between cells
         tableView.separatorStyle = .none
+        
+        //set default style
+        tableView.backgroundColor = greyColor
         //Set title
         navigationItem.title = showName
     }
